@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html">  JavaScript Fundamentals,  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="Lab-02_JS_functions">
+          Lab-02_JS_functions
+        </a>
+      
+        <a class="item" data-tab="Startup">
+          Startup
+        </a>
+      
+        <a class="item" data-tab="Functions">
+          Functions
+        </a>
+      
+        <a class="item" data-tab="Methods">
+          Methods
+        </a>
+      
+        <a class="item" data-tab="Constructur">
+          Constructur
+        </a>
+      
+        <a class="item" data-tab="Solutions">
+          Solutions
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-1/index.html">Lab-01_JS_Objects </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-2/index.html">Lab-02_JS_functions </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic02/book-1/index.html">Lab-HTML </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic03/book-1/index.html">Lab-React_Basics </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="Lab-02_JS_functions">
+            <h1>Javascript (JS) fundamentals - Functions.</h1>
+<p>This lab continues our exploration of Javascripr fundamentals, this time focusing on the behavioral side. The topics covered include function definition, method definition, and constructor functions.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Startup">
+            <h2>Start-up.</h2>
+<p>Unzip <a href="./archives/start.zip">this archive</a> and use it as the starting point for the lab exercises. 
+The content of <code>lab002/functions.js</code> should look familiar - it&#39;s from the previous lab exercise. We will expand this file in the next few sections.</p>
+<p>Create a Git repository in <code>lab02</code>:</p>
+<pre><code>   $ git init
+   $ git add -A
+   $ git commit -m &quot;Initial structure&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Functions">
+            <h2>Functions.</h2>
+<p>Suppose we want a function that allows us add an entry to the <em>previous_owners</em> property of <em>aCar</em>. Copy the following function expression, placing it at the end of <code>functions.js</code>:</p>
+<pre><code>let addPreviousOwner = function(car, newName, newAddress) {
+        let o = { name : newName, address : newAddress } ;
+        car.previous_owners.push(o) ;
+    } ;</code></pre>
+<p>To test the above function, place the following statements after the function expression:</p>
+<pre><code>    addPreviousOwner(aCar,&#39;Jim Nugent&#39;,&#39;3 Lower Road&#39;) ;
+    let last = aCar.previous_owners.length - 1;
+    console.log(aCar.previous_owners[last].name) ;</code></pre>
+<p>Run it, as follows:</p>
+<pre><code>     $ node functions.js</code></pre>
+<p>The log statement displays &#39;Jim Nugent&#39;.</p>
+<p>Assume we only need to record the three most recent previous owners of a car. Trying to add a fourth person should cause the first previous owner to be removed from the record, leaving the second owner as the new first entry in the array. A similar outcome should happen on adding a fifth and subsequent person - the array should only ever have a maximum of three entries. <strong>You are required</strong> to change the implementation of the <em>addPreviousOwner</em> function to meet this requirement. </p>
+<p>Hint: The <em>shift</em> method removes the first entry in an array, e.g. arrayRef.shift().</p>
+<p>To test your solution, add the following additional lines to the bottom of <code>functions.js</code>:</p>
+<pre><code>     addPreviousOwner(aCar,&#39;Rachel Fleming&#39;,&#39;4 Upper Road&#39;) 
+     console.log(aCar.previous_owners[2].name) 
+     console.log(aCar.previous_owners[0].name) </code></pre>
+<p>The two log statements should display the names &#39;Rachel Fleming&#39; and &#39;Sheila Dwyer&#39;.</p>
+<p>(See <a href="./index.html#/Solutions">solution 01</a> for the completed code.)</p>
+<p>After completing your solution, update the git repository:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;addPreviousOwner function&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Methods">
+            <h2>Methods.</h2>
+<p>The <em>addPreviousOwner</em> function should really be a method of <em>aCar</em>. Make the following adjustment to the <em>aCar</em> object:</p>
+<pre><code>    let aCar = {
+        .
+        .
+        .
+        addPreviousOwner : function(newName,newAddress) {
+               let o = { name : newName, address : newAddress } ;
+               if (this.previous_owners.length === 3) {
+                     this.previous_owners.shift() ;
+               }
+               this.previous_owners.push(o) ;
+            },
+           previous_owners : [  . . . as before . . . ],
+        . . . as before . . .
+    }; // end aCar </code></pre>
+<p>Note, the keyword &#39;this&#39; is used inside the method to reference the containing object (aCar). You should now remove the old <em>addPreviousOwner</em> function expression and replace all calls to it with method calls, as follows (the &#39;console.log&#39; statements remain unchanged):</p>
+<pre><code>    aCar.addPreviousOwner(&#39;Jim Nugent&#39;,&#39;3 Lower Road&#39;) ;</code></pre>
+<p><strong>You are required</strong> to add a new method to <em>aCar</em>, called <em>newOwner</em>. The method&#39;s arguments are the name and address of the new owner of the car. The method should add the current owner details to the list of previous owners and then assign the new owner details  to the current owner properties. </p>
+<pre><code>    let aCar = {
+        owner : &#39;Joe Bloggs&#39;,        // Current owner details
+        address : &#39;3 Walkers Lane&#39;,
+        .
+        .
+        .
+    } ;</code></pre>
+<p>Test your method implementation by adding the following statements to the end of the file:  </p>
+<pre><code>    aCar.newOwner(&#39;Donal Dunne&#39;,&#39;5 Kings Way&#39;) ;
+    console.log(&#39;Sold by: &#39; + aCar.previous_owners[2].name) ;
+    console.log(&#39;Bought by: &#39; + aCar.owner) ;</code></pre>
+<p>The log statements should display:</p>
+<blockquote>
+<blockquote>
+<p>Sold by: Joe Bloggs
+Bought by: Donal Dunne</p>
+</blockquote>
+</blockquote>
+<p>(See <a href="./index.html#/Solutions">solution 02</a> for the completed code.)</p>
+<p>After completing your solution, update the git repository:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;Demonstrate methods&quot;</code></pre>
+<h3>Method/Function return value.</h3>
+<p>Our methods so far returned nothing (undefined). It is generally better to return something explicitly, even if the caller may not actually use it.</p>
+<p>Add the following method to  aCar:</p>
+<pre><code>    let aCar = {
+        . . . . . 
+        howOld : function() {
+            let today = new Date();
+            let thisYear = today.getFullYear() ;
+            return thisYear - (this.registration.year + 2000) ;
+        },
+        .
+        .
+        .
+    }</code></pre>
+<p>[The Date feature used in the above method is useful. You can experiment with it in the Google Chrome Developer tools, as illustrated below:</p>
+<p><img src="./img/date.png" alt=""></p>
+<p>]</p>
+<p>The howOld function computes the car&#39;s age, in years. To test it, add the following log statement at the end of the file and run it:</p>
+<pre><code> console.log(`Car age: ${ aCar.howOld() } years.`) ;</code></pre>
+<p>[The above log statement is using string template syntax from ES^. It&#39;s an alternative to string concatenation, which is quite cumbersome.]</p>
+<p>Some methods return a boolean result. For example, add a method that determines whether a car has a certain feature, as follows:</p>
+<pre><code>    let aCar = {
+        . . . . .
+        addPreviousOwner : function(.....) { 
+            . . . . .
+        },
+        hasFeature : function(query) {
+            let result = false;
+            this.features.forEach(function(feature) {
+                   if (query.toUpperCase() === feature.toUpperCase() ) {
+                   result = true ;
+                }
+            })
+            return result ;
+        },
+        .
+        .
+        . 
+    }</code></pre>
+<p>[For robustness the method above is made case-insensitive by temporarily converting any string to upper-case.]</p>
+<p>To test this method add the following to the bottom of the file and run the code:</p>
+<pre><code> console.log(`Alarm: ${aCar.hasFeature(&#39;alarm&#39;)}.` ) ;</code></pre>
+<p><strong>You are required</strong> to implement a method that determines if a particular person (based on name only) was a previous owner of the car. Test your implementation by adding the following to the end of the file:</p>
+<pre><code> let name = &#39;Jim Nugent&#39;
+ console.log(`${name} ? ${aCar.wasOwnedBy(name)}.` ) 
+ name = &#39;Paul Minihan&#39; 
+ console.log(`${name} ? ${aCar.wasOwnedBy(name)}.` ) ;</code></pre>
+<p>The log statements should display:</p>
+<pre><code>    Jim Nugent ? true
+    Paul Minihan ? false</code></pre>
+<p><a href="./index.html#/Solutions">See [Solution 03</a> for the correct implementation.]</p>
+<p>After completing a solution, update the git repository:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;Method responses&quot;</code></pre>
+<p>Because searching an array for a matching entry is such a common requirement, the Array <em>find</em> method is provided. Change the implementation of <em>hasFeature</em> to the following:</p>
+<pre><code>    .
+    .
+    .
+    hasFeature : function(query) {
+        let match = this.features.find(function(element) {
+            return query.toUpperCase() === element.toUpperCase() ;
+        });
+        return match === undefined ? false : true 
+    },
+    .
+    .
+    .</code></pre>
+<p><em>find</em> returns the matching array entry, if found; otherwise it returns undefined. The ternary operator (?:) is also used above for convenience. See <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/find">here</a> for more information on <em>find</em>. </p>
+<p><strong>You are required</strong> to refactor the <em>wasOwnedBy</em> method to avail of the Array find feature.</p>
+<p>After completing a solution, update the git repository:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;Refactoring&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Constructur">
+            <h2>Constructors.</h2>
+<p>The literal object syntax used in the previous sections is inefficient when creating multiple car objects. A <strong>constructor function</strong> should be used instead. </p>
+<p>Creating a new file in <code>lab002</code>. called <code>constructor.js</code>. and paste in this code:</p>
+<pre><code>    function Car(name,address,make,model,cc,registration ) {
+        this.owner = name
+        this.address = address
+        this.previous_owners = [ ]
+        this.type = { make : make, model : model, cc : cc }
+        this.features = [&#39;Parking assist&#39;, &#39;Alarm&#39;, &#39;Tow-bar&#39;];
+
+        this.addPreviousOwner = function(newName,newAddress) {
+            let o = { name : newName, address : newAddress }
+            if (this.previous_owners.length === 3) {
+                this.previous_owners.shift()
+            }
+            this.previous_owners.push(o)
+        };
+
+        this.wasOwnedBy = function(query) {
+            let match = this.previous_owners.find(function(element) {
+                return element.name.toUpperCase() === query.toUpperCase() ;
+            });
+            return match == undefined ? false : true 
+        };
+    }
+
+    let car1 = new Car(&#39;Joe Bloggs&#39;,&#39;3 Walkers Lane&#39;,
+        &#39;Toyota&#39;,&#39;Corolla&#39;,1.8,
+        &#39;10-WD-1058&#39;) ;
+    car1.addPreviousOwner( &#39;Pat Smith&#39;, &#39;1 Main Street&#39;) ;
+    car1.addPreviousOwner( &#39;Pat Smith&#39;, &#39;1 Main Street&#39;) ;
+    car1.addPreviousOwner( &#39;Sheila Dwyer&#39;, 
+        &#39;2 High Street&#39;) ;
+    console.log(`Pat Smith ?  ${car1.wasOwnedBy(&#39;Pat Smith&#39;)}.` ) ;</code></pre>
+<p>Note, this code is not yet complete. Take time to study it and then run it:</p>
+<pre><code>    $ node constructor.js </code></pre>
+<p> Update the git repository:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;Added initial car constructor&quot;</code></pre>
+<p>In the previous section we declared a <em>newOwner</em> method. Using that implementation as a guide, <strong>you are required</strong> to add the method to the <em>Car</em> constructor. Test it by adding the following to the end of <code>constructor.js</code>:</p>
+<pre><code>   car1.newOwner(&#39;Donal Dunne&#39;,&#39;5 Kings Way&#39;) ;
+   console.log(&#39;Sold by: &#39; + car1.previous_owners[2].name) 
+   console.log(&#39;Bought by: &#39; + car1.owner) </code></pre>
+<p>The log statements should display the seller as &#39;Joe Bloggs&#39; and buyer as &#39;Donal Dunne&#39;.</p>
+<p>(See <a href="./index.html#/Solutions">Solution 04</a> for the completed code.)</p>
+<p>Update the git repository:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;newOwner added to constructor&quot;</code></pre>
+<p>The registration details are not yet supported. While this information is stored internally as an object structure, we don&#39;t need to expose this in the constructor&#39;s interface. Using a simple string as the constructor parameter seems more natural, e.g. new Car(....,&#39;10-WD-1058&#39;). Consequently, the constructor function must parse the registration string and place the elements in the nested object. The predefined String <em>split</em> method can help here. You can experiment with it in  Chrome&#39;s Developer Tools console, as illustrated below: </p>
+<p><img src="./img/split.png" alt=""></p>
+<p>Update the Car constructor to make use of this feature, as follows:</p>
+<pre><code>    function Car(name, address, make, model, cc, registration) {
+        .
+        .
+        .
+        let regParts = registration.split(&#39;-&#39;)
+        this.registration = {
+            year : parseInt(regParts[0]), 
+            county : regParts[1], 
+            number : regParts[2] 
+        };
+    }</code></pre>
+<p>[ The <em>parseInt()</em> function converts a numeric string to an integer.]</p>
+<p>To prove the new code works, add the <em>howOld</em> method, as follows:</p>
+<pre><code>    function Car(... as before ...) {
+        .
+        . 
+        .
+        this.howOld = function() {
+            let today = new Date();
+            let thisYear = today.getFullYear();
+            return thisYear - (this.registration.year + 2000);
+        };
+
+        this.newOwner = function(....) { . . . .  } ;
+        . . . . . 
+    }</code></pre>
+<p>and add this test line to the end of the file:</p>
+<pre><code>  console.log(`Car age: ${car1.howOld()}` ) ;</code></pre>
+<p>The log statement should display &#39;Car age: 9&#39;. </p>
+<p>Update the git repository:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;Add registration support and howOld method&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Solutions">
+            <h2>Solution 01</h2>
+<pre><code>  let addPreviousOwner = function(car,newName,newAddress) {
+         let o = { name : newName, address : newAddress } ;
+         if (car.previous_owners.length === 3) {
+            car.previous_owners.shift() ;
+         }
+         car.previous_owners.push(o) ;
+   } ;</code></pre>
+<h2>Solution 02</h2>
+<pre><code>  let aCar = {
+      owner : &#39;Joe Bloggs&#39;,
+      address : &#39;3 Walkers Lane&#39;,
+      newOwner : function(name, address) {
+         this.addPreviousOwner(this.owner,this.address) ;
+         this.owner = name ;
+         this.address = address ;
+      },
+      . . . . . . . .. 
+  } ;</code></pre>
+<h2>Solution 03</h2>
+<pre><code>  let aCar = {
+      . . . . . . 
+        wasOwnedBy : function(name) {
+            let result = false ;
+            this.previous_owners.forEach(function(owner) {
+                if (name.toUpperCase() === owner.name.toUpperCase()) {
+                    result = true ;
+                }
+            }) ;
+            return result ;
+        },    
+      . . . . . .
+  } ;</code></pre>
+<h2>Solution 04.</h2>
+<pre><code>function Car(name,address,make,model,cc,registration) {
+     .
+     .
+     . 
+    this.newOwner = function(newName,newAddress) {
+        this.addPreviousOwner(this.owner,this.address)
+        this.owner = newName
+        this.address = newAddress
+    };
+    this.addPreviousOwner = function(.....) {
+        .
+        .
+        .
+   };</code></pre>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>

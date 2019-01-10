@@ -98,13 +98,41 @@ html, body {
     <header class="header item">
       <i id="toc" class="sitemap icon"></i>
       
-        <a href="../index.html"> Introduction to HTML, CSS and Bootstrap  </a>
+        <a href="../index.html">  JavaScript Fundamentals,  </a>
       
     </header>
     <div class="right tab-menu menu">
       
-        <a class="item" data-tab="Lab-HTML">
-          Lab-HTML
+        <a class="item" data-tab="Lab-01_JS_Objects">
+          Lab-01_JS_Objects
+        </a>
+      
+        <a class="item" data-tab="Startup">
+          Startup
+        </a>
+      
+        <a class="item" data-tab="Nesting">
+          Nesting
+        </a>
+      
+        <a class="item" data-tab="Dynamic">
+          Dynamic
+        </a>
+      
+        <a class="item" data-tab="Arrays">
+          Arrays
+        </a>
+      
+        <a class="item" data-tab="Iteration">
+          Iteration
+        </a>
+      
+        <a class="item" data-tab="Chrome_DevTools">
+          Chrome_DevTools
+        </a>
+      
+        <a class="item" data-tab="Solutions">
+          Solutions
         </a>
       
     </div>
@@ -118,8 +146,31 @@ html, body {
       <br><br>
       
         
-          <a class="item"
-             href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-1/index.html">Lab-HTML </a>
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-1/index.html">Lab-01_JS_Objects </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-2/index.html">Lab-02_JS_functions </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic02/book-1/index.html">Lab-HTML </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic03/book-1/index.html">Lab-React_Basics </a>
+          
         
       
     </div>
@@ -127,9 +178,241 @@ html, body {
       <div class="ui basic segment">
         <br>
         
-          <div class="ui tab segment lab" data-tab="Lab-HTML">
-            <h1>HTML/CSS/Bootstrap Introduction</h1>
-<p>By completing this lab you will develop an understanding of the basics of HTML/CSS/Bootstrap. </p>
+          <div class="ui tab segment lab" data-tab="Lab-01_JS_Objects">
+            <h1>Javascript (JS) Fundamentals - Objects.</h1>
+<p>By completing a set of small exercises, this lab helps you develop an understanding of the basic syntax and fundamental concepts of the JavaScript language, with particular emphasis on data representation.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Startup">
+            <h2>Start-up.</h2>
+<p>Download the sample code <a href="./archives/samplecode.zip">here]</a> supporting the lecture slides and unzip it. Open a terminal window (Shell/DOS window) and use the <em>cd</em> command to relocate to this code&#39;s base folder (the <code>samplecode</code> folder). Run the first sample script, as follows:</p>
+<pre><code>$ node 01_primitives.js</code></pre>
+<p>[Note: As a convention, the dollar symbol ($) is used to represent the terminal prompt - it is not part of a typed command.]</p>
+<p>The screen-shot shows the expected result.</p>
+<p><img src="./img/terminal1.png" alt=""></p>
+<p>Now examine the code in the script file <code>02_objects.js</code> and run it:</p>
+<pre><code>$ node 02_objects.js</code></pre>
+<p>Do you understand how the code generated the response displayed?</p>
+<p>Create a new folder (away from <code>samplecode</code>), called <code>lab001</code>, and in it create a file named <code>fundamentals.js</code>. Paste the code below into this file:</p>
+<pre><code>    let aCar = {
+        owner : &quot;Joe Bloggs&quot;,
+        type : &#39;Toyota Corolla 1.8&#39;,
+        registration : &#39;10WD1058&#39;
+    };
+
+    console.log(aCar.owner);</code></pre>
+<p>Open a second terminal window, go to the <code>lab001</code> folder and run the script:</p>
+<pre><code>$ node fundamentals.js </code></pre>
+<p>It should display the car owner&#39;s name.</p>
+<p>Add a git repository to the <code>lab001</code> folder:</p>
+<pre><code>    $ git init
+    $ git add -A
+    $ git commit -m &quot;Initial structure&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Nesting">
+            <h2>Nested Objects.</h2>
+<p>Before attempting the exercise below, first examine the file <code>04_1_nested_objects.js</code> from the samples. Run it and ensure you understand how it generated its output.</p>
+<p>In <code>fundamentals.js</code> the car&#39;s <em>type</em> property is a simple string but structurally it can be broken down into three parts: Make (eg Toyota), Model (eg Corolla), and CC (eg 1.8). <strong>You are required</strong> to change this property of <em>aCar</em> from a string to an object with three properties, namely <em>make</em>, <em>model</em> and <em>cc</em>. To prove your change worked, add the following log statement to the bottom of the file:</p>
+<pre><code>console.log(aCar.owner + &#39; drives a &#39; + aCar.type.make);</code></pre>
+<p>and run it as before: </p>
+<pre><code>$ node fundamentals.js </code></pre>
+<p>It should display: <strong>Joe Bloggs drives a Toyota</strong>.</p>
+<p>(The solution to this exercise is available <a href="./index.html#/Solutions">here</a> under &#39;Solution 01&#39;.)</p>
+<p>Similarly, a car&#39;s <em>registration</em> is also composed of three distinct elements; year (10 for 2010), county code (WD for Waterford), and number (1058). <strong>You are required</strong> to again change aCar to reflect this nested structure. Also add a log statement that displays the following: <strong>Reg. = 10-WD-1058</strong>.</p>
+<p>(The solution is <a href="./index.html#/Solutions">here</a> under &#39;Solution 02&#39;.)</p>
+<p>Before continuing, update the git repository, as follows:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;Nested objects&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Dynamic">
+            <h2>Dynamic properties.</h2>
+<p>For this section examine <code>03_dynamic_objects.js</code> from the samples provided. Notice how properties can be dynamically added (employer) and removed (age) <strong>after the initialization</strong> of the <em>me</em> object. Run it (switch to the other terminal window) and ensure you understand how it generated its output.</p>
+<p>In <code>fundamentals.js</code>, <strong>after the initialization statement</strong>, dynamically add two new properties to <em>aCar</em>, namely:</p>
+<ol>
+<li>mileage - set it to 80000.</li>
+<li>color - this should be an object rather than a primitive value. It should detail exterior color (say, red) and interior fabric. Interior has two attributes, namely, texture (e.g. leather) and shade (e.g. cream).</li>
+</ol>
+<p>To test your solution, add a &#39;console.log&#39; statement at the end of the file that displays the following: <strong>It is a red car, 80000 mileage, with leather interior.</strong>.</p>
+<p>(The solution is <a href="./index.html#/Solutions">here</a> under &#39;Solution 03&#39;.)</p>
+<p>Before continuing, update the git repository (from <code>lab001</code> folder):</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;Dynamic properties&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Arrays">
+            <h2>Arrays.</h2>
+<p>Examine <code>05_arrays.js</code> from the samples. Run it and ensure you understand how it generated its output.</p>
+<p>In <code>fundamentals.js</code> add a <em>previous owners</em> property to <em>aCar</em> (statically for simplicity), as follows:</p>
+<pre><code>    let aCar = {
+        owner : &#39;Joe Bloggs&#39;,
+        previous_owners : [&#39;Pat Smith - 1 Main Street&#39;, 
+                           &#39;Sheila Dwyer - 2 High Street&#39;],
+        . . . . . . 
+        registration : {year : 10, county : &#39;WD&#39;, number : 1058}
+    } ;</code></pre>
+<p>This new property is an array of strings. To test it, add a log statement to the bottom of the file, as follows:</p>
+<pre><code>  console.log(&#39;First owner : &#39; + aCar.previous_owners[0] )</code></pre>
+<p>and run the code:</p>
+<pre><code>    $ node fundamentals.js </code></pre>
+<p>The new log statement displays: <strong>First owner : Pat Smith - 1 Main Street</strong>.</p>
+<p>A better design for <em>previous_owners</em> would be an array of objects, where each object&#39;s structure is:</p>
+<pre><code>      { name : &#39; .......&#39;, address : &#39;.......&#39;}</code></pre>
+<p><strong>You are required</strong> to change <em>previous_owners</em>  to reflect this redesign and also rewrite the log statement so that it still displays the same information.</p>
+<p>(The solution is <a href="./index.html#/Solutions">here</a> under &#39;Solution 04&#39;.)</p>
+<p>For completeness, add a property to <em>aCar</em> for the current owner&#39;s address, as follows:</p>
+<pre><code>    let aCar = {
+        owner : &#39;Joe Bloggs&#39;,
+        address : &#39;3 Walkers Lane&#39;,
+        previous_owners : ...........
+        .
+        .
+        .
+    } ;</code></pre>
+<p>Before continuing, update the git repository:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;Arrays&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Iteration">
+            <h2>Looping/Iteration constructs.</h2>
+<p>Suppose the car has a list of <em>extra features</em>. We can represent this as a simple array of strings, as follows:</p>
+<pre><code>    let aCar = {
+        owner : &#39;Joe Bloggs&#39;,
+        .
+        .
+        .
+        features : [&#39;Parking assist&#39;, 
+                    &#39;Alarm&#39;, 
+                    &#39;Tow-bar&#39;],
+        registration : .......
+    } ;</code></pre>
+<p>At the end of <code>fundamentals.js</code>, add a for-loop to display this list, as follows:</p>
+<pre><code>    for (let i = 0 ; i &lt; aCar.features.length ; i += 1) {
+        console.log(aCar.features[i]) ;
+    } </code></pre>
+<p>Run the code to prove it works.</p>
+<p><strong>You are required</strong> to write a second for-loop that displays the name only (not the address) of each previous owners. </p>
+<p>(See <a href="./index.html#/Solutions">Solution 05</a> for the completed code.)</p>
+<p>The loop construct for iterating over an object&#39;s properties is slightly different. For example, to display the key-value pairs in the <em>type</em> property of aCar, add the following code at the end of <code>fundamentals.js</code>:</p>
+<pre><code>    for (let p in aCar.type)  {
+        console.log(p.toUpperCase() + &#39; = &#39; + aCar.type[p] ) ;
+    }</code></pre>
+<p>Run the code to prove it works. </p>
+<p>In the above code the expression <code>aCar.type[p]</code> demonstrates the <strong>subscript notation</strong> style for accessing an object&#39;s properties. The p variable is dereferenced before the expression is evaluated.</p>
+<pre><code>   e.g.
+   p = &#39;make&#39; 
+   aCar.type[p] =&gt; aCar.type[&#39;make&#39;]</code></pre>
+<p> In all the earlier examples we used the <strong>dot notation</strong> style, e.g. aCar.type.make), however, it will not work in the above case as dereferencing does not take place - &#39;aCar.type.p&#39; is undefined. </p>
+<p>Update the git repository:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;Loop constructs&quot;</code></pre>
+<p>To prove Git has recorded the above incremental changes, type the command:</p>
+<pre><code>     $ git log</code></pre>
+<p>For more detailed output use:</p>
+<pre><code>    $ git log -p</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Chrome_DevTools">
+            <h1>The Browser as a Javascript Development tool.</h1>
+<p>So far we have used the <strong>node.js</strong> platform to execute JS code. However, the Web Browser was the original JS execution environment. In recent years, browser vendors have added excellent <em>Developer Tools</em> to assist with debugging web applications. The remainder of this lab introduces the developer tools in the <a href="https://developer.chrome.com/devtools">Google Chrome</a> browser - other browsers have similar tools. [You should install this browser to complete the lab.] </p>
+<p>To demonstrate the tools, we will paste the JS code developed so far into a blank web page. Download <a href="./archives/demo.zip">this file</a>, unzip it and study the content. Open the <code>demo.html</code> web page in the Chrome browser. Although the page renders as blank, the JS code inside the &#39;script&#39; tag has been executed. To prove this, open the Developer tools by clicking the Chrome menu icon on the top right and selecting the tools, as illustrated below:</p>
+<p><img src="./img/devtool.png" alt=""></p>
+<p>The tools pane appears in the browser window and the <strong>Console</strong> tab is selected as the default (if not then select it manually). All the log statements from our JS code appear in the console view, as illustrated below:</p>
+<p><img src="./img/console.png" alt=""></p>
+<p>The Console allows us interact with the JS code by typing statements at the prompt. [In a later lab we will use the console to interact with the current web page]. At the prompt, type the following statement and hit return:</p>
+<pre><code>      aCar.owner</code></pre>
+<p>The response is illustrated below:</p>
+<p><img src="./img/prompt.png" alt=""></p>
+<p>We can also change any object property, for example, type these two statements at the prompt:</p>
+<pre><code>    aCar.color.exterior = &#39;blue&#39;
+    aCar.color.exterior</code></pre>
+<p>The Console attempts to evaluate any JavaScript expression you enter at the prompt. It also provides <strong>auto-completion and tab-completion</strong>. For example, as you type expressions, property names are automatically suggested (see illustration). If there are multiple properties with the same prefix, pressing the Tab key cycles through them. Pressing the right arrow key accepts the current suggestion. </p>
+<p><img src="./img/completion.png" alt=""></p>
+<p>Notice that the <em>aCar</em> object has a number of properties not explicitly defined by us - see illustration. These are inherited by all objects by default - some are useful. </p>
+<p><img src="./img/properties.png" alt=""></p>
+<p>When a statement execution returns an object rather than a primitive then you can expand the object to see its property detail.</p>
+<p><img src="./img/expand.png" alt=""></p>
+<p>Experiment a while with the tool; it will be useful for debugging application code later in the semester. </p>
+<hr>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Solutions">
+            <h2>Solution 01</h2>
+<pre><code>    let aCar = {
+        owner : &#39;Joe Bloggs&#39;,
+        type : {
+            make : &#39;Toyota&#39;,
+            model : &#39;Corolla&#39;,
+            cc : 1.8
+        },
+        registration : &#39;10WD1058&#39;
+    };
+    console.log(aCar.owner + &#39; drives a &#39; + aCar.type.make);</code></pre>
+<h2>Solution 02.</h2>
+<pre><code>    let aCar = {
+        owner : &#39;Joe Bloggs,
+        type : {
+            make : &#39;Toyota&#39;,
+            model : &#39;Corolla&#39;,
+            cc : 1.8
+        },
+        registration : {year : 10, county : &#39;WD&#39;, number : 1058}
+    };
+
+    console.log(aCar.owner + &#39; drives a &#39; + aCar.type.make);
+    console.log(&#39;Reg. = &#39; + aCar.registration.year + &#39;-&#39; +
+                            aCar.registration.county + &#39;-&#39; +
+                            aCar.registration.number );</code></pre>
+<h2>Solution 03.</h2>
+<pre><code>    let aCar = {
+        owner : &#39;Joe Bloggs&#39;,
+        type : {
+            make : &#39;Toyota&#39;,
+            model : &#39;Corolla&#39;,
+            cc : 1.8
+        },
+        registration : {year : 10, county : &#39;WD&#39;, number : 1058}
+    };
+
+    console.log(aCar.owner + &#39; drives a &#39; + aCar.type.make);
+    console.log(&#39;Reg. = &#39; + aCar.registration.year + &#39;-&#39; +
+                            aCar.registration.county + &#39;-&#39; +
+                            aCar.registration.number );
+
+    aCar.mileage = 80000;
+    aCar.color = { exterior : &#39;red&#39;, 
+           interior : { texture : &#39;leather&#39;, shade : &#39;cream&#39; }
+         };
+
+    console.log(&#39;It is a &#39; + aCar.color.exterior + 
+                 &#39; car, &#39;  + aCar.mileage + &#39; mileage, with &#39; + 
+                 aCar.color.interior.texture + &#39; interior.&#39;);</code></pre>
+<h2>Solution 04.</h2>
+<pre><code>    let aCar = {
+        owner : &#39;Joe Bloggs&#39;,
+        previous_owners : [ 
+            { name : &#39;Pat Smith&#39;, address : &#39;1 Main Street&#39;}, 
+            { name : &#39;Sheila Dwyer&#39;, address : &#39;2 High Street&#39;}
+        ],
+        . . . . . . . . .
+        registration : {year : 10, county : &#39;WD&#39;, number : 1058}
+    };
+    . . . . . . . . 
+    console.log(&#39;First owner : &#39; + aCar.previous_owners[0].name + 
+                 &#39; - &#39; + aCar.previous_owners[0].address );</code></pre>
+<h2>Solution 05.</h2>
+<pre><code>    for (let i = 0 ; i &lt; aCar.previous_owners.length ; i += 1) {
+        console.log(aCar.previous_owners[i].name);
+    }</code></pre>
 
           </div>
         
