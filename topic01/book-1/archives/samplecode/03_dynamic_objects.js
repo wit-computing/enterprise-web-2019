@@ -1,4 +1,4 @@
-const me = {
+let me = {
 	name : "Diarmuid O'Connor",   
 	address : '1 Main Street',
 	age : 21,                
