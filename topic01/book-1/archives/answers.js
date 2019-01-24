@@ -1,4 +1,4 @@
-let book = {
+let book = { 
     title: 'JavaScript: The Good Parts',
     author: 'Douglas Crockford',
     price:  15.17,
@@ -27,14 +27,14 @@ let book = {
     }
 }
 
-book.rating = 6
-book.publisher = 'O Reilly'
-console.log(book.isbn)
-console.log(book.tableOfContent.chapter01)
-book.tableOfContent.chapter04 = 'Arrays'
-book.tableOfContent.chapter06 = 'Methods'
+book.rating = 6                   // Q2
+book.publisher = 'O Reilly'       // Q3
+console.log(book.isbn)            // Q4  undefined 
+console.log(book.tableOfContent.chapter01)   // 'The Good Parts'
+book.tableOfContent.chapter04 = 'Arrays'     //  Q6
+book.tableOfContent.chapter06 = 'Methods'    //  Q7 
 console.log(book.tableOfContent)
-console.log(book.reviews[1].name)
-book.reviews.push({test: '... bla bla bla ...', name: 'Brendan Eich'})
+console.log(book.reviews[1].name)            // Q8  Zach Smith
+book.reviews.push({test: '... bla bla bla ...', name: 'Brendan Eich'})  //  Q9
 console.log(book.reviews)
 console.log(book.doSomething('Zach Smith'))

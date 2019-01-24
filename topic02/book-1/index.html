@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html"> Introduction to the DOM, CSS and Bootstrap  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="Lab-03_HTML_CSS">
+          Lab-03_HTML_CSS
+        </a>
+      
+        <a class="item" data-tab="Objectives">
+          Objectives
+        </a>
+      
+        <a class="item" data-tab="HTML">
+          HTML
+        </a>
+      
+        <a class="item" data-tab="CSS">
+          CSS
+        </a>
+      
+        <a class="item" data-tab="Bootstrap">
+          Bootstrap
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-1/index.html">Lab-01_JS_Objects </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-2/index.html">Lab-02_JS_functions </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic02/book-1/index.html">Lab-03_HTML_CSS </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="Lab-03_HTML_CSS">
+            <h1>HTML/CSS/Bootstrap Introduction</h1>
+<p>By completing this lab you will develop an understanding of the basics of HTML/CSS/Bootstrap.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Objectives">
+            <h1>Objectives</h1>
+<ul>
+<li>Setup your folder structure.</li>
+<li>Create a simple HTML Page and view it in a browser.</li>
+<li>Improve your page; Add more pages and create navigation links between the pages.</li>
+<li>Style your pages using CSS.</li>
+<li>Use Bootstrap to style the page.</li>
+</ul>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="HTML">
+            <h1>Environment Setup</h1>
+<p>It is assumed you are using your own personal laptop/device with a standard, reasonably up-to-date operating system (e.g. Linux/IoS/Windows).</p>
+<h2>Browser</h2>
+<p>In order to complete the lab you need a browser that supports HTML5. Most up to date browsers do. We recommend to use Google Chrome as the lab instructions are based on this.</p>
+<h2>Editor</h2>
+<p>You will need a suitable editor to write your code. Sublime is recommended. Please download and install on your machine. If you wish, you can use another editor.</p>
+<h2>HTML Folder Structure</h2>
+<p>Create a new folder called <em>lab2</em> and create two more folders called <em>images</em>,<em>stylesheets</em> inside <em>lab2</em>. It should look something like this:</p>
+<pre><code>+-- lab3
+|   +--images
+|   +--stylesheets</code></pre>
+<p>You&#39;re now ready to create a web page!</p>
+<h2>A Really Basic HTML Page</h2>
+<p>Create a new file in  the folder <em>lab3</em> called <em>index.html</em>. Enter the following HTML code and save.</p>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Enterprise Web Cars&lt;/h1&gt;
+    &lt;p&gt;Hello Enterprise Web&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Now view this page in your browser by using the open option in the file menu of the browser. You should see the HTML rendered as follows:</p>
+<p><img src="./img/browser1.png" alt="FIGURE 1"></p>
+<p>You can see the general structure of the page and how the related to the mark up in the HTML code. As you did last week, open Developer Tools in Chrome and you can view HTML source and the rendered page at the same time. In the Elements tab, clicking on each element will result in the corresponding area in the page to be hightlighed. This will allow you to inspect your HTML code.</p>
+<p><img src="./img/browser2.png" alt="FIGURE 2"></p>
+<h2>Adding Content</h2>
+<p>We&#39;ll now add some content to the page. Using the lecture slides and the web as a reference, try the following:</p>
+<ul>
+<li>Add a <code>&lt;title&gt;</code> element with the value &quot;Enterprise Web Cars&quot; inside the <code>&lt;head&gt;</code> element.
+Replace the value of the <code>&lt;p&gt;</code> element in the body with the following text:</li>
+</ul>
+<pre><code>We have the biggest selection of commercial and private cars in Ireland. Check out our new cars. This week we recommend the &lt;em&gt;Ford Mondeo&lt;/em&gt;. What a car!</code></pre>
+<ul>
+<li>Save and check the changes work in the browser. You should now see the title and some more content on your page.</li>
+</ul>
+<p><img src="./img/browser3.png" alt="FIGURE 3"></p>
+<h2>Images and Links</h2>
+<p>We will now add some images and links to our web application. Save the following images into the images folder inside the <em>lab3</em> folder (right-click on image and select &quot;Save image as...&quot;):</p>
+<p><img src="./img/mondeo.jpg" alt="FIGURE 4">
+<img src="./img/golf.jpg" alt="FIGURE 5"></p>
+<p>Now create a new folder, <em>stock</em>, in the <em>lab1</em> folder. In the <em>stock</em> folder create the a new file, <em>cars.html</em>, that contains the following html:</p>
+<pre><code class="lang-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt; Enterprise Web Cars: New Cars &lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h2&gt;Ford Mondeo&lt;/h2&gt;
+    &lt;p&gt;
+      &lt;img src=&quot;../images/mondeo.jpg&quot;&gt;
+      &lt;p&gt;Traction control, Radio/CD/MP3, Outside temperature meter, Multi function steering wheel, Isofix child seat anchor points, Immobiliser,                    Heated screen.&lt;/p&gt;
+    &lt;/p&gt;
+    &lt;h2&gt;Volkswagen Golf&lt;/h2&gt;
+    &lt;p&gt;
+      &lt;img src=&quot;../images/golf.jpg&quot;&gt;
+     &lt;p&gt;ABS, Driver Airbag, Passenger Airbag, Side Airbag, Child Locks, Deadlocks, Flat Tyre Indicator, ISO Fix, Multiple Airbags, Side Impact Protection, Xenon Headlights. &lt;/p&gt;
+    &lt;p&gt;
+      &lt;a href=&quot;../index.html&quot;&gt;Home&lt;/a&gt;
+    &lt;/p&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Notice how the <code>src</code> attributes in the <code>&lt;img&gt;</code> elements use relative addressing to reference the image files. Now return to your <em>index.html</em> page and update the paragraph text to include a link to this page as follows:</p>
+<pre><code class="lang-html"> We have the biggest selection of commercial and private cars in Ireland. Check out our &lt;a href=&quot;stock/cars.html&quot;&gt; new cars&lt;/a&gt;. This week we recommend &lt;em&gt;the Ford Mondeo&lt;/em&gt;. What a car!</code></pre>
+<p>Create another folder, <em>about</em> in the <em>lab3</em> folder. In the stock folder create the a new file, <em>directions.html</em>, that contains the following html:</p>
+<pre><code class="lang-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Enterprise Web Cars: Directions&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Directions&lt;/h1&gt;
+    &lt;p&gt;Take the 305 S exit to Waterford go 0.4 mi&lt;/p&gt;
+    &lt;p&gt;Continue on 305 go 12 mi&lt;/p&gt;
+    &lt;p&gt;Turn right at Structure Ave N go 0.6 mi&lt;/p&gt;
+    &lt;p&gt;Turn right and head toward Structure Ave N go 0.0 mi&lt;/p&gt;
+    &lt;p&gt;Turn right at Structure Ave N go 0.7 mi&lt;/p&gt;
+    &lt;p&gt;Continue on Structure Ave S go 0.2 mi&lt;/p&gt;
+    &lt;p&gt;Turn right at SW Presentation Way go 0.0 mi&lt;/p&gt;
+    &lt;p&gt;
+      &lt;a href=&quot;../index.html&quot;&gt;Home&lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>In <em>index.html</em>, enter the following code after first paragraph to create a &quot;Directions&quot; section on the page:</p>
+<pre><code class="lang-html"> &lt;h2&gt;Directions&lt;/h2&gt;
+    &lt;p&gt;
+      You&#39;ll find us right in the center of Waterford. If you need help finding
+      us, check out our
+      &lt;a href=&quot;about/directions.html&quot;&gt;detailed directions&lt;/a&gt;.
+      Come join us!
+    &lt;/p&gt;</code></pre>
+<p>Now try the web application out, making sure the links work and images appear correctly.</p>
+<h2>Menu Bar</h2>
+<p>The site should offer clear navigation. While it&#39;s possible to have links in the text, we will also create a &quot;nav bar&quot; at the top of the screen with the same links.</p>
+<p>Add the following HTML code just inside the <body> element. This contains an unordered list of links to the other pages in the site.</p>
+<pre><code class="lang-html">&lt;nav&gt;
+    &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt; |
+    &lt;a href=&quot;./stock/cars.html&quot;&gt;Cars&lt;/a&gt; |
+    &lt;a href=&quot;./about/directions.html&quot;&gt;Directions&lt;/a&gt; |
+&lt;/nav&gt;</code></pre>
+<p>Add a navigation bar to the other two pages also. You will need to adjust the links relative to each page.</p>
+<h2>Favicon Icon</h2>
+<p>Finally, we&#39;ll add a Favicon icon to our pages. A Favicon is a favorite icon associated with a particular page or organisation. It&#39;s the icon that appears on the browser tabs beside the title. Download the following icon to your <em>images</em> folder.</p>
+<p><img src="./img/favicon.ico" alt="FIGURE 5"></p>
+<p>Now, in the <head> element, link to the icon by entering the following link element:</p>
+<pre><code class="lang-html"> &lt;link rel=&quot;icon&quot; href=&quot;images/favicon.ico&quot;&gt;</code></pre>
+<p>As with the menu bar, replicate this in the other pages. We&#39;ll now move on to apply some style to our page using CSS...</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="CSS">
+            <h1>Cascading Style Sheets</h1>
+<p>HTML elements alone will give us a structured page - however it will have a very plain and unattractive appearance. To introduce &#39;style&#39; into a page we need another language - Cascading Style Sheets (CSS). This is a different language from HTML and is usually stored in a separate file - the stylesheet.</p>
+<h2>CSS</h2>
+<p>Create a new file called <em>style.css</em> and save it into the <em>stylesheets</em> folder you created in the last step. Add the following lines of code to the file and save:</p>
+<pre><code class="lang-css">p
+{
+  color: maroon; /* Change text colour to maroon
+}</code></pre>
+<p>Bind this file into your pages by &#39;linking&#39; to it in the the <code>&lt;head&gt;</code> element of each page. Add the following line of code into the head element:</p>
+<pre><code class="lang-html">    &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;stylesheets/style.css&quot; /&gt;</code></pre>
+<p>Now have a look at the <em>index.html</em> page in the browser - you should notice that the text in the paragraph is now maroon in colour. Add the link element to <em>cars.html</em> and <em>directions.html</em>. Again you will need to adjust the relative reference for each page.</p>
+<p>Add the following rules one at a time a observe the effect:</p>
+<pre><code class="lang-css">h1, h2
+{
+  color: #007e7e; 
+}
+
+h1
+{
+  font-size: 200%; 
+  border-bottom: 1px solid black;
+}
+
+h2
+{
+  font-size: 130%;
+}
+
+  body
+{
+  width: 80%;  
+  margin: 0 auto;
+  /*font-family Specifies the font for the element. If he browser does not support the first font, it tries the next font and so on... */
+  font-family: Verdana, Helvetica, Arial, sans-serif; 
+  font-size:small;
+  line-height: 1.6em;
+}
+
+li {
+    display: inline;  /*displays list items inline instead of block. 
+                        Result is nav bar items displayed horizontally.*/
+}</code></pre>
+<p>All going well you should end up with your index.html page looking something like this:</p>
+<p><img src="./img/browser4.png" alt="FIGURE 4"></p>
+<p>If you want, you can explore the css rules by changing the values and observing the results.</p>
+<h2>CSS Class Selectors</h2>
+<p>The class selector allows you to apply syle rules to elements with a specific class attribute. Add the following paragraph element to your index.html page after the last body.</p>
+<pre><code class="lang-html">&lt;p&gt;
+Thinking of buying a car but don&#39;t have the cash? We&#39;ve got the car loan for you!   With a variable rate loan from our financial partners carsharks.com you have the option of making extra repayments and clear your loan early. Lending criteria terms and conditions apply. For Consumer Hire Purchase of &amp;euro;7,000 or more...
+&lt;/p&gt;</code></pre>
+<p>In the browser, it will appear with the standard style rules specified for paragraphs:</p>
+<p><img src="./img/browser5.png" alt="FIGURE 5"></p>
+<p>We want to draw attention to this paragraph in the overall page by applying specific style properties.For example, different font and background colour and add a background image beside the text.</p>
+<p>Save the following image, <em>background.gif</em>, to the images folder.</p>
+<p><img src="./img/background.gif" alt="Background"></p>
+<p>Update the <code>&lt;p&gt;</code> element by adding a class attribute with the value &quot;finance&quot;.</p>
+<pre><code class="lang-html">&lt;p class=&#39;finance&#39;&gt;</code></pre>
+<p>Now open <em>style.css</em> and add the following css rule with the appropriate class selector. Notice class selectors begin with a period followed by the class name. This will apply the style rules to all elements with attribute class=&quot;finance&quot;.</p>
+<pre><code class="lang-css">.finance
+{
+  border-color: white;
+  border-width: 1px;
+  border-style: dashed;
+
+  margin: 30px;
+  padding: 25px;
+  padding-left: 80px;
+  margin-right: 150px;
+
+  background-color: #a7cece;
+  background-image: url(../images/background.gif);
+  background-repeat: no-repeat;
+  background-position: top-left;
+
+  line-height: 1.9em;
+  font-style: italic;
+  font-family: Georgia, &quot;Times New Roman&quot;, Times, serif;
+  color: black;
+}</code></pre>
+<p>View <em>index.html</em> in the browser. See how the finance paragraph is now more prominent. Play around with some of the style rules to understand their effect.</p>
+<p><img src="./img/browser6.png" alt="FIGURE 6"></p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Bootstrap">
+            <h1>Bootstrap and Forms</h1>
+<p>In the last task you created your own custom css style. While this allows for full control over your styling, it can be a long process to develop from scratch. Furthermore, we should be trying to style our pages such that they look good on all devices such as smart phones, tablets etc.</p>
+<p>Several frameworks already exist that we can leverage to provide good generic styling that looks good everywhere. In this lab, we&#39;ll will use <a href="https://getbootstrap.com/docs/3.4/">Bootstrap 3.4</a> to improve our simple web site. First we&#39;ll link to Bootstrap.</p>
+<h2>Linking to Bootstrap</h2>
+<p>You can link to more than one css style sheet in a page. To bind to the Bootstrap files, add the following into the head element of your pages, just above your own style sheet.</p>
+<pre><code class="lang-html">   &lt;!-- Bootstrap core CSS --&gt;
+    &lt;link href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;/&gt;
+   &lt;!-- Bootstrap theme --&gt;
+    &lt;link href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap-theme.min.css&quot; rel=&quot;stylesheet&quot;/&gt;</code></pre>
+<p>Bootstrap also uses some pre-written, core JavaScript libraries that can add a lot of cool features to you page. We can link to JavaScript files by adding the following code at the bottom of your HTML pages (just before the closing <code>&lt;/html&gt;</code> tag.</p>
+<pre><code class="lang-html">   &lt;!-- Bootstrap core JavaScript
+    ================================================== --&gt;
+    &lt;!-- Placed at the end of the document so the pages load faster --&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+<p>You&#39;ll notice that your page will look the same. This is because your style settings are overriding bootstrap default styles (e.g. borders).</p>
+<p>Next we&#39;ll include a viewport meta tag on our page. Bootstrap is designed with mobile devices in mind so to ensure proper rendering and touch zooming. To try to ensure this, insert the following line in the <code>&lt;head&gt;</code> element.</p>
+<pre><code class="lang-html">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</code></pre>
+<p>We&#39;re going to use a Bootstrap theme to style up this screen so we will use the class attribute to apply bootstrap themes to our HTML.</p>
+<h2>Update style.css</h2>
+<p>Open <em>style.css</em> file you created in the CSS section and delete all CSS rules apart from the finance class rule. This will let the general bootstrap style apply to your element. The contents of style.css should now look like this:</p>
+<pre><code class="lang-css">.finance
+{
+  border-color: white;
+  border-width: 1px;
+  border-style: dashed;
+
+  margin: 30px;
+  padding: 25px;
+  padding-left: 80px;
+  margin-right: 150px;
+
+  background-color: #a7cece;
+  background-image: url(../images/background.gif);
+  background-repeat: no-repeat;
+  background-position: top-left;
+
+  line-height: 1.9em;
+  font-style: italic;
+  font-family: Georgia, &quot;Times New Roman&quot;, Times, serif;
+  color: black;
+}</code></pre>
+<h2>Applying Bootstrap Theme</h2>
+<p>We will use a <code>&lt;div&gt;</code> to apply the showcase theme to the whole document. Put the following div element into the <em>index.html</em> page, starting just above the nav bar and ending just before the closing <code>&lt;/body&gt;</code> tag.</p>
+<pre><code class="lang-html"> &lt;div class=&quot;container theme-showcase&quot; role=&quot;main&quot;&gt;
+...
+...
+...
+ &lt;/div&gt;
+
+&lt;/body&gt;</code></pre>
+<p>To make the navigation bar appear across the top of the page, add the following class attributes to the existing <code>&lt;nav&gt;</code> and <code>&lt;ul&gt;</code> elements:</p>
+<pre><code class="lang-html">&lt;nav class=&quot;navbar&quot;&gt;
+    &lt;ul class=&quot;nav navbar-nav&quot;&gt;</code></pre>
+<p>Now take another look at <em>index.html</em> in the browser (you may need to refresh the page). It should look like this:</p>
+<p><img src="./img/browser7.png" alt="FIGURE 7"></p>
+<h2>Jumbotron</h2>
+<p>Apply the &quot;jumbotron&quot; style to your heading for a primary marketing message or impact. Insert a new <code>&lt;div&gt;</code> around the heading and add a new &quot;marketing message&quot; paragraph as follows:</p>
+<pre><code class="lang-html">&lt;div class=&quot;jumbotron&quot;&gt;
+    &lt;h1&gt;Enterprise Web Cars&lt;/h1&gt; &lt;!--Already in the page...--&gt;
+    &lt;p&gt;The best selection of commercial and private cars in Ireland.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p>As you&#39;ll see, this has a substantial effect on the rendered page. Also, resize the browser window and notice how the page adjusts accoordingly. This is a key feature of Bootstrap, enabling it to look good on any device.</p>
+<p><img src="./img/browser8.png" alt="FIGURE 8"></p>
+<h2>Improve the Nav Bar</h2>
+<p>Let&#39;s improve the Navigation bar by adding a collapsed nav bar button for small screen devices. Replace completely the existing <nav> element with the following:</p>
+<pre><code class="lang-html">&lt;nav class=&quot;navbar navbar-inverse navbar-fixed-top&quot;&gt;
+      &lt;div class=&quot;container&quot;&gt;
+        &lt;div class=&quot;navbar-header&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;navbar-toggle collapsed&quot; data-toggle=&quot;collapse&quot; data-target=&quot;#navbar&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;navbar&quot;&gt;
+            &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;
+            &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+            &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+            &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;navbar&quot; class=&quot;navbar-collapse collapse&quot;&gt;
+          &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+            &lt;li class=&quot;active&quot;&gt;&lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt; &lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;stock/cars.html&quot;&gt;Cars&lt;/a&gt; &lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;about/directions.html&quot;&gt;Directions&lt;/a&gt; &lt;/li&gt;
+          &lt;/ul&gt;
+      &lt;/div&gt; 
+    &lt;/div&gt;
+    &lt;/nav&gt;</code></pre>
+<p>Go though the code and try to relate to what you see on the screen. In particular, notice what happens the nav bar when you resize the browser window to be quite small (or displayed in a small screes/resolution device such as a smart phone).</p>
+<p>You may notice the Nav bar obscures some of the title area. We can remedy this by including the following padding rule in <em>styles.css</em>.</p>
+<pre><code class="lang-css">body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}</code></pre>
+<p>View in a browser to check the results:</p>
+<p><img src="./img/browser9.png" alt="FIGURE 9"></p>
+<h2>HTML Form</h2>
+<p>Finally, HTML forms allow users to enter and submit data via the browser window. We will add a new HTML form that allows users to submit their email address. Again, we can use Bootstrap classifiers to style the form. Enter the following HTML just after the finance paragraph:</p>
+<pre><code class="lang-html">&lt;form class=&quot;form-inline&quot; role=&quot;form&quot;&gt;
+    &lt;label&gt;Send us your email to keep informed about our great deals&lt;/label&gt;&lt;br/&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+    &lt;input  type=&quot;email&quot; id=&quot;email&quot; class=&quot;form-control&quot; placeholder=&quot;Enter email&quot;/&gt;
+    &lt;/div&gt;
+    &lt;input type=&quot;button&quot; value=&quot;Go&quot; onclick=&quot;console.log(document.getElementById(&#39;email&#39;).value)&quot; &gt;
+&lt;/form&gt;
+      ~~</code></pre>
+<p><img src="./img/browser10.png" alt="FIGURE 10"></p>
+<p>Notice the use of attributes to include text placeholder. Also, the <code>onclick</code> attribute contains some JavaScript that, using an element id, will execute when the button is clicked. This output the contents of the email text will be output to the console. Have a look at the Javascript console in Developer Tools in your browser when you click the button. Try to understand the code and how it does this.</p>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>
