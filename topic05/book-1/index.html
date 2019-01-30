@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html">  React Component model.  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="Lab-Interactive_Apps">
+          Lab-Interactive_Apps
+        </a>
+      
+        <a class="item" data-tab="Startup">
+          Startup
+        </a>
+      
+        <a class="item" data-tab="Contact_List">
+          Contact_List
+        </a>
+      
+        <a class="item" data-tab="Phone_Catalogue">
+          Phone_Catalogue
+        </a>
+      
+        <a class="item" data-tab="Hacker_News">
+          Hacker_News
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic05/book-1/index.html">Lab-Interactive_Apps </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="Lab-Interactive_Apps">
+            <h1>Building React SPAs (Interactive).</h1>
+<p>Continue the development of the three SPAs by adding <strong>statefulness</strong> and making them <strong>interactive and dynamic</strong>.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Startup">
+            <h2>Startup.</h2>
+<p>Use the code developed in the previous lab (the <code>threeApps</code> folder) as the starting point for this one.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Contact_List">
+            <h2>Contact List App.</h2>
+<p>The objective is to allow the user edit or delete an existing contact, with the option to undo / cancel the operation, if required. We also want to enable the addition of new contacts to the list.</p>
+<h3>Stub API</h3>
+<p>In production mode a SPA gets its model data from a &#39;real&#39; web API. However, during development a <strong>stub API</strong> is a common technique, either because the API is not yet developed or to postpone integration until the SPA is complete. </p>
+<p>Create the file <code>contactlist/src/dataStore/stubAPI.js</code> and add the following code:</p>
+<pre><code>  import _ from &#39;lodash&#39;;
+
+  class StubAPI {
+      constructor() {
+          this.contacts = [
+              {
+              &#39;name&#39;: &#39;Contact 1&#39;,
+              &#39;address&#39;: &#39;123 Test St&#39;,
+              &#39;phone_number&#39;: &#39;132-3212&#39;
+              },        
+              {
+              &#39;name&#39;: &#39;Contact 2&#39;,
+              &#39;address&#39;: &#39;23 Main St&#39;,
+              &#39;phone_number&#39;: &#39;934-4329&#39;
+              }, 
+              {
+              &#39;name&#39;: &#39;Contact 3&#39;,
+              &#39;address&#39;: &#39;4 Lower St&#39;,
+              &#39;phone_number&#39;: &#39;432-5832&#39;
+              },
+              {
+              &#39;name&#39;: &#39;Contact 4&#39;,
+              &#39;address&#39;: &#39;49 Upper Street&#39;,
+              &#39;phone_number&#39;: &#39;934-4290&#39;
+              },
+              {
+              &#39;name&#39;: &#39;Contact 5&#39;,
+              &#39;address&#39;: &#39;4 High Street&#39;,
+              &#39;phone_number&#39;: &#39;933-3390&#39;
+              }
+          ] ; 
+      }
+
+      delete(k) {
+          let elements = _.remove(this.contacts, 
+              (contact) =&gt; contact.phone_number === k
+          );
+          return elements; 
+      }
+      getAll() {
+          return this.contacts ;
+      }
+
+      add(n,a,p) {
+          let len = this.contacts.length ;
+          let newLen = this.contacts.push({
+              name: n, address : a, phone_number: p }) ;
+          return newLen &gt; len ;
+      }
+
+      update(key,n,a,p) {
+          let index = _.findIndex(this.contacts, 
+              (contact) =&gt; contact.phone_number === key
+          );      
+          if (index !== -1) {
+              this.contacts.splice(index, 1, 
+                  {name: n, address: a, phone_number: p});
+              return true ;
+          }
+          return false ;
+      }
+  }
+
+  export default (new StubAPI() );</code></pre>
+<p>This code uses the <em>lodash</em> utility package. To install it, in the terminal window go to the <code>contactList</code> folder and type:</p>
+<pre><code>   $ npm install  lodash@2.4.2 --save</code></pre>
+<p>[This installs the package in <code>node_modules</code> and updates (--save) the local <code>package.json</code> file.]</p>
+<p>Start the development server from the <code>contactlist</code> folder:</p>
+<pre><code>   $ npm start</code></pre>
+<p>In <code>contactlist/src/App.js</code>, the App component should now get the sample model data from the stub API. Replace the entire content of the file with the following: </p>
+<pre><code>  import React , { Component } from &#39;react&#39;;
+  import &#39;./App.css&#39;;
+  import Header from &#39;./components/header&#39; 
+  import ContactForm from &#39;./components/contactForm&#39; 
+  import ContactList from &#39;./components/contactList&#39; 
+  import api from &#39;./dataStore/stubAPI&#39;  // NEW
+
+  class App extends Component {
+      render() {
+          let contacts = api.getAll() ;    // NEW
+          return (    
+              &lt;div className=&quot;jumbotron&quot;&gt;
+                  &lt;Header noContacts={contacts.length} /&gt;
+                  &lt;ContactForm /&gt;
+                  &lt;ContactList contacts={contacts}  /&gt;  
+              &lt;/div&gt;                      
+              );
+      }
+  }
+
+export default App;</code></pre>
+<p>The app should now render in the browser as before.</p>
+<p><img src="./img/app.png" alt=""></p>
+<p>From the <code>contactlist</code> folder update the local Git repo:</p>
+<pre><code>$ git add -A
+$ git commit -m &quot;Added stub API&quot;</code></pre>
+<p>Restart the development server. </p>
+<h3>UI state.</h3>
+<p>In React terms, a common source of UI state is user input controls, including:</p>
+<ul>
+<li>Input Text field.</li>
+<li>Drop-down menu.</li>
+<li>Radio button or checkbox.</li>
+</ul>
+<p>An analysis of this app&#39;s behavior requirements gives the following UI state breakdown:</p>
+<ol>
+<li>Contact details - A contact&#39;s propeeties (name, address, etc) are editable and therefore should be stored as UI state.</li>
+<li>New contact details - The input fields on the Add contact mini form are UI state.</li>
+<li>Contact status - A contact&#39;s &#39;status&#39; changes when the user clicks the Edit or Delete button. The change is reflected in the text label, color and meaning of its two buttons. Three status types are possible: Normal (default); Edit (button labels change to Undo and Save); and Delete (button labels change to Confirm and Cancel). As a status change results from user input, it maps to React&#39;s <em>component state</em> concept.</li>
+</ol>
+<h3>Stateful components.</h3>
+<p>Which components should manage the app&#39;s UI state? </p>
+<p>Only the Contact component is concerned about the status attribute. Also, no other component needs to be re-rendered while the user is editing/updating a contact. The web Form component can manage the new contact&#39;s details while they are being entered. When the user submits the data it is only then the App components needs to be informed.</p>
+<p>In <code>src/components/contact.js</code>, change the Contact component as shown below:</p>
+<pre><code>  class Contact extends Component {
+      state = {
+        status : &#39;&#39;,
+        name: this.props.contact.name,
+        address: this.props.contact.address,
+        phone_number: this.props.contact.phone_number,
+        previousDetails: {
+          name: this.props.contact.name,
+          address: this.props.contact.address,
+          phone_number: this.props.contact.phone_number  
+        }
+      };
+      render() {
+          . . . as before . . .
+      }
+  }</code></pre>
+<p>Notes:</p>
+<ol>
+<li>For simplicity, the normal (default) contact status will be represented by an empty string. The values &#39;edit&#39; and &#39;del&#39; will be used for the other status options - see later.</li>
+<li>The initial values for a contact&#39;s details are passed in as props. </li>
+<li>The previousDetails structure is necessary to support the undo operation of the contact edit feature - we need to reset the contact&#39;s properties back to pre-edit values.</li>
+</ol>
+<h4>Externalize configuration.</h4>
+<p>The attributes (color, label) of the buttons associated with a contact could be considered <strong>configuration data</strong>. It is good practice to separate configuration from logic, thus making an app easier to reconfigure. Create the file  <code>src/config/buttonsConfig.js</code> and add the following code:</p>
+<pre><code>  let buttons = {
+     normal : { 
+        leftButtonVal : &#39;Edit&#39;,
+        rightButtonVal : &#39;Delete&#39;,
+        leftButtonColor : &#39;btn-default&#39;,
+        rightButtonColor : &#39;btn-danger&#39;
+     },
+     delete : { 
+        leftButtonVal : &#39;Undo&#39; ,
+        rightButtonVal : &#39;Confirm&#39; ,
+        leftButtonColor : &#39;btn-success&#39;,
+        rightButtonColor : &#39;btn-danger&#39;
+     },
+     edit : {
+        leftButtonVal : &#39;Save&#39; ,
+        rightButtonVal : &#39;Cancel&#39; ,
+        leftButtonColor : &#39;btn-danger&#39;,
+        rightButtonColor : &#39;btn-success&#39;
+     }
+  }
+  export default buttons;</code></pre>
+<p>This configuration data is used in the next sectiom.</p>
+<h3>Adding dynamic behavior.</h3>
+<p>We will start by adding support for a contact&#39;s Edit button. The code will involve the following:</p>
+<ol>
+<li>Change the Contact component&#39;s status to &#39;edit&#39;. </li>
+<li>Keep the contact details stored in the state object in sync with the text input fields as the user is typing. React&#39;s <em>onChange</em> event will facilitate synchronization.</li>
+<li>If the user cancels an edit operation then the contact&#39;s details must be reset.</li>
+</ol>
+<p>Significant changes are required to <code>components/contact.js</code>. Update its content as detailed below:</p>
+<pre><code>. . . . other imports . . . . 
+import buttons from &#39;../config/buttonsConfig&#39;;
+import _ from &#39;lodash&#39;;
+import api from &#39;../dataStore/stubAPI&#39;
+
+class Contact extends Component {
+    state = { . . . as before . . . };
+    handleEdit = () =&gt;  this.setState({ status : &#39;edit&#39;} );
+    handleSave = (e) =&gt;  null ;  // Implemented later
+    handleCancel = () =&gt; {
+      let {name, address, phone_number} = this.state.previousDetails ;
+      this.setState({ status : &#39;&#39;, 
+          name, address, phone_number } ) ;
+    }; 
+    handleNameChange = (e) =&gt;  this.setState({name: e.target.value});
+    handleAddressChange = (e) =&gt; this.setState({address: e.target.value});  
+    handlePhoneNumChange = (e) =&gt;  
+              this.setState({phone_number: e.target.value});             
+    render() {
+          let activeButtons = buttons.normal ;
+          let leftButtonHandler = this.handleEdit;
+          let rightButtonHandler = this.handleDelete;
+          if (this.state.status === &#39;edit&#39; ) {
+              activeButtons = buttons.edit ;
+              leftButtonHandler = this.handleSave;
+              rightButtonHandler = this.handleCancel ;
+          }    
+          return (
+            &lt;div className=&quot;col-sm-3&quot; &gt;
+              &lt;div className=&quot;panel panel-primary&quot;&gt;
+                  &lt;div className=&quot;panel-heading&quot;&gt;
+                      { this.state.name }
+                  &lt;/div&gt;
+                  &lt;div className=&quot;panel-body&quot;&gt;
+                  {  this.state.status === &#39;edit&#39; ? 
+                      [ 
+                      &lt;input type=&quot;text&quot; className=&quot;form-control&quot;
+                          value={this.state.name}
+                          onChange={this.handleNameChange} /&gt;,
+                      &lt;input type=&quot;text&quot; className=&quot;form-control&quot;
+                          value={this.state.address}
+                          onChange={this.handleAddressChange} /&gt;,
+                      &lt;input type=&quot;text&quot; className=&quot;form-control&quot;
+                          value={this.state.phone_number}
+                          onChange={this.handlePhoneNumChange} /&gt;
+                      ] :
+                      [
+                          &lt;p key={&#39;name&#39;}&gt;{this.state.name}&lt;/p&gt;,
+                          &lt;p key={&#39;address&#39;} &gt;{this.state.address}&lt;/p&gt;,
+                          &lt;p key={&#39;phone_number&#39;} &gt;{this.state.phone_number}&lt;/p&gt;,
+                      ]   
+                  }        
+                  &lt;/div&gt;
+                  &lt;div className=&quot;panel-footer&quot;&gt; 
+                    &lt;div className=&quot;btn-group btn-group-justified&quot; role=&quot;group&quot; aria-label=&quot;...&quot;&gt;
+                      &lt;div className=&quot;btn-group&quot; role=&quot;group&quot;&gt;
+                          &lt;button type=&quot;button&quot; 
+                              className={&#39;btn &#39; + activeButtons.leftButtonColor} 
+                              onClick={leftButtonHandler} &gt;
+                              {activeButtons.leftButtonVal}
+                          &lt;/button&gt;
+                      &lt;/div&gt;
+                      &lt;div className=&quot;btn-group&quot; role=&quot;group&quot;&gt;
+                          &lt;button type=&quot;button&quot; 
+                              className={&#39;btn &#39; + activeButtons.rightButtonColor} 
+                              onClick={rightButtonHandler} &gt;
+                              {activeButtons.rightButtonVal}
+                          &lt;/button&gt;  
+                      &lt;/div&gt;
+                  &lt;/div&gt;                     
+                  &lt;/div&gt;          
+              &lt;/div&gt;
+            &lt;/div&gt;
+          ) ; 
+        }
+    } 
+    export default Contact;</code></pre>
+<p>Notes:</p>
+<ol>
+<li>ES6 arrow functions have &#39;this&#39; bound to the containing object. </li>
+<li>In ES6, for single-line anonymous functions the curly-braces are optional and the return keyword is omitted.</li>
+<li>In edit mode, the Contact component&#39;s data fields change from non-editable text to input fields. The ternary operator (?:) is used inside the above JSX to implement the conditional switch. The JSX (and ultimately HTML) is being <strong>dynamically computed</strong> based on the status property of the state object.</li>
+<li>We use this.state instead of this.props to set the value of an input field. This ensures the state object is in sync with the current input.    </li>
+<li>The save changes feature is not implemented, yet.</li>
+</ol>
+<p>To test the above code, click the Edit button of any contact. </p>
+<p><img src="./img/edit.png" alt=""></p>
+<p>The contact&#39;s details are now editable. Change some values (say, address) and click Cancel to reset it.</p>
+<p>To get save working, implement the <em>handleSave</em>, as follows:</p>
+<pre><code>class Contact extends Component {
+    . . . . . . 
+    handleSave = (e) =&gt; {
+        e.preventDefault();
+        let updatedName = this.state.name.trim();
+        let updatedAddress = this.state.address.trim();
+        let updatedPhone_number = this.state.phone_number.trim();
+        if (!updatedName || !updatedAddress || !updatedPhone_number ) {
+            return ;
+        }
+        let {name, address, phone_number} = this.state ;
+        this.setState({status : &#39;&#39;,
+            previousDetails: { name, address, phone_number  }
+        })
+        api.update( this.state.previousDetails.phone_number,
+            updatedName , updatedAddress, updatedPhone_number )
+    };                              
+    handleCancel = (e) =&gt; { . . .  as before . . . }</code></pre>
+<p>Now try editing a contact and saving the changes.</p>
+<h3>Inverse data flow.</h3>
+<p>To implement the Delete contact feature we need to follow the inverse data flow design pattern. For a Delete action the Contact component must request the App component to complete the delete, via the stub API. The App then re-renders itself to ensure the &#39;number of contacts&#39; badge is updated. The elements of the inverse data flow pattern includes:</p>
+<ul>
+<li>A function in App to communicate with the API and perform re-rendering.</li>
+<li>Pass a reference to above function to the Contact components. </li>
+<li>Contact component invokes the function when required. </li>
+</ul>
+<p>[ The re-rendering by the App component does lead to some unnecessary re-rendering by the Contact components. We will remove this unnecessary execution later.]</p>
+<p>In <code>src/App.js</code>, make the following changes:</p>
+<pre><code>  .
+  .
+  .
+  class App extends Component {
+      deleteContact = (key) =&gt; {
+          api.delete(key); 
+          this.setState({});                          
+      };
+
+      render() {
+            . . . . as before . .  .
+            return (
+                . . . as before . . . 
+                &lt;ContactList contacts={contacts} 
+                      deleteHandler={this.deleteContact} /&gt;
+                . . . as before . . . 
+        );
+    }
+  }
+  export default App;</code></pre>
+<p>In <code>components/contactList.js</code> make the following changes:</p>
+<pre><code>  export default class ContactList extends Component {
+      render() {
+        let contactPanels =   this.props.contacts.map(
+            (c) =&gt; &lt;Contact key={c.phone_number} contact={c} 
+                      deleteHandler={this.props.deleteHandler} /&gt; 
+        );
+        return (
+            . . . . as before . . . .
+          ) ;
+      }
+  }</code></pre>
+<p>The final change is to complete the data flow pattern, in  <code>components/contact.js</code>:</p>
+<pre><code>   . . . . . . 
+   class Contact extends Component {
+      . . . . other handlers . . . . 
+      handleDelete = () =&gt;  this.setState({ status : &#39;del&#39;} );
+      handleConfirm = (e) =&gt; {
+        e.preventDefault();
+        this.props.deleteHandler(this.state.phone_number);
+      };
+      render() { 
+          . . . . . . . 
+         if (this.state.status === &#39;edit&#39; ) {
+             . . . as before . . . 
+         } else if (this.state.status === &#39;del&#39; ) {
+            activeButtons = buttons.delete ;
+            leftButtonHandler = this.handleCancel ;
+            rightButtonHandler = this.handleConfirm;
+         }
+         return ( . . . as before . . . )   
+  }
+  export default Contact;</code></pre>
+<p>In the browser, test the Delete feature.</p>
+<p>From the <code>threeApps/contactlist</code> folder commit this work:</p>
+<pre><code> $ git add -A
+ $ git commit -m &quot;Edit and Delete features completed&quot;</code></pre>
+<h3>Add Contact,</h3>
+<p>The mini web form to add a new contact is the remaining feature. The inverse data flow pattern applies here also, in that we need:</p>
+<ul>
+<li>A function in App to pass the new contact details to the API and perform a re-rendering.</li>
+<li>To pass a reference to above function to the ContactForm components. </li>
+<li>ContactForm component invokes the function when required.</li>
+</ul>
+<p>In <code>src/App.js</code> make the following changes:</p>
+<pre><code>   . . . . imports . . . . 
+
+   class App extends Component {
+      addContact = (n, a, p) =&gt; {
+           api.add(n,a,p) ;
+           this.setState({});
+      };
+      deleteContact = ..... as before .....</code></pre>
+<p>and in the render method of the same component, pass this new method to the form component:</p>
+<pre><code>     . . . . .. 
+     &lt;ContactForm  addHandler={this.addContact} /&gt;
+     . . . . . . </code></pre>
+<p>In a React app, data entry fields must be managed by your code (for HTML-based forms the browser DOM does it). The approach is to store a field&#39;s value in state and update it on every key press. In <code>components/contactForm.js</code> replace the entire code with the following: </p>
+<pre><code>  import React , { Component } from &#39;react&#39;;
+
+  class ContactForm extends Component {
+      state = { name: &#39;&#39;, address: &#39;&#39;, phone_number : &#39;&#39;};
+      handleSubmit = (e) =&gt; {
+        e.preventDefault();
+        let name = this.state.name.trim();
+        let address = this.state.address.trim();
+        let phone_number = this.state.phone_number.trim();
+        if (!name || !address || !phone_number) {
+            return;
+        }
+        this.props.addHandler(name,address,phone_number);
+        this.setState({name: &#39;&#39;, address: &#39;&#39;, phone_number: &#39;&#39;});
+    }
+      handleNameChange = (e) =&gt;  this.setState({name: e.target.value});
+      handleAddressChange = (e) =&gt; this.setState({address: e.target.value});
+      handlePhoneNumChange = (e) =&gt;  this.setState({phone_number: e.target.value});
+
+      render() {
+          return (
+              &lt;div className=&quot;container-fluid&quot;&gt;
+                  &lt;div className=&quot;row&quot;&gt;
+                  &lt;div className=&quot;col-sm-2&quot; &gt;
+                     &lt;button type=&quot;button&quot; className=&quot;btn btn-success&quot;
+                         onClick={this.handleSubmit} &gt;Add Contact&lt;/button&gt;
+                  &lt;/div&gt;              
+                  &lt;div className=&quot;col-sm-3&quot; &gt;
+                    &lt;input type=&quot;text&quot; className=&quot;form-control&quot; 
+                        placeholder=&quot;Name&quot;
+                        value={this.state.name}
+                        onChange={this.handleNameChange}
+                    /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;col-sm-3&quot; &gt;
+                    &lt;input type=&quot;text&quot; className=&quot;form-control&quot;
+                        placeholder=&quot;Address&quot;
+                        value={this.state.address}
+                        onChange={this.handleAddressChange}
+                    /&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;col-sm-2&quot; &gt;
+                    &lt;input type=&quot;text&quot; className=&quot;form-control&quot; 
+                        placeholder=&quot;Phone No.&quot;
+                        value={this.state.phone_number}
+                        onChange={this.handlePhoneNumChange}
+                    /&gt;
+                  &lt;/div&gt;                             
+                &lt;/div&gt;
+              &lt;/div&gt;
+          );
+      }
+  }
+  export default ContactForm;</code></pre>
+<p>In the browser, test the feature works.</p>
+<p>On completion, commit the work:</p>
+<pre><code> $ git add -A
+ $ git commit -m &quot;Add contact completed&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Phone_Catalogue">
+            <h2>Phone Catalogue App.</h2>
+<p>For this app, when the user enters text in the search field it should display only those phones whose name contains the entered text. Also, the list of matching phones should be reordered when the drop-down menu options is changed.</p>
+<p>From <code>threeApps/phonecatalogue</code> folder, install the lodash package:</p>
+<pre><code>     $ npm install  lodash@2.4.2 --save</code></pre>
+<p>Start the development server:</p>
+<pre><code>     $ npm start </code></pre>
+<h3>UI state.</h3>
+<p>The UI state for this application consists of:</p>
+<ol>
+<li>The search text - Every character typed in the text box will require a recalculation of the matching subset of phones.</li>
+<li>The Sort drop-down menu selection - Changes the ordering of the current matching subset of phone.</li>
+</ol>
+<h3>Stateful components.</h3>
+<p>Both the SelectControls and App components need to know the current search text value. SelectControls uses it to set the text input field value, while App uses it to compute the matching subset of phones. As App is higher up the component hierarchy, it should manage this state value. The same argument can be made for the sort drop-down menu selection.</p>
+<p>In <code>phonesCatalogue/src/App.js</code>, add a state object, as follows:</p>
+<pre><code>  class App extends Component {
+    state = { search: &#39;&#39;, sort: &#39;name&#39; };
+    render() {
+        . . . as before . . .
+    }
+  }</code></pre>
+<h3>Adding dynamic behavior.</h3>
+<p>We need to implement inverse data flow between the App and SelectControls components.In <code>src/components/selectControls/index.js</code>, completely replace its content with the following code:</p>
+<pre><code>import React, { Component } from &#39;react&#39;;
+
+ export default class SelectControls extends Component {
+    handleChange = (e, type, value) =&gt; {
+        e.preventDefault();
+        this.props.onUserInput(type, value);
+    };
+    handleTextChange = (e) =&gt; {
+        this.handleChange( e, &#39;search&#39;, e.target.value);
+    };
+    handleSortChange = (e) =&gt; {
+        this.handleChange(e, &#39;sort&#39;, e.target.value);
+    };
+
+    render() {
+        return (
+            &lt;div className=&quot;col-md-10&quot;&gt;
+                &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; 
+                    value={this.props.filterText}
+                    onChange={this.handleTextChange} /&gt;
+                &lt;span&gt; Sort by: &lt;/span&gt;
+                &lt;select id=&quot;sort&quot; value={this.props.order } 
+                    onChange={this.handleSortChange} &gt;
+                    &lt;option value=&quot;name&quot;&gt;Alphabetical&lt;/option&gt;
+                    &lt;option value=&quot;age&quot;&gt;Newest&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+        );
+    }
+  }</code></pre>
+<p>Note, the handlerChange function calls a props function (not yet defined) belonging to the App component. The App function updates the state object and force a re-computation of the matching phone list, as well as a re-rendering. Make the following changes to <code>src/App.js</code>:</p>
+<pre><code>  class App extends React.Component {
+    state = { . . . as before . . . };
+
+    handleChange = (type, value) =&gt; {
+        type === &#39;search&#39; ?
+            this.setState( { search: value } ) :
+            this.setState( { sort: value } ) ;
+    };
+
+    render() {
+        console.log( 
+            `Criteria: Search=  ${this.state.search} ; Sort= ${this.state.sort}`);
+        let filteredList = Phones ; // Incomplete
+        return (
+          &lt;div className=&quot;jumbotron&quot;&gt;
+              &lt;div className=&quot;container-fluid&quot;&gt;
+                &lt;div className=&quot;row&quot;&gt;
+                 &lt;div className=&quot;col-md-10&quot;&gt;
+                    &lt;h2&gt;Phone Catalogue App&lt;/h2&gt;
+                 &lt;/div&gt;
+                 &lt;SelectControls onUserInput={this.handleChange } 
+                        filterText={this.state.search} 
+                        sort={this.state.sort} /&gt;
+                 &lt;PhoneList phones={filteredList} /&gt;
+              &lt;/div&gt; 
+            &lt;/div&gt;                   
+         &lt;/div&gt;
+        );
+    }
+  }</code></pre>
+<p>This code is incomplete because the subset of matching phones is not being recomputed as required, however, the <code>console.log()</code> statement in the render method allows us verify the &#39;inverse data flow&#39; is working. To prove it, in the browser, open the Chrome developer tools. Now type &#39;sam&#39; in the search text field and select &#39;Newest&#39; in the sort dropdown. The screenshot below shows the console output. </p>
+<p><img src="./img/console.png" alt=""></p>
+<p>In <code>src/App.js</code>, add the import  at the top:</p>
+<pre><code>      import _ from &#39;lodash&#39;;</code></pre>
+<p>and update the App component&#39;s render method, as shown:</p>
+<pre><code>    render() {
+        let list = Phones.filter( 
+            (p) =&gt; 
+            p.name.toLowerCase().search(this.state.search.toLowerCase()) !== -1 
+        );
+        let filteredList = _.sortBy(list, this.state.sort) ;
+        return ( . . . as before . . . );
+    }</code></pre>
+<p>The features used above include:</p>
+<ol>
+<li>The array <em>filter</em> method - creates a new array consisting of those entries in the source (this.props.phones) for which the arrow function returns true.</li>
+<li>The string <em>search</em> method - returns the position of a substring (this.state.search) within a source string (p.name); otherwise, returns -1 when not present.</li>
+<li>The lodash <em>sortBy</em> utility function.</li>
+</ol>
+<p>In the browser check the app is fully-functional by using the search text and drop-down menu inputs.</p>
+<h3>Storybook addons.</h3>
+<p>Storybook can accommodate components that expect a function prop by providing a stub replacement. We use an addon to implement the stub.  Add the following line to the configuration file <code>.storybook/addons.js</code>:</p>
+<pre><code>  import &#39;@storybook/addon-actions/register&#39;;</code></pre>
+<p> In <code>stories/phoneApp.js</code> add a new import at the top:</p>
+<pre><code>  import { action } from &#39;@storybook/addon-actions&#39;;</code></pre>
+<p>and update the related story:</p>
+<pre><code>    storiesOf(&#39;Phone Catalogue&#39;, module)
+        .add(&#39;Select controls&#39;, 
+          () =&gt;   &lt;SelectControls 
+                    onUserInput={ action(&#39;input changed&#39;) }
+                    filterText=&#39;&#39; /&gt; 
+        )
+        .add(&#39;Phone&#39;, . . . . as before . . . . </code></pre>
+<p>We are passing a dummy function (or action ) to the SelectControls component. The dummy will simply display a message (&#39;input changed&#39;) when invoked.  Start the server:</p>
+<pre><code>  $ npx start-storybook -s ./public -p 9001 -c .storybook</code></pre>
+<p>Browse to <a href="http://localhost:9001/">http://localhost:9001/</a> , select from the drop-down, and type in the search field.
+Confirmation of the dummy function calls can be seen in the &#39;Action Logger&#39; panel.</p>
+<p><img src="./img/phonestory.png" alt=""></p>
+<p>see <a href="https://storybook.js.org/addons/addon-gallery/">here</a> for a ful list of Storybook addons.</p>
+<p>Commit these changes to git:</p>
+<pre><code>    $ git add -A
+    $ git commit -m &quot;Search page completed&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Hacker_News">
+            <h2>Hacher News.</h2>
+<h3>Setup.</h3>
+<p>From <code>threeApps/hackerNews</code>, install the lodash packages:</p>
+<pre><code>     $ npm install  lodash@2.4.2 --save</code></pre>
+<p>From the same folder start the server:</p>
+<pre><code>     $ npm start </code></pre>
+<h3>Stub API</h3>
+<p>Again we will use a stub API as the model data source. Create the file <code>hackerNews/src/dataStore/stubAPI.js</code> and paste in the following code:</p>
+<pre><code>import _ from &#39;lodash&#39;;
+
+class StubAPI {
+    constructor() {
+        this.posts = [
+            {  id: 1 ,
+                title : &#39;India - Tiger population sees 30% increase.&#39;,
+                link : &#39;http://www.bbc.com/news/world-asia-30896028&#39;,
+                username : &#39;jbloggs&#39;,
+                comments : [],
+                upvotes : 10
+            },
+            { 
+                id: 2,
+                title : &#39;The button that is not.&#39;,
+                link : &#39;http://blog.nuclearsecrecy.com/2014/12/15/button-isnt/&#39;,
+                username : &#39;notme&#39;,
+                comments : [],
+                upvotes : 12
+            },
+            { 
+                id: 3,
+                title : &#39;Google Nears $1B Investment in SpaceX&#39;,
+                link : null,
+                username : &#39;notme&#39;,
+                comments : [],
+                upvotes : 12
+            },
+            { 
+                id: 4,
+                title : &#39;Coinbase Raises $75M from DFJ Growth, USAA, and More&#39;,
+                link : &#39;http://blog.coinbase.com/post/108642362357/coinbase-raises-75m-from-dfj-growth-usaa-nyse&#39;,
+                username : &#39;psmith&#39;,  
+                comments : [],
+                upvotes : 2
+            }
+        ] ;
+    }
+
+    getAll() {
+        return this.posts ;
+    }
+
+    add(title, link) {
+        let id = 1 ;
+        let last = _.last(this.posts) ;
+        if (last) {
+            id = last.id + 1 ;
+        }
+        let len = this.posts.length ;
+        let newLen = this.posts.push({ 
+            id, title, link, 
+            username: &#39;&#39;, 
+            comments: [], 
+            upvotes: 0 }) ;
+        return newLen &gt; len ;
+    }
+
+    upvote(id) {
+        let index = _.findIndex(this.posts, 
+            (post) =&gt; post.id === id
+        );   
+        if (index !== -1) {                 
+            this.posts[index].upvotes += 1 ;
+            return true ;
+        }
+        return false ;
+    }
+
+    getPost(id) {
+        let index = _.findIndex(this.posts, 
+            (post) =&gt; post.id === id
+        )   
+        let result = index !== -1 ?                  
+            this.posts[index] :
+            null ;
+        return result;
+    }
+
+    addComment(postId,c,n) {
+        let post = this.getPost(postId ) ;
+        let id = 1 ;
+        let last = _.last(post.comments) ;
+        if (last) {
+            id = last.id + 1 ;
+        }
+        post.comments.push({ &#39;id&#39;: id,  
+            comment: c , author: n, upvotes: 0 } ) ;
+    }
+
+    upvoteComment(postId,commentId) {
+        let post = this.getPost(postId ) ;
+        let index = _.findIndex(post.comments, 
+            (c) =&gt; c.id === commentId
+        );  
+        if (index !== -1) {                 
+            post.comments[index].upvotes += 1 ;
+        }
+    }
+}
+
+export default (new StubAPI() );</code></pre>
+<p>Note: An <strong>id</strong> has been added to each post (news item) object for convenience. The add method of the API computes the id of a new post by simply adding 1 to the id of the last one in the array. The upvote method is passed the id of the post to be upvoted.</p>
+<p>In <code>src/App.js</code> completely replace the current code with the following:</p>
+<pre><code>    import React, { Component } from &#39;react&#39;;
+    import NewsList from &#39;./components/newsList&#39;;
+    import Form from &#39;./components/newsForm&#39;;
+    import api from &#39;./dataStore/stubAPI&#39;;
+
+    export default class App extends Component {
+
+        render() {
+            let posts =  api.getAll();
+            return (
+              &lt;div className=&quot;jumbotron&quot;&gt;
+                &lt;div className=&quot;container-fluid&quot;&gt;
+                  &lt;div className=&quot;row&quot;&gt;
+                    &lt;div className=&quot;col-md-9 col-md-offset-3&quot; &gt;
+                        &lt;a href=&quot;/&quot;&gt;&lt;h1&gt;Hacker News&lt;/h1&gt;&lt;/a&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;container&quot;&gt;
+                   &lt;div className=&quot;row&quot;&gt;
+                      &lt;div className=&quot;col-md-9 col-md-offset-1&quot;&gt;
+                        &lt;NewsList posts={posts}  /&gt;
+                        &lt;Form /&gt;
+                      &lt;/div&gt;
+                   &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            );
+        }
+    }</code></pre>
+<p>The browser should render the news items as before.</p>
+<h3>Dynamic behaviour.</h3>
+<p>We will add the upvoting feature first. In <code>src/App.js</code> add a new function:</p>
+<pre><code>export default class App extends Component {
+    incrementUpvote = (id) =&gt; {
+        api.upvote(id) ;
+        this.setState({});
+    };
+
+   render() {
+       . . . . . . 
+           &lt;NewsList posts={posts} 
+                upvoteHandler={this.incrementUpvote} /&gt;
+       . . . . . . 
+  }</code></pre>
+<p>This function is called when the user clicks a thumb-up glyph. Therefore it must be passed down the component hierarchy to NewsItem. In <code>components/newsList/index.js</code>, update the NewsItem set of props:</p>
+<pre><code>render() {
+    let items = this.props.posts.map(
+        (post,index) =&gt; 
+            &lt;NewsItem key={index} 
+                post={post} 
+                upvoteHandler={this.props.upvoteHandler} /&gt; 
+    );
+    return ( . . . as before . . )</code></pre>
+<p>In <code>components/newsItwm/index.js</code>, add the onClick handler:</p>
+<pre><code>    export default class NewsItem extends Component {
+        handleVote = () =&gt;  this.props.upvoteHandler(this.props.post.id);
+
+        render() {
+            . . . . . . 
+            return (
+               . . . . .
+                &lt;span className=&quot;glyphicon glyphicon-thumbs-up ptr&quot; 
+                      onClick={this.handleVote}/&gt;
+                {this.props.post.upvotes}
+               . . . . . . . . </code></pre>
+<p>In the browser you should now be able to increment a news item&#39;s upvote count. </p>
+<p>We also want the items to be in descending order, by vote count. In <code>src/App.js</code> compute the order in the render method:</p>
+<pre><code>     . . . . imports . . . 
+    import _ from &#39;lodash&#39;;
+    . . . . . . .
+    render() {
+       let posts = _.sortBy(api.getAll(), 
+            (post) =&gt; - post.upvotes
+       );
+       return ( 
+            . . . as before . . </code></pre>
+<p>The news items will now always be in descending order.</p>
+<p>From the <code>threeApps/hackerNews</code> folder, commit the work so far:</p>
+<pre><code> $ git add -A
+ $ git commit -m &quot;Upvote feature completed&quot;</code></pre>
+<h3>Add news item.</h3>
+<p>The add news item feature is very similar to the add contact feature in the Contact List app.
+We need the following:</p>
+<ul>
+<li>A state object in the NewsForm component to store the current values being typed into the form fields.</li>
+<li>A function to pass the new item to the API and force a re-rendering.<ul>
+<li>The function needs to be part of the App component.</li>
+</ul>
+</li>
+</ul>
+<p>In <code>src/App.js</code> make the following changes:</p>
+<pre><code>export default class App extends Component {
+    addNewsItem = (title,link) =&gt; {
+        api.add(title,link)
+        this.setState({})
+    }
+    incrementUpvote = (id) =&gt; { . . . as before }</code></pre>
+<p>and in the render method change the Form tag:</p>
+<pre><code>    &lt;Form handleAdd={ this.addNewsItem } /&gt;</code></pre>
+<h4>Exercise.</h4>
+<p>You are required to complete the implementation. The code that needs modifying is <code>components/newsForm/index.js</code>. Use the Add contact form from the Contact List App  as a guide.</p>
+<h3>Storybook.</h3>
+<p>For completeness we should update the Storybook code for the NewsForm component/ 
+In <code>.storybook/addons.js</code> register the addon-action plugin:</p>
+<pre><code>  import &#39;@storybook/addon-actions/register&#39;;</code></pre>
+<p>In <code>stories/hackerApp.js</code> import the plugin:</p>
+<pre><code>  import { action } from &#39;@storybook/addon-actions&#39;;</code></pre>
+<h4>Exercise.</h4>
+<p>You are required to update the effected story in <code>stories/hackerApp.js</code>.</p>
+<p>When completed, start the Storybook server and test it in the browser. Fill out the form and click the Add button. The screenshot shows a sample result.</p>
+<p><img src="./img/newsstory.png" alt=""></p>
+<hr>
+<p>On completion, go to the <code>hackerNews</code> folder and commit the work:</p>
+<pre><code> $ git add .
+ $ git commit -m &quot;Add news item feature completed&quot;</code></pre>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>
