@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html">  React Component model.  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="Lab_React_Data_Flow">
+          Lab_React_Data_Flow
+        </a>
+      
+        <a class="item" data-tab="1Way_Data_Flow">
+          1Way_Data_Flow
+        </a>
+      
+        <a class="item" data-tab="Inverse_Data_Flow">
+          Inverse_Data_Flow
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-1/index.html">Lab-01_JS_Objects </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-2/index.html">Lab-02_JS_functions </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic02/book-1/index.html">Lab-03_HTML_CSS </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic03/book-1/index.html">Lab-React_Basics </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-1/index.html">Lab_React_Data_Flow </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-2/index.html">Lab_Static_React_Apps </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="Lab_React_Data_Flow">
+            <h1>React data flow.</h1>
+<p>Setup the FilteredFriends applications to illustrate the basic <strong>data flow</strong> design patterns promoted by ReactJS.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="1Way_Data_Flow">
+            <h2>1-way data flow.</h2>
+<p>Download and unzip <a href="./archives/1WayDataFlow.zip">this archive</a> - it&#39;s the FilterFriends React app developed with the create-react-app tool. Open a terminal, go to the base folder (<code>1WayDataFlow</code>) and type:</p>
+<pre><code>    $ npm install</code></pre>
+<p>Before running this app, we first need to setup a <strong>mock</strong> Web API. The <a href="https://github.com/typicode/json-server">json-server</a> utility is ideal for this requirement. Install it as follows:</p>
+<pre><code>   $ npm install -g json-server</code></pre>
+<p>Create a file in the base folder (<code>1WayDataFlow</code>) named <code>friends.json</code> and paste in the JSON structure below:  </p>
+<pre><code>    {
+      &quot;friends&quot;: [
+        {
+          &quot;id&quot;: 1,
+          &quot;name&quot;: &quot;Joe Bloggs&quot;,
+          &quot;address&quot;: &quot;1 Main Street&quot;,
+          &quot;email&quot;: &quot;jbloggs@here.con&quot;
+        },
+        {
+          &quot;id&quot;: 2,
+          &quot;name&quot;: &quot;Paula Smith&quot;,
+          &quot;address&quot;: &quot;5 High Street&quot;,
+          &quot;email&quot;: &quot;psmith@here.con&quot;
+        },
+        {
+          &quot;id&quot;: 3,
+          &quot;name&quot;: &quot;Catherine Dwyer&quot;,
+          &quot;address&quot;: &quot;2 Upper Street&quot;,
+          &quot;email&quot;: &quot;cdwyer@here.con&quot;
+        },
+        {
+          &quot;id&quot;: 4,
+          &quot;name&quot;: &quot;Paul Briggs&quot;,
+          &quot;address&quot;: &quot;3 Side Street&quot;,
+          &quot;email&quot;: &quot;pbriggs@here.con&quot;
+        }
+      ]
+    }</code></pre>
+<p>From the base folder start the mock API server:</p>
+<pre><code>    ¢ json-server ./friends.json -p 3001</code></pre>
+<p>[ Note, the server is using port 3001.]</p>
+<p>To prove the mock API is working, in the browser navigate to: <a href="http://localhost:3001/friends">http://localhost:3001/friends</a>. The server will responds with the full list of friends. Try a HTTP request to:  <a href="http://localhost:3001/friends/2">http://localhost:3001/friends/2</a>. This time the Web API returns the friend with an id of 2. Leave the API server running. </p>
+<p>Open a second terminal window, go to <code>1WayDataFlow</code>  and start the development server (provided by the create-react-app tool):</p>
+<pre><code>    $ npm start</code></pre>
+<p>The app should be displaying the full list of friends retrieved from the API (see illustration). Use the search text box to find specific friends.</p>
+<p><img src="./img/friends.png" alt=""></p>
+<p>Examine the code in <code>src/App.js</code> and the <code>src/components</code> folder to ensure you understand how it works. Some features worth noting are: </p>
+<ul>
+<li>The FriendsApp component uses React&#39;s component state feature to store the current value of the text input field. They are always in sync.</li>
+<li>The <em>componentDidMount</em> method in the <em>FriendsApp</em> component sends an <strong>asynchronous</strong> HTTP Get request to the API server. It stores the responds (the full list of friends, as a JSON data structure) in the <em>localCache</em> custom object and then forces a re-rendering of the component by calling <em>setState()</em>.</li>
+<li>The <em>render</em> method of <em>FriendsApp</em> computes the matching subset of friends, based on the current content of the input field.</li>
+<li>The <em>onChange</em> event handler for the input field - the <em>filterFriends</em> function - also forces a re-rendering of its containing component, i.e. every time the user changes the text field the subset of matching friends must be recomputed and the display updated.</li>
+<li>Sometimes a change to the input text field does not change the matching subset of friends. In this case their is no need to re-render the display. The <em>shouldComponentUpdate</em> method of the <em>FilteredFriendList</em> component fulfills this performance check.</li>
+</ul>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Inverse_Data_Flow">
+            <h2>Inverse data flow.</h2>
+<p>Download and unzip <a href="./archives/InverseDataFlow.zip">this archive</a>. Open a terminal window, go to the base folder (<code>InverseDataFlow</code>) and type:</p>
+<pre><code>    $ npm install </code></pre>
+<p>Open a second terminal window, go to the <code>1WayDataFlow</code> folder and start the json-server:</p>
+<pre><code>    ¢ json-server ./friends.json -p 3001</code></pre>
+<p>In the &#39;InverseDataFlow&#39; terminal window, start the development server:</p>
+<pre><code>    $ npm start</code></pre>
+<p>This app is a redesign of the Filtered Friends app from the previous section - exact same functionality though. The component design for this version is as follows:</p>
+<pre><code>          FriendsApp
+               |
+               V
+        ------------------
+        |                |            
+        V                V
+SearchBox      FilteredFriendList
+                          |
+                          |  (multiple)
+                          V
+                       Friend</code></pre>
+<p>See <code>src/App,js</code> and <code>src/components</code> folder for details. </p>
+<p>The main difference in this design is the input text field is now managed by a separate component. <em>SearchBox</em>. However, as in the previous design, the <em>FriendsApp</em> component still stores the current value of the text field as part of its state object. Any changes in the text field must trigger a recompute of the matching subset of friends. Therefore SearchBox must communicate any change to FriendsApp. This is achieved by the inverse data flow pattern. <em>FriendsApp</em> passing a function reference to <em>SearchBox</em>, via a prop. The function updates the state, thus forcing a re-rendering. SearchBox calls this function via the field&#39;s <em>onChange</em> event handler. </p>
+<p>Examine the code to ensure you understand how it works.</p>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>

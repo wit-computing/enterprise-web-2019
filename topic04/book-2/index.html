@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html">  React Component model.  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="Lab_Static_React_Apps">
+          Lab_Static_React_Apps
+        </a>
+      
+        <a class="item" data-tab="Startup">
+          Startup
+        </a>
+      
+        <a class="item" data-tab="Contact_List">
+          Contact_List
+        </a>
+      
+        <a class="item" data-tab="Phone_Catalogue">
+          Phone_Catalogue
+        </a>
+      
+        <a class="item" data-tab="Hacker_News">
+          Hacker_News
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-1/index.html">Lab-01_JS_Objects </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-2/index.html">Lab-02_JS_functions </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic02/book-1/index.html">Lab-03_HTML_CSS </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic03/book-1/index.html">Lab-React_Basics </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-1/index.html">Lab_React_Data_Flow </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-2/index.html">Lab_Static_React_Apps </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="Lab_Static_React_Apps">
+            <h1>Building React SPAs (Static).</h1>
+<p>Over the coming weeks we will build three React apps in parallel. A static version of each is the target of this lab.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Startup">
+            <h2>Startup.</h2>
+<p>The three apps being developed over the coming weeks are:</p>
+<ul>
+<li>Contact list</li>
+<li>Phone Catalogue and </li>
+<li>Hacker News. </li>
+</ul>
+<p>This lab is focused on step one of the <em>Thinking in React</em> process - the development process recommended by the React design team (discussed in a later lectures). This step is titled <code>Build a static version</code> of the app. In subsequent labs we will add user interaction and routing.</p>
+<p>Download <a href="./archives/start.zip">this zip</a> as the starting point and and unzip it. It contains three skeletons apps, one for each of the above mentioned use case. The apps were generated with the <code>create-react-app</code> tool. We will use Git to keep a log of the work done in the labs over the coming weeks.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Contact_List">
+            <h2>Contact List App.</h2>
+<h3>Setup.</h3>
+<p>In the terminal window, go to <code>threeApps/contactlist</code> and install the required packages:</p>
+<pre><code>    $ npm install</code></pre>
+<p>Start the development server:</p>
+<pre><code>    $ npm start</code></pre>
+<h3>UI Design.</h3>
+<p>The desired UI for this app looks as follows:</p>
+<p><img src="./img/Contacts.png" alt=""></p>
+<p>The proposed component breakdown for the UI is:</p>
+<p><img src="./img/ContactsDesign.png" alt=""></p>
+<p>So the set of components are:</p>
+<ol>
+<li>Header</li>
+<li>Add contact mini form</li>
+<li>List of contacts</li>
+<li>A contact </li>
+</ol>
+<p>This breakdown maps to the following component hierarchy:</p>
+<pre><code>                   App (Default)
+                    |
+      -----------------------------
+      |             |             |
+     Header    ContactForm    ContactList
+                                  |
+                               Contact</code></pre>
+<h3>Implementation.</h3>
+<p>In <code>contactlist/src/index.js</code> add the following import at the top:</p>
+<pre><code>  import &#39;../node_modules/bootstrap/dist/css/bootstrap.css&#39;;</code></pre>
+<p>Create the file <code>contactlist/src/components/header.js</code> (you need to create the <code>components</code> folder manually) and add the following content:</p>
+<pre><code>import React , { Component } from &#39;react&#39;;
+
+class Header extends Component {
+  render() {
+    return (
+      &lt;div className=&quot;container-fluid&quot;&gt;
+        &lt;div className=&quot;row&quot;&gt;
+          &lt;div className=&quot;col-md-3 offset-md-3&quot; &gt;
+            &lt;div className=&quot;page-header&quot;&gt;
+              &lt;h2&gt;Contact List &lt;span className=&quot;badge&quot;&gt; {50}&lt;/span&gt;
+             &lt;/h2&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;  
+    ) ;
+  }
+}
+
+export default Header;</code></pre>
+<p>In <code>contactlist/src/App.js</code> replace the entire content with the following:</p>
+<pre><code>import React , { Component } from &#39;react&#39;;
+import &#39;./App.css&#39;;
+import Header from &#39;./components/header&#39; 
+
+class App extends Component {
+    render() {
+      return (
+        &lt;div className=&quot;jumbotron&quot;&gt;
+            &lt;Header /&gt;
+        &lt;/div&gt;
+      );
+    }
+  }
+
+  export default App;</code></pre>
+<p>Assuming the development server is still running (npm start), the browser should now look as follows:</p>
+<p><img src="./img/header.png" alt=""></p>
+<p>Create the file <code>contactlist/src/components/contactForm.js</code> and add the following content:</p>
+<pre><code>import React , { Component } from &#39;react&#39;;
+
+ class ContactForm extends Component {
+    render() {
+      return (
+        &lt;div className=&quot;container-fluid&quot;&gt;
+          &lt;div className=&quot;row&quot;&gt;
+             &lt;div className=&quot;col-sm-2&quot; &gt;
+              &lt;button type=&quot;button&quot; className=&quot;btn btn-success&quot;&gt;Add Contact&lt;/button&gt;
+            &lt;/div&gt;              
+            &lt;div className=&quot;col-sm-3&quot; &gt;
+              &lt;input type=&quot;text&quot; className=&quot;form-control&quot; defaultValue=&quot;Enter name&quot;/&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;col-sm-3&quot; &gt;
+              &lt;input type=&quot;text&quot; className=&quot;form-control&quot; defaultValue=&quot;Enter address&quot;/&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;col-sm-2&quot; &gt;
+               &lt;input type=&quot;text&quot; className=&quot;form-control&quot; defaultValue=&quot;Enter telephone&quot;/&gt;
+            &lt;/div&gt;                             
+           &lt;/div&gt;
+        &lt;/div&gt;
+        );
+    }
+  }
+
+  export default ContactForm;</code></pre>
+<p>Wire this component in to the app by modifying <code>src/App.js</code> as shown below:</p>
+<pre><code>. . . . imports . . . . . 
+import ContactForm from &#39;./components/contactForm&#39; 
+
+class App extends Component {
+    render() {
+      return (
+        &lt;div className=&quot;jumbotron&quot;&gt;
+            &lt;Header /&gt;
+            &lt;ContactForm  /&gt;
+        &lt;/div&gt;
+      );
+    }
+  }
+
+  export default App;</code></pre>
+<p>Now the browser renders the app as follows:</p>
+<p><img src="./img/handf.png" alt=""></p>
+<p>Create the file <code>src/components/contact.js</code> and add the following content:</p>
+<pre><code>  import React , { Component } from &#39;react&#39;;
+
+  class Contact extends Component {
+    render() {
+      return (
+          &lt;div className=&quot;col-sm-3&quot; &gt;
+            &lt;div className=&quot;panel panel-primary&quot;&gt;
+              &lt;div className=&quot;panel-heading&quot;&gt;
+                  { this.props.contact.name }
+              &lt;/div&gt;
+              &lt;div className=&quot;panel-body&quot;&gt; 
+                &lt;p&gt;{ this.props.contact.name }&lt;/p&gt;
+                  &lt;p&gt;{ this.props.contact.address }&lt;/p&gt;
+                  &lt;p&gt;{ this.props.contact.phone_number }&lt;/p&gt;              
+              &lt;/div&gt;
+              &lt;div className=&quot;panel-footer&quot;&gt; 
+                &lt;div className=&quot;btn-group btn-group-justified&quot; role=&quot;group&quot; aria-label=&quot;...&quot;&gt;
+                    &lt;div className=&quot;btn-group&quot; role=&quot;group&quot;&gt;
+                      &lt;button type=&quot;button&quot; className=&quot;btn btn-default&quot;&gt;Edit&lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;btn-group&quot; role=&quot;group&quot;&gt;
+                      &lt;button type=&quot;button&quot; className=&quot;btn btn-danger&quot;&gt;Delete&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;                     
+              &lt;/div&gt;          
+            &lt;/div&gt;
+          &lt;/div&gt;
+          ) ;
+      }
+  }
+
+  export default Contact;</code></pre>
+<p>Notice, the component expects a data prop to be passed in, e.g. this.props.contact.name, this.props.contact.address. To see how this component renders, make the following temporary adjustment to <code>src/App.js</code>:</p>
+<pre><code> . . . . imports . . . . .
+import Contact from &#39;./components/contact&#39; 
+
+class App extends Component {
+    render() {
+      return (
+        &lt;div className=&quot;jumbotron&quot;&gt;
+            &lt;Header /&gt;
+            &lt;ContactForm  /&gt;
+            &lt;Contact contact={{name: &#39;Joe Bloggs&#39;, 
+                address: &#39;1 High Street&#39;,
+                phone_number: &#39;055-12345678&#39;}}  /&gt;
+        &lt;/div&gt;
+      );
+    }
+  }
+
+  export default App;</code></pre>
+<p>Now the browser renders the app as follows:</p>
+<p><img src="./img/handfandc.png" alt=""></p>
+<p>Lets add some dummy data to facilitate rendering many contacts on the web page. In <code>src/App.js</code> add the following array definition:</p>
+<pre><code> . . . . imports . . . . 
+
+ let contacts = [
+    {
+        &quot;name&quot;: &quot;Contact 1&quot;,
+        &quot;address&quot;: &quot;123 Test St&quot;,
+        &quot;phone_number&quot;: &quot;132-3212&quot;
+    },       
+    {
+        &quot;name&quot;: &quot;Contact 2&quot;,
+        &quot;address&quot;: &quot;23 Main St&quot;,
+        &quot;phone_number&quot;: &quot;934-4329&quot;
+    },        
+    {
+        &quot;name&quot;: &quot;Contact 3&quot;,
+        &quot;address&quot;: &quot;4 Lower St&quot;,
+        &quot;phone_number&quot;: &quot;432-5832&quot;
+    },            
+    {
+        &quot;name&quot;: &quot;Contact 4&quot;,
+        &quot;address&quot;: &quot;49 Upper Street&quot;,
+        &quot;phone_number&quot;: &quot;934-4290&quot;
+    },
+    {
+        &quot;name&quot;: &quot;Contact 5&quot;,
+        &quot;address&quot;: &quot;4 High Street&quot;,
+        &quot;phone_number&quot;: &quot;933-4110&quot;
+    }                
+  ] ;    
+
+  class App extends Component {
+     . . . . . as before  . . .</code></pre>
+<p>We need a component that renders a list of Contacts from the above array. Create <code>src/components/contactList.js</code> and add the following code:</p>
+<pre><code>import React , { Component } from &#39;react&#39;;
+import Contact from &#39;./contact&#39; 
+
+export default class ContactList extends Component {
+  render() {
+    let contactPanels = this.props.contacts.map(
+          (c) =&gt; &lt;Contact key={c.phone_number} contact={c} /&gt;
+    );
+    return (
+      &lt;div className=&quot;container-fluid contacts&quot;&gt;
+        &lt;div className=&quot;row&quot;&gt;
+            {contactPanels}  
+        &lt;/div&gt;
+        &lt;/div&gt;
+      ) ;
+   }
+} </code></pre>
+<p>This component expects a prop containing an array of contact objects. In <code>src/App.js</code>, replace the single contact rendering code with the list component, as follows:</p>
+<pre><code>. . . . . other imports . . . .
+import ContactList from &#39;./components/contactList&#39; ;
+// Remove the &#39;import Contact ....&#39; line
+
+. . . . contacts array as before . . . . 
+
+class App extends Component {
+    render() {
+      return (
+        &lt;div className=&quot;jumbotron&quot;&gt;
+            &lt;Header /&gt;
+            &lt;ContactForm  /&gt;
+            &lt;ContactList contacts={contacts} /&gt;
+        &lt;/div&gt;
+      );
+    }
+  }
+
+  export default App;</code></pre>
+<p>The browser should now be rendering all the contacts in the array. </p>
+<p>A tiny bit of custom CSS is required. Replace the <strong>entire content</strong> of <code>src/App.css</code> with the following:</p>
+<pre><code>.contacts {
+  margin-top: 10px;
+}</code></pre>
+<p>Their is one small bug in the output rendered. The badge in the header should show the number of contacts being displayed (and dynamically update as contacts are added/deleted - later lab). In other words we want the badge value to reflect the &#39;current&#39; length of the contacts array. <strong>You are required</strong> to modify the code to achieve this (Hint: Think props). The result should look as follows:</p>
+<p><img src="./img/Contacts.png" alt=""></p>
+<p>On completion, in the terminal window, from the  <code>threeApps/contactlist</code> folder, type the following commands:</p>
+<pre><code>     $ git add -A
+     $ git commit -m &quot;Static version completed&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Phone_Catalogue">
+            <h2>Phone Catalogue App.</h2>
+<h3>Setup.</h3>
+<p>In the terminal window, go to <code>threeApps/phoneCatalogue</code> folder and install the required packages:</p>
+<pre><code>    $ npm install</code></pre>
+<h3>UI Design.</h3>
+<p>The desired UI for this app will look as follows:</p>
+<p><img src="./img/PhoneCatalogue.png" alt=""></p>
+<p>A component breakdown for this UI is as follows:</p>
+<p><img src="./img/PhoneCatalogueDesign.png" alt=""></p>
+<p>This leads to a component hierarchy of the following:</p>
+<pre><code>                App (Default)
+                 | 
+          -----------------
+          |               |
+   SelectControls     PhoneList
+                          |
+                       Phone</code></pre>
+<p>Remember, we are only developing a static version of the app in this lab - no user interaction works, yet. Ultimately the search text input will cause the app to compute a filtered list of matching phones, based on phone name. For now all phones in the catalogue will be displayed.</p>
+<h3>Additional setup.</h3>
+<p>This app requires a sample data set. Unzip <a href="./archives/data.zip">this archive</a> and place  <code>Data.js</code> in the <code>src/</code> folder. This is the app&#39;s sample data set. Each phone object in the set has an image URL property. These image files (and related specification files to be used in a later lab) are available in <a href="./archives/phoneSpecs.zip">this zip</a>. Unzip it and move the <code>phoneSpecs</code> folder into <code>phoneCatalogue/public</code>, to give the following structure:</p>
+<pre><code>      phoneCatalogue
+       |
+       |---public
+            |
+            |----phoneSpecs
+                  |
+                  |--- etc</code></pre>
+<p>We will use Storybook in this app&#39;s component development. For your convenience, the necessary source files have been added to the project - see the <code>.storybook</code> and <code>stories</code> folders.</p>
+<p>It is good practice to organize the <code>src/components</code> folder so that each component has its own sub-folder. Create the following file structure:</p>
+<p><img src="./img/files.png" alt=""></p>
+<p>The added advantage is each component&#39;s CSS is easily identified.</p>
+<h3>Implementation.</h3>
+<p>The <em>SelectControls</em> component is the easiest. In <code>src/components/selectControls/index.js</code> place the following code:</p>
+<pre><code>import React, { Component } from &#39;react&#39;;
+
+export default class SelectControls extends Component {
+    render() {
+        return (
+                &lt;div className=&quot;col-md-10&quot;&gt;
+                        &lt;input type=&quot;text&quot; placeholder=&quot;Search&quot; /&gt;
+                        &lt;span&gt; Sort by: &lt;/span&gt;
+                        &lt;select id=&quot;sort&quot; &gt;
+                                &lt;option value=&quot;name&quot;&gt;Alphabetical&lt;/option&gt;
+                                &lt;option value=&quot;age&quot;&gt;Newest&lt;/option&gt;
+                        &lt;/select&gt;
+                &lt;/div&gt;
+        );
+    }
+}</code></pre>
+<p>In <code>stories/phoneApp.js</code> replace the code with this:</p>
+<pre><code>import React from &#39;react&#39;;
+import { storiesOf } from &#39;@storybook/react&#39;;
+import &#39;../node_modules/bootstrap/dist/css/bootstrap.css&#39;;
+import SelectControls from &#39;../src/components/selectControls&#39;;
+
+storiesOf(&#39;Phone Catalogue&#39;, module)
+        .add(&#39;Select controls&#39;, 
+            () =&gt;  &lt;SelectControls /&gt; 
+        )</code></pre>
+<p>Start the Storybook server:</p>
+<pre><code> $ npx start-storybook -p 9001 -c .storybook</code></pre>
+<p>and open the interface in the browser: <a href="http://localhost:9001/">http://localhost:9001/</a></p>
+<p><img src="./img/story1.png" alt=""></p>
+<p>Moving on to the Phone component. In <code>src/components/phone/index.js</code> place the following code:</p>
+<pre><code>import React, { Component } from &#39;react&#39;;
+import &#39;./phone.css&#39;;
+
+export default class Phone extends Component {
+    render() {
+            let url = &#39;phoneSpecs/&#39; + this.props.phone.imageUrl;
+            return (
+                &lt;li className=&quot;thumbnail phone_item&quot;&gt;
+                    &lt;a href={&#39;/phones/&#39; + this.props.phone.id} className=&quot;thumb&quot; &gt;
+                            &lt;img src={url} alt={this.props.phone.name} /&gt; 
+                    &lt;/a&gt;
+                &lt;a href={&#39;/phones/&#39; + this.props.phone.id}&gt; {this.props.phone.name}&lt;/a&gt;
+                &lt;p&gt;{this.props.phone.snippet}&lt;/p&gt;
+                &lt;/li&gt;
+        ) ;
+    }
+}</code></pre>
+<p>Some custom CSS is used above. Define it in <code>src/components/phone/phone.css</code>:</p>
+<pre><code>.phone_item {
+        height: 115px;
+        padding-top: 15px;
+    }
+
+    .thumb {
+        float: left;
+        margin: -0.5em 1em 1.5em 0;
+        padding-bottom: 1em;
+        height: 100px;
+        width: 100px
+    }</code></pre>
+<p>In <code>stories/phoneApp.js</code> add a story for this component:</p>
+<pre><code> . . . . other imports . . . . .
+ import Phone from &#39;../src/components/phone&#39;;
+ import Phones from &#39;../src/Data&#39;;   // Test data set
+
+ storiesOf(&#39;Phone Catalogue&#39;, module)
+    .add(&#39;Select controls&#39;, 
+       . . . . . 
+    )
+    .add(&#39;Phone&#39;, 
+        () =&gt;  &lt;Phone phone={Phones[0]} /&gt; 
+    )     </code></pre>
+<p>In the Storybook browser page select this component. The image is not rendering. In the JSX code, the img tag is referencing a static file using a relative pathname. We need to contextualize it. Restart the server, as follows:</p>
+<p>A relative pathname is used in the img tag
+We need to tell Story</p>
+<pre><code> $ npx start-storybook -s ./public -p 9001 -c .storybook</code></pre>
+<p>[-s for static directory name] The image should now appears in the Storybook rendering. </p>
+<p>The PhoneList component needs a prop containing an array of phone objects. It generates an array of Phone components, using the map method, from the object array. In <code>components/phoneList/index.js</code> place the following code:</p>
+<pre><code>  import React, { Component } from &#39;react&#39;;
+  import Phone from &#39;../phone&#39;
+  import &#39;./phoneList.css&#39;
+
+  export default class PhoneList extends Component {
+      render() {
+        let displayedPhones =  this.props.phones.map( 
+            (phone) =&gt; &lt;Phone key={phone.id} phone={phone } /&gt;
+         ) ; 
+        return (
+          &lt;div className=&quot;col-md-10&quot;&gt;
+            &lt;ul className=&quot;phones&quot;&gt;
+                {displayedPhones}
+            &lt;/ul&gt;
+          &lt;/div&gt;
+        ) ;
+    }
+  }</code></pre>
+<p>In <code>components/phoneList/phoneList.css</code> add a small amount of CSS:</p>
+<pre><code>.phones {
+    list-style: none;
+    padding-top: 10px;
+}</code></pre>
+<p>In <code>stories/phoneApp.js</code> add a story for this component:</p>
+<pre><code> . . . . other imports . . . . .
+import PhoneList from &#39;../src/components/phoneList&#39;;
+
+storiesOf(&#39;Phone Catalogue&#39;, module)
+      . . . . .    
+    .add(&#39;Phone list&#39;, 
+       () =&gt;  &lt;PhoneList phones={Phones} /&gt; 
+    )    </code></pre>
+<h3>Assemble the App.</h3>
+<p>We now plug these components together to form the app. Stop Storybook server and start the app server:</p>
+<pre><code>   $ npm start</code></pre>
+<p>In <code>src/App.js</code> replace the entire content with the following:</p>
+<pre><code>    import React , { Component } from &#39;react&#39;;
+    import Phones from  &#39;./Data&#39;;
+    import PhoneList from &#39;./components/phoneList&#39;
+    import SelectControls  from &#39;./components/selectControls&#39; ;
+
+    class App extends Component {
+        render() {
+            let list = Phones ;
+            return (
+                &lt;div className=&quot;jumbotron&quot;&gt;
+                &lt;div className=&quot;container-fluid&quot;&gt;
+                        &lt;div className=&quot;row&quot;&gt;
+                            &lt;div className=&quot;col-md-10&quot; &gt;
+                                &lt;h2&gt;Phone Catalogue App&lt;/h2&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div className=&quot;row&quot;&gt;
+                            &lt;SelectControls /&gt;
+                            &lt;PhoneList phones={list} /&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            );
+        }
+    }
+    export default App;</code></pre>
+<p>The <code>src/App.css</code> file content can be cleared. Finally, <code>src/index.js</code> can be set to the following:</p>
+<pre><code>    import React from &#39;react&#39;;
+    import ReactDOM from &#39;react-dom&#39;;
+    import App from &#39;./App&#39;;
+    import &#39;../node_modules/bootstrap/dist/css/bootstrap.css&#39;;
+
+    ReactDOM.render(&lt;App /&gt;, document.getElementById(&#39;root&#39;));</code></pre>
+<p>The browser should now be rendering the page correctly at: <a href="http://localhost:3000">http://localhost:3000</a>  (although their is no user interaction support yet).</p>
+<h4>Exercise.</h4>
+<p>Add a badge to the header that shows the number of phones displayed on the page:</p>
+<p><img src="./img/exercise.png" alt=""></p>
+<hr>
+<p>On completion, from the <code>threeApps/phoneCatalogue</code> folder, type the following commands:</p>
+<pre><code>     $ git add -A
+     $ git commit -m &quot;Static version completed&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Hacker_News">
+            <h2>Hacher News App.</h2>
+<h3>Setup.</h3>
+<p>In a terminal window, go to <code>threeApps/hackernews</code> folder and install the required packages:</p>
+<pre><code>    $ npm install</code></pre>
+<p>Start the Storybook server:</p>
+<pre><code> $ npx start-storybook -p 9001 -c .storybook</code></pre>
+<p>and open the interface in the browser: <a href="http://localhost:9001/">http://localhost:9001/</a></p>
+<h3>UI Design.</h3>
+<p>The desired UI for this app looks as follows:</p>
+<p><img src="./img/HackerNews.png" alt=""></p>
+<p>Note, each news item has a &#39;Comment&#39; link. It will allow the user add a comment for the item (developed in a later lab).</p>
+<p>The app&#39;s component breakdown is illustrated below:</p>
+<p><img src="./img/HackerNewsDesign.png" alt=""></p>
+<p>This gives a component hierarchy as follows:</p>
+<pre><code>          App (default)
+           |
+     ---------------
+    |              |
+ NewsList      NewsForm
+    | 
+NewsItem</code></pre>
+<p>Create the following file structure to support this component set:</p>
+<p><img src="./img/hackfiles.png" alt=""></p>
+<h3>Implementation.</h3>
+<p>In <code>src/components/newsForm/index.ks</code> use the following code:</p>
+<pre><code>    import React, { Component } from &#39;react&#39;;
+
+    export default class Form extends Component {
+        render() {
+            return (
+            &lt;form style={{marginTop: &#39;30px&#39;}}&gt;
+               &lt;h3&gt;Add a news item&lt;/h3&gt;
+               &lt;div className=&quot;form-group&quot;&gt;
+                  &lt;input type=&quot;text&quot;
+                    className=&quot;form-control&quot;
+                    placeholder=&quot;Title&quot;&gt;&lt;/input&gt;
+               &lt;/div&gt;
+               &lt;div className=&quot;form-group&quot;&gt;
+                   &lt;input type=&quot;text&quot;
+                     className=&quot;form-control&quot;
+                    placeholder=&quot;Link&quot;&gt;&lt;/input&gt;
+               &lt;/div&gt;
+               &lt;button type=&quot;submit&quot; className=&quot;btn btn-primary&quot;&gt;Add&lt;/button&gt;
+            &lt;/form&gt;
+            );
+        }
+    }</code></pre>
+<p>Add a story to <code>stories/hackerApp.js</code>:</p>
+<pre><code>    . . . . imports . . . . .  
+    import NewsForm from &#39;../src/components/newsForm&#39;;
+
+    storiesOf(&#39;Hacker App/News Form&#39;, module)
+       .add(&#39;default&#39;, () =&gt;  &lt;NewsForm /&gt;
+       )</code></pre>
+<p>For illustration purposes we are using Storybook&#39;s grouping syntax (the / character) in the story name - the story is in the &#39;Hacker App&#39; group. Examine the component in the browser.</p>
+<p>In <code>src/components/newsItem/index.ks</code> use the following code:</p>
+<pre><code>import React, { Component } from &#39;react&#39;;
+import &#39;./newsItem.css&#39;;
+
+export default class NewsItem extends Component {
+render() {
+    let line ;
+    if (this.props.post.link ) {
+        line = &lt;a href={this.props.post.link} &gt;
+                {this.props.post.title} &lt;/a&gt; ;
+    } else {
+        line = &lt;span&gt;{this.props.post.title} &lt;/span&gt; ;
+    }
+    return (
+        &lt;div &gt;
+        &lt;span className=&quot;glyphicon glyphicon-thumbs-up ptr&quot;/&gt;
+            {this.props.post.upvotes}
+        &lt;span className=&quot;newsitem&quot; &gt;{line}
+            &lt;span&gt;
+                &lt;a href={&#39;#/posts/&#39; + this.props.post.id }&gt;Comments&lt;/a&gt;
+            &lt;/span&gt;
+        &lt;/span&gt;
+        &lt;/div&gt;  
+        );
+    }
+} </code></pre>
+<p>Add some custom CSS to <code>src/components/newsItem/newsItem.css</code>:</p>
+<pre><code>.newsitem  {
+    font-size: 20px ; 
+    margin-left: 10px ; 
+    }
+
+.ptr {
+    cursor:pointer;
+}</code></pre>
+<p>This component expects a prop object detailing the news item (or news post) data. The object&#39;s structure is:</p>
+<pre><code> {
+    id: xx,
+    title: &#39; . . . . . . &#39;,
+    username: &#39; . . . . &#39;,
+    link: &#39; . . . URL . . . .&#39;,   (Optional)
+    upvotes: xx,
+    comments: []
+ }</code></pre>
+<p>The component renders slightly different depending on whether the news item has a hyperlink to an article or not. Add two story to <code>stories/hackerApp.js</code>:</p>
+<pre><code>. . . . imports . . . . 
+import NewsItem from &#39;../src/components/newsItem&#39;;
+
+const post = {
+    id: 1 ,
+    title : &#39;Post 1.&#39;,
+    link : &#39;http://www.foo.bar&#39;,
+    username : &#39;jbloggs&#39;,
+    comments : [],
+    upvotes: 10
+};
+
+storiesOf(&#39;Hacker App/News Item&#39;, module)
+    .add(&#39;default&#39;, () =&gt; &lt;NewsItem post= { post }  /&gt;
+    )
+    .add(&#39;No hyperlink&#39;, () =&gt; &lt;NewsItem post= { { ...post, link: &#39;&#39;} }  /&gt;
+    )
+
+// As before
+storiesOf(&#39;Hacker App/News Form&#39;, module)
+    .add(&#39;default&#39;, () =&gt; &lt;NewsForm /&gt;
+)</code></pre>
+<p>The news item and news form stories are under the same group name (Hacker App). Storybook allows multiple invocations of its <em>storiesOf()</em> function in the same file - it&#39;s a matter of preference.</p>
+<p><img src="./img/hackstory.png" alt=""></p>
+<h4>Exercise.</h4>
+<p>The remaining component is NewsList - renders a list of news items. Add the following stub implementation to <code>src/components/newsList/index.ks</code></p>
+<pre><code>import React, { Component } from &#39;react&#39;;
+import NewsItem from &#39;../newsItem&#39;;
+
+export default class NewsList extends Component {
+    render() {
+        return (
+           &lt;h1&gt;TODO&lt;/h1&gt;
+        );
+    }
+}</code></pre>
+<p>YOU ARE REQUIRED to complete the implement. Use the PhoneList component from  the Phone catalogue as a guide. Add this story to <code>stories/hackerApp.js</code>:</p>
+<pre><code>    . . . . . . 
+    import NewsList from &#39;../src/components/newsList&#39;;
+    . . . . . . .
+
+    storiesOf(&#39;Hacker App/News List&#39;, module)
+      .add(&#39;default&#39;, () =&gt; { 
+        const defaultPosts = [
+            { ...post, id: 1, title: &#39;Post 1&#39;, upvotes: 10 },
+            { ...post, id: 2, title: &#39;Post 2&#39;, upvotes: 20 },
+            { ...post, id: 3, title: &#39;Post 3&#39;, upvotes: 30 },
+            { ...post, id: 4, title: &#39;Post 4&#39;, upvotes: 40 }
+        ];
+        return &lt;NewsList posts= { defaultPosts }  /&gt;
+    });</code></pre>
+<p>The story should render as shown below.</p>
+<p><img src="./img/hackliststory.png" alt=""></p>
+<h3>Assemble the App.</h3>
+<p>We now have all the components developed. It&#39;s time to put the app together. Stop the Storybook server and start the create-react-app development server:</p>
+<pre><code>  $ npm start</code></pre>
+<p>Replace the content of <code>src/App.js</code> with the the following:</p>
+<pre><code>    import React, { Component } from &#39;react&#39;;
+    import NewsList from &#39;./components/newsList&#39;;
+    import Form from &#39;./components/newsForm&#39;;
+
+    let testPosts = [
+        {   
+        title : &#39;India - Tiger population sees 30% increase.&#39;,
+        link : &#39;http://www.bbc.com/news/world-asia-30896028&#39;,
+        username : &#39;jbloggs&#39;,
+        comments : [],
+        upvotes : 10
+        },
+        { 
+        title : &#39;The button that is not.&#39;,
+        link : &#39;http://blog.nuclearsecrecy.com/2014/12/15/button-isnt/&#39;,
+        username : &#39;notme&#39;,
+        comments : [],
+        upvotes : 12
+        },
+        { 
+        title : &#39;Google Nears $1B Investment in SpaceX&#39;,
+        link : null,
+        username : &#39;notme&#39;,
+        comments : [],
+        upvotes : 12
+        },
+        { 
+        title : &#39;Coinbase Raises $75M from DFJ Growth, USAA, and More&#39;,
+        link : &#39;http://blog.coinbase.com/post/108642362357/coinbase-raises-75m-from-dfj-growth-usaa-nyse&#39;,
+        username : &#39;psmith&#39;,  
+        comments : [],
+        upvotes : 2
+        }
+    ] ;
+
+    export default class App extends Component {
+        render() {
+            return (
+              &lt;div className=&quot;jumbotron&quot;&gt;
+                &lt;div className=&quot;container-fluid&quot;&gt;
+                &lt;div className=&quot;row&quot;&gt;
+                    &lt;div className=&quot;col-md-9 col-md-offset-3&quot; &gt;
+                        &lt;a href=&quot;/&quot;&gt;&lt;h1&gt;Hacker News&lt;/h1&gt;&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;container&quot;&gt;
+                &lt;div className=&quot;row&quot;&gt;
+                    &lt;div className=&quot;col-md-9 col-md-offset-1&quot;&gt;
+                        &lt;NewsList posts={testPosts}  /&gt;
+                        &lt;Form /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            );
+        }
+    }</code></pre>
+<p>In the browser the app will render but the styling is not correct. The Bootstrap CSS library is missing. Change <code>src/index.js</code> as follows: </p>
+<pre><code>import React from &#39;react&#39;;
+import ReactDOM from &#39;react-dom&#39;;
+import App from &#39;./App&#39;;
+import &#39;../node_modules/bootstrap/dist/css/bootstrap.css&#39;;
+
+ReactDOM.render(&lt;App /&gt;, document.getElementById(&#39;root&#39;));</code></pre>
+<p>You should now see the following in the browser:</p>
+<p><img src="./img/hackerStart.png" alt=""></p>
+<p>Commit the work to the Git repository (from the <code>threeApps/hackernews</code> folder) with the commands:</p>
+<pre><code>     $ git add -A
+     $ git commit -m &quot;Static version completed&quot;</code></pre>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>
