@@ -98,7 +98,7 @@ html, body {
     <header class="header item">
       <i id="toc" class="sitemap icon"></i>
       
-        <a href="../index.html">  React Component model.  </a>
+        <a href="../index.html">  Thinking in React.  </a>
       
     </header>
     <div class="right tab-menu menu">
@@ -136,6 +136,48 @@ html, body {
         
           
             <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-1/index.html">Lab-01_JS_Objects </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-2/index.html">Lab-02_JS_functions </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic02/book-1/index.html">Lab-03_HTML_CSS </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic03/book-1/index.html">Lab-React_Basics </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-1/index.html">Lab_React_Data_Flow </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-2/index.html">Lab_Static_React_Apps </a>
+          
+        
+      
+        
+          
+            <a class="item"
                href="https://wit-computing.github.io/enterprise-web-2019//topic05/book-1/index.html">Lab-Interactive_Apps </a>
           
         
@@ -146,7 +188,7 @@ html, body {
         <br>
         
           <div class="ui tab segment lab" data-tab="Lab-Interactive_Apps">
-            <h1>Building React SPAs (Interactive).</h1>
+            <h1>Building React SPAs (Dynamic).</h1>
 <p>Continue the development of the three SPAs by adding <strong>statefulness</strong> and making them <strong>interactive and dynamic</strong>.</p>
 
           </div>
@@ -269,9 +311,9 @@ $ git commit -m &quot;Added stub API&quot;</code></pre>
 </ul>
 <p>An analysis of this app&#39;s behavior requirements gives the following UI state breakdown:</p>
 <ol>
-<li>Contact details - A contact&#39;s propeeties (name, address, etc) are editable and therefore should be stored as UI state.</li>
+<li>Contact details - A contact&#39;s properties (name, address, etc) are editable and therefore should be stored as UI state.</li>
 <li>New contact details - The input fields on the Add contact mini form are UI state.</li>
-<li>Contact status - A contact&#39;s &#39;status&#39; changes when the user clicks the Edit or Delete button. The change is reflected in the text label, color and meaning of its two buttons. Three status types are possible: Normal (default); Edit (button labels change to Undo and Save); and Delete (button labels change to Confirm and Cancel). As a status change results from user input, it maps to React&#39;s <em>component state</em> concept.</li>
+<li>Contact status - A contact&#39;s &#39;status&#39; changes when the user clicks the Edit or Delete button. The change is reflected in the label, color and meaning of its two buttons. Three status types are possible: Normal (default); Edit (button labels change to Undo and Save); and Delete (button labels change to Confirm and Cancel). As a status change results from user input, it maps to React&#39;s <em>component state</em> concept.</li>
 </ol>
 <h3>Stateful components.</h3>
 <p>Which components should manage the app&#39;s UI state? </p>
@@ -296,8 +338,8 @@ $ git commit -m &quot;Added stub API&quot;</code></pre>
 <p>Notes:</p>
 <ol>
 <li>For simplicity, the normal (default) contact status will be represented by an empty string. The values &#39;edit&#39; and &#39;del&#39; will be used for the other status options - see later.</li>
-<li>The initial values for a contact&#39;s details are passed in as props. </li>
-<li>The previousDetails structure is necessary to support the undo operation of the contact edit feature - we need to reset the contact&#39;s properties back to pre-edit values.</li>
+<li>The initial values for a contact&#39;s details are passed in as props. While props are not normally stored as state, it is necessary here to support the edit feature.</li>
+<li>The previousDetails nested object is necessary to support the undo operation of the edit feature - we need to reset the contact&#39;s properties back to pre-edit values.</li>
 </ol>
 <h4>Externalize configuration.</h4>
 <p>The attributes (color, label) of the buttons associated with a contact could be considered <strong>configuration data</strong>. It is good practice to separate configuration from logic, thus making an app easier to reconfigure. Create the file  <code>src/config/buttonsConfig.js</code> and add the following code:</p>
@@ -322,7 +364,7 @@ $ git commit -m &quot;Added stub API&quot;</code></pre>
      }
   }
   export default buttons;</code></pre>
-<p>This configuration data is used in the next sectiom.</p>
+<p>This configuration data is used in the next section.</p>
 <h3>Adding dynamic behavior.</h3>
 <p>We will start by adding support for a contact&#39;s Edit button. The code will involve the following:</p>
 <ol>
@@ -501,7 +543,7 @@ class Contact extends Component {
          return ( . . . as before . . . )   
   }
   export default Contact;</code></pre>
-<p>In the browser, test the Delete feature.</p>
+<p>Note, for convenience we are using a contact&#39;s phone number as a unique key/ identifier. In the browser, test the Delete feature.</p>
 <p>From the <code>threeApps/contactlist</code> folder commit this work:</p>
 <pre><code> $ git add -A
  $ git commit -m &quot;Edit and Delete features completed&quot;</code></pre>
@@ -509,7 +551,7 @@ class Contact extends Component {
 <p>The mini web form to add a new contact is the remaining feature. The inverse data flow pattern applies here also, in that we need:</p>
 <ul>
 <li>A function in App to pass the new contact details to the API and perform a re-rendering.</li>
-<li>To pass a reference to above function to the ContactForm components. </li>
+<li>To pass a reference to above function to the ContactForm component. </li>
 <li>ContactForm component invokes the function when required.</li>
 </ul>
 <p>In <code>src/App.js</code> make the following changes:</p>
@@ -521,7 +563,7 @@ class Contact extends Component {
            this.setState({});
       };
       deleteContact = ..... as before .....</code></pre>
-<p>and in the render method of the same component, pass this new method to the form component:</p>
+<p>and in the render method of the same component, pass this new function to the form component:</p>
 <pre><code>     . . . . .. 
      &lt;ContactForm  addHandler={this.addContact} /&gt;
      . . . . . . </code></pre>
@@ -589,7 +631,7 @@ class Contact extends Component {
         
           <div class="ui tab segment lab" data-tab="Phone_Catalogue">
             <h2>Phone Catalogue App.</h2>
-<p>For this app, when the user enters text in the search field it should display only those phones whose name contains the entered text. Also, the list of matching phones should be reordered when the drop-down menu options is changed.</p>
+<p>In this app when the user enters text in the search field it should display only those phones whose name contains the entered text. Also, the order of the list of matching phones should change when the drop-down menu options is changed.</p>
 <p>From <code>threeApps/phonecatalogue</code> folder, install the lodash package:</p>
 <pre><code>     $ npm install  lodash@2.4.2 --save</code></pre>
 <p>Start the development server:</p>
@@ -610,7 +652,7 @@ class Contact extends Component {
     }
   }</code></pre>
 <h3>Adding dynamic behavior.</h3>
-<p>We need to implement inverse data flow between the App and SelectControls components.In <code>src/components/selectControls/index.js</code>, completely replace its content with the following code:</p>
+<p>We need to implement inverse data flow between the App and SelectControls components. In <code>src/components/selectControls/index.js</code>, completely replace its content with the following code:</p>
 <pre><code>import React, { Component } from &#39;react&#39;;
 
  export default class SelectControls extends Component {
@@ -641,7 +683,7 @@ class Contact extends Component {
         );
     }
   }</code></pre>
-<p>Note, the handlerChange function calls a props function (not yet defined) belonging to the App component. The App function updates the state object and force a re-computation of the matching phone list, as well as a re-rendering. Make the following changes to <code>src/App.js</code>:</p>
+<p>Note, the handlerChange function calls a props function (not yet defined) belonging to the App component. The App function updates the state object, re-computation of the matching phone list, and forces a re-rendering. Make the following changes to <code>src/App.js</code>:</p>
 <pre><code>  class App extends React.Component {
     state = { . . . as before . . . };
 
@@ -672,7 +714,7 @@ class Contact extends Component {
         );
     }
   }</code></pre>
-<p>This code is incomplete because the subset of matching phones is not being recomputed as required, however, the <code>console.log()</code> statement in the render method allows us verify the &#39;inverse data flow&#39; is working. To prove it, in the browser, open the Chrome developer tools. Now type &#39;sam&#39; in the search text field and select &#39;Newest&#39; in the sort dropdown. The screenshot below shows the console output. </p>
+<p>This code is incomplete because the subset of matching phones is not being recomputed, however, the <code>console.log()</code> statement in the render method allows us verify the &#39;inverse data flow&#39; is working. To prove it, in the browser, open the Chrome developer tools. Now type &#39;sam&#39; in the search text field and select &#39;Newest&#39; in the sort dropdown. The screenshot below shows the console output. </p>
 <p><img src="./img/console.png" alt=""></p>
 <p>In <code>src/App.js</code>, add the import  at the top:</p>
 <pre><code>      import _ from &#39;lodash&#39;;</code></pre>
@@ -707,10 +749,9 @@ class Contact extends Component {
         .add(&#39;Phone&#39;, . . . . as before . . . . </code></pre>
 <p>We are passing a dummy function (or action ) to the SelectControls component. The dummy will simply display a message (&#39;input changed&#39;) when invoked.  Start the server:</p>
 <pre><code>  $ npx start-storybook -s ./public -p 9001 -c .storybook</code></pre>
-<p>Browse to <a href="http://localhost:9001/">http://localhost:9001/</a> , select from the drop-down, and type in the search field.
-Confirmation of the dummy function calls can be seen in the &#39;Action Logger&#39; panel.</p>
+<p>Browse to <a href="http://localhost:9001/">http://localhost:9001/</a> , select the story, and in the component change the drop-down menu selection and type in the search field. Confirmation of the dummy function calls can be seen in the &#39;Action Logger&#39; panel.</p>
 <p><img src="./img/phonestory.png" alt=""></p>
-<p>see <a href="https://storybook.js.org/addons/addon-gallery/">here</a> for a ful list of Storybook addons.</p>
+<p>see <a href="https://storybook.js.org/addons/addon-gallery/">here</a> for a full list of Storybook addons.</p>
 <p>Commit these changes to git:</p>
 <pre><code>    $ git add -A
     $ git commit -m &quot;Search page completed&quot;</code></pre>
@@ -896,8 +937,7 @@ export default (new StubAPI() );</code></pre>
                       onClick={this.handleVote}/&gt;
                 {this.props.post.upvotes}
                . . . . . . . . </code></pre>
-<p>In the browser you should now be able to increment a news item&#39;s upvote count. </p>
-<p>We also want the items to be in descending order, by vote count. In <code>src/App.js</code> compute the order in the render method:</p>
+<p>In the browser you should now be able to increment a news item&#39;s upvote count. We also want the items to be in descending order, by vote count. In <code>src/App.js</code> compute the order in the render method:</p>
 <pre><code>     . . . . imports . . . 
     import _ from &#39;lodash&#39;;
     . . . . . . .
@@ -907,13 +947,12 @@ export default (new StubAPI() );</code></pre>
        );
        return ( 
             . . . as before . . </code></pre>
-<p>The news items will now always be in descending order.</p>
+<p>In the browser upvote an item a few times to force a reordering.</p>
 <p>From the <code>threeApps/hackerNews</code> folder, commit the work so far:</p>
 <pre><code> $ git add -A
  $ git commit -m &quot;Upvote feature completed&quot;</code></pre>
 <h3>Add news item.</h3>
-<p>The add news item feature is very similar to the add contact feature in the Contact List app.
-We need the following:</p>
+<p>The add news item feature is very similar to the add contact feature in the Contact List app. We need the following:</p>
 <ul>
 <li>A state object in the NewsForm component to store the current values being typed into the form fields.</li>
 <li>A function to pass the new item to the API and force a re-rendering.<ul>
@@ -931,7 +970,7 @@ We need the following:</p>
 <p>and in the render method change the Form tag:</p>
 <pre><code>    &lt;Form handleAdd={ this.addNewsItem } /&gt;</code></pre>
 <h4>Exercise.</h4>
-<p>You are required to complete the implementation. The code that needs modifying is <code>components/newsForm/index.js</code>. Use the Add contact form from the Contact List App  as a guide.</p>
+<p>You are required to complete the implementation. The code that needs modifying is <code>components/newsForm/index.js</code> - use the Add contact form from the Contact List App  as a guide.</p>
 <h3>Storybook.</h3>
 <p>For completeness we should update the Storybook code for the NewsForm component/ 
 In <code>.storybook/addons.js</code> register the addon-action plugin:</p>
@@ -944,7 +983,7 @@ In <code>.storybook/addons.js</code> register the addon-action plugin:</p>
 <p><img src="./img/newsstory.png" alt=""></p>
 <hr>
 <p>On completion, go to the <code>hackerNews</code> folder and commit the work:</p>
-<pre><code> $ git add .
+<pre><code> $ git add -A
  $ git commit -m &quot;Add news item feature completed&quot;</code></pre>
 
           </div>
