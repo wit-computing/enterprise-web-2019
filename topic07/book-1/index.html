@@ -316,9 +316,9 @@ Click create repository and you should be taken to your new repo page.
 <h3>Pull down the changes on the remote repo</h3>
 <p>You created a .gitignore file on the remote repo. You need to <em>pull</em> this change into your local repo. Git has a branching system so that you can work on different parts of a project at different times but by default the first branch is named &#39;master&#39;. When you pull (and push) from a project, you tell Git the branch name you want and the name of the remote that it lives on.
 - Enter the following command to pull the remote changes into the master branch on your local repo:</p>
-<pre><code class="lang-bash">$ git pull origin master</code></pre>
+<pre><code class="lang-bash">$ git pull origin master --allow-unrelated-histories</code></pre>
 <ul>
-<li>You will be required to edit a change file to justify the committing of remote changes to your local repo. Enter some text to describe the change and save the file.</li>
+<li>The <code>--allow-unrelated-histories</code> needs to be included as the local and remote repositories were created independently and have some commits.</li>
 </ul>
 <p>Now we will <em>push</em> your local work (i.e. the readme.md) to the remote repo. </p>
 <h3>Push Work to your Remote</h3>
