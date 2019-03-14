@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html">  Web APIs  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="node_lab2">
+          node_lab2
+        </a>
+      
+        <a class="item" data-tab="01">
+          01
+        </a>
+      
+        <a class="item" data-tab="02">
+          02
+        </a>
+      
+        <a class="item" data-tab="03">
+          03
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-1/index.html">Lab-01_JS_Objects </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-2/index.html">Lab-02_JS_functions </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic02/book-1/index.html">Lab-03_HTML_CSS </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic03/book-1/index.html">Lab-React_Basics </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-1/index.html">Lab_React_Data_Flow </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-2/index.html">Lab_Static_React_Apps </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic05/book-1/index.html">Lab-Interactive_Apps </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic06/book-1/index.html">Lab_React_Routing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic07/book-1/index.html">node_lab1 </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic08/book-1/index.html">node_lab2 </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="node_lab2">
+            <h2>Node and Express 2</h2>
+<p>This lab uses Express implement APIs for the contact and Hacker News examples.  In this lab you will use routing, parameterise URLs, and parsing Middleware.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="01">
+            <h1>Contacts API</h1>
+<p>We will enhance the Contacts API from last weeks lab. The following is a suggested API design for Contacts API.</p>
+<h1>API Design</h1>
+<p>We are going to create an API to manage contact data. The proposed API is as follows:</p>
+<p><img src="./img/contacts_api.png" alt="Contacts API"></p>
+<h3>Set up</h3>
+<ul>
+<li><p>User the <strong>node-lab1</strong> folder from last weeks lab as the starting point for this lab. If you do not have a solution for last weeks lab, you can get it from the labs folder in the examples repo at <a href="https://github.com/fxwalsh/ewd-examples-2019.git">https://github.com/fxwalsh/ewd-examples-2019.git</a>.</p>
+</li>
+<li><p>Install the following packages in your lab folder.</p>
+</li>
+</ul>
+<blockquote>
+<pre><code class="lang-script">npm install --save body-parser
+npm install --save lodashgit</code></pre>
+<p>Body-parser is a middleware that express can use to parse json.</p>
+</blockquote>
+<ul>
+<li>Update index.js to import and use <strong>body-parser</strong> in it&#39;s middleware stack.</li>
+</ul>
+<blockquote>
+<pre><code class="lang-javascript">import bodyParser from &#39;body-parser&#39;;
+....
+//configure body-parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+....</code></pre>
+</blockquote>
+<ul>
+<li>Before we go any further, test the contacts API using your Rest client(e.g. Postman). This should be still working the same from last weeks lab.
+<img src="./img/contacts_api_1.png" alt="contacts API"></li>
+</ul>
+<h2>Add a Contact</h2>
+<ul>
+<li>Now replace the contents of the contacts routing script, <strong>/api/contacts/index.js</strong>, with the following code.</li>
+</ul>
+<pre><code class="lang-javascript">import express from &#39;express&#39;;
+import contacts from &#39;./contacts&#39;;
+
+const router = express.Router();
+
+router.get(&#39;/&#39;, (req, res) =&gt; {
+  res.send({ contacts: contacts });
+});
+
+router.post(&#39;/&#39;, (req, res) =&gt; {
+        let newContact = req.body;
+        if (newContact){
+          contacts.push({name: newContact.name, address : newContact.address, phone_number: newContact.phone_number }) ;
+          res.status(201).send({message: &quot;Contact Created&quot;});
+      }else{
+            res.status(400).send({message: &quot;Unable to find Contact in request. No Contact Found in body&quot;});
+      }
+});
+
+export default router;</code></pre>
+<p>The above script adds a HTTP post route that gets a new contact data from the request body (<code>req.body</code>) and pushes it onto the contacts list.</p>
+<ul>
+<li>Test with your Rest Client. You will need to supply a JSON representation of the new client in the HTTP request <strong>body</strong> and make sure to select <strong>post</strong> as the HTTP method.</li>
+</ul>
+<p><img src="./img/contacts_post.png" alt="Add contact (HTTP post)"></p>
+<p>All going well, you should see a successfull reponse similar to the following:</p>
+<p><img src="./img/contacts_post_success.png" alt="Add contact (HTTP post)"></p>
+<h2>Update a Contact</h2>
+<ul>
+<li>Updating a contact involves replacing a contact with the new data in the HTTP request body. This corresponds to a HTTP PUT request. For now, use the phone number as the unique key to identify contacts. Add the following routing code to the end of <strong>/api/contacts/index.js</strong>.</li>
+</ul>
+<pre><code class="lang-javascript">// Update a contact
+router.put(&#39;/:id&#39;, (req, res) =&gt; {
+     const key = req.params.id;
+     const updateContact = req.body;
+     const index = contacts.map((contact)=&gt;{
+return contact.phone_number;
+}).indexOf(key);
+            if (index !== -1) {
+               contacts.splice(index, 1, {name: updateContact.name, address: updateContact.address,
+               phone_number: updateContact.phone_number});
+               res.status(200).send({message: &#39;Contact Updated&#39;});
+              } else {
+          res.status(400).send({message: &#39;Unable to find Contact in request. No Contact Found in body&#39;});
+      }
+});</code></pre>
+<p>Test using a Rest client by doing a <strong>HTTP PUT</strong> using
+the  URL of an existing contact as follows and include a JSON document in the HTTP body to replace it.</p>
+<blockquote>
+<p><a href="http://localhost:8080/api/contacts/934-4329">http://localhost:8080/api/contacts/934-4329</a></p>
+</blockquote>
+<p>Using Postman, you should see something similar to the following: </p>
+<p><img src="./img/put.png" alt="Update Contact (HTTP Put)"></p>
+<h2>Delete a Contact</h2>
+<ul>
+<li>Include the following function and test that the function removes a contact.(e.g. perform a HTTP DELETE on <a href="http://localhost:8080/api/contacts/934-4329">http://localhost:8080/api/contacts/934-4329</a>). You do not need to provide any body data for a delete.</li>
+</ul>
+<pre><code class="lang-javascript">// Delete a contact
+router.delete(&#39;/:id&#39;, (req, res) =&gt; {
+     const key = req.params.id;
+     const index = contacts.map((contact)=&gt;{
+return contact.phone_number;
+}).indexOf(key);
+    if (index &gt; -1) {
+contacts.splice(index, 1);
+        res.status(200).send({message: `Deleted contact with phone_number: ${key}.`});
+    } else {
+      res.status(400).send({message: `Unable to find contact with phone_number: ${key}.`});
+      }
+});</code></pre>
+<p>Check by performing a Delete followed by a Get.</p>
+<h2>Commit it</h2>
+<p>Commit the changes you just made to your repo.</p>
+<pre><code>git add --all
+git commit -m &quot;added routing for add,update,delete contact&quot;</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="02">
+            <h1>Hacker News API</h1>
+<p>Now we will create an API for <a href="https://news.ycombinator.com/">Hacker News</a>. Hacker News is a social news website focusing on computer science and entrepreneurship. In general, content that can be submitted is defined as &quot;anything that gratifies one&#39;s intellectual curiosity&quot;.The following is a suggested API design for Hacker News Posts. </p>
+<p>Note that the URL parameters arepreceeded by a colon(&quot;:&quot;)</p>
+<p><img src="./img/hacker_api.png" alt="Hacker News API"></p>
+<h1>Set up</h1>
+<ul>
+<li>Create a new <em>posts</em> directory in the <em>api</em> directory for the Hacker News  API scripts.</li>
+</ul>
+<pre><code class="lang-script">+api
+  +posts</code></pre>
+<ul>
+<li>In <em>/api/posts</em>, create two new javascript files, <em>stubAPI.js</em> and <em>index.js</em>.:</li>
+</ul>
+<pre><code class="lang-script">+api
+   +posts
+      |- stubAPI.js
+      |- index.js</code></pre>
+<h2>StubAPI.js</h2>
+<ul>
+<li>The <em>stubAPI.js</em> will take the place of the Mongo database for the time being. In <em>stubAPI.js</em>, enter the following code:</li>
+</ul>
+<pre><code class="lang-javascript">import _ from &#39;lodash&#39;;
+
+  const posts = [
+         {id: 1,
+            title: &#39;India - Tiger population sees 30% increase.&#39;,
+            link: &#39;http://www.bbc.com/news/world-asia-30896028&#39;,
+            username: &#39;jbloggs&#39;,
+            comments: [],
+            upvotes: 10,
+          },
+         {
+            id: 2,
+            title: &#39;The button that is not.&#39;,
+            link: &#39;http://blog.nuclearsecrecy.com/2014/12/15/button-isnt/&#39;,
+            username: &#39;notme&#39;,
+            comments: [],
+            upvotes: 12,
+          },
+          {
+            id: 3,
+            title: &#39;Google Nears $1B Investment in SpaceX&#39;,
+            link: null,
+            username: &#39;notme&#39;,
+            comments: [],
+            upvotes: 12,
+          },
+          {
+            id: 4,
+            title: &#39;Coinbase Raises $75M from DFJ Growth, USAA, and More&#39;,
+            link: &#39;http://blog.coinbase.com/post/108642362357/coinbase-raises-75m-from-dfj-growth-usaa-nyse&#39;,
+            username: &#39;psmith&#39;,
+            comments: [],
+            upvotes: 2,
+          },
+      ];
+
+
+     const stubAPI = {
+         getAll: () =&gt; {
+            return posts;
+          },
+         add: (t, l) =&gt; {
+              if (!(t &amp;&amp; l)) return false;
+              let id = 1;
+              const last = _.last(posts);
+              if (last) {
+                 id = last.id + 1;
+              }
+              let len = posts.length;
+              let newLen = posts.push({
+                  &#39;id&#39;: id,
+                 &#39;title&#39;: t, &#39;link&#39;: l, &#39;username&#39;: &#39;&#39;, &#39;comments&#39;: [], &#39;upvotes&#39;: 0});
+               return newLen &gt; len?id:-1;
+              },
+         upvote: (id) =&gt; {
+             const index = _.findIndex(posts,
+                   (post) =&gt; {
+                    return post.id == id;
+                  } );
+             if (index !== -1) {
+                  posts[index].upvotes += 1;
+                  return true;
+                }
+              return false;
+           },
+         getPost: (id) =&gt; {
+            let result = null;
+            const index = _.findIndex(posts,
+                   (post) =&gt; {
+                    return post.id == id;
+                  } );
+             if (index !== -1) {
+                result = posts[index];
+                    }
+            return result;
+            },
+         addComment: (postId, c, n) =&gt; {
+            let result = false;
+            const post = stubAPI.getPost(postId);
+            let id = 1;
+            if (post) {
+            const last = _.last(post.comments);
+            if (last) {
+               id = last.id + 1;
+            }
+            post.comments.push({&#39;id&#39;: id,
+                     &#39;comment&#39;: c, &#39;author&#39;: n, &#39;upvotes&#39;: 0} );
+            result = true;
+            }
+          return result;
+            },
+         upvoteComment: (postId, commentId) =&gt; {
+            let result = false;
+            const post = stubAPI.getPost(postId);
+            if (post) {
+            const index = _.findIndex(post.comments, (c) =&gt; {
+                      return c.id == commentId;
+                    });
+             if (index !== -1) {
+                 post.comments[index].upvotes += 1;
+                 result = true;
+                }
+              }
+            return result;
+          },
+      };
+    export default stubAPI;</code></pre>
+<h1>Routing</h1>
+<ul>
+<li>We will use the same service to handle hacker news as well as contacts. We will need to add the  a new route in index.js for Hacker News. Add the following statements to the top of index.js to import and use the hacker news routes.</li>
+</ul>
+<pre><code class="lang-javascript">import postsRouter from &#39;./api/posts&#39;;
+
+......
+
+app.use(&#39;/api/posts&#39;, postsRouter);</code></pre>
+<h1>Get and Post</h1>
+<p>Getting and posting posts is very similar to the Contacts API. Add the following to <strong>api/posts/index.js</strong>:</p>
+<pre><code class="lang-javascript">import express from &#39;express&#39;;
+import stubAPI from &#39;./stubAPI&#39;;
+
+const router = express.Router();
+
+// get all posts
+router.get(&#39;/&#39;, (req, res) =&gt; {
+  const posts = stubAPI.getAll();
+  res.send({posts: posts});
+});
+
+
+// Add a post
+router.post(&#39;/&#39;, (req, res) =&gt; {
+    const newPost = req.body;
+
+    if (newPost &amp;&amp; stubAPI.add(newPost.title, newPost.link)) {
+         return res.status(201).send({message: &#39;Posts Created&#39;});
+    }
+    return res.status(400).send({message: &#39;Unable to find Post in request.&#39;});
+});
+
+// get a post
+router.get(&#39;/:id&#39;, (req, res) =&gt; {
+    const id = req.params.id;
+    const post = stubAPI.getPost(id);
+
+       if (post) {
+               return res.status(200).send(post);
+              }
+              return res.status(404).send({message: `Unable to find Post ${id}`});
+});
+
+export default router;</code></pre>
+<ul>
+<li>Save and test using your Rest client. Make sure any changes using POST are visible using GET on <a href="http://locahost:8080/api/posts">http://locahost:8080/api/posts</a></li>
+</ul>
+<h2>Upvotes and Comments.</h2>
+<ul>
+<li>Add the following route to <em>/api/posts/index.js</em> to allow for post upvotes:</li>
+</ul>
+<pre><code class="lang-javascript">// upvote a post
+router.post(&#39;/:id/upvote&#39;, (req, res) =&gt; {
+     const id = req.params.id;
+            if (stubAPI.upvote(id)) {
+                 return res.status(200).send({message: `Post ${id} Upvoted`});
+            }
+            return res.status(404).send({message: `Unable to find Post ${id}`});
+});</code></pre>
+<p>The function extracts the <code>:id</code> parameter and uses it to upvote the corresponding post.
+Test using your Rest client, making sure upvotes are recorded correctly.</p>
+<h2>Commit it</h2>
+<ul>
+<li>Commit the changes you just made to your repo.</li>
+</ul>
+<pre><code class="lang-bash">git add --all
+git commit -m &quot;added routing for hacker news API&quot;</code></pre>
+<h2>Challenge</h2>
+<p>Examine and understand the code for adding a post and upvoting a post. Now try to implement adding and upvoting comments.</p>
+<blockquote>
+<p><strong> hint: </strong> an example comment would be <code>{&quot;comment&quot;:&quot;this is a great post!&quot;, &quot;author&quot;:&quot;fxwalsh&quot;}</code>. Refer to the API Design table for the correct parametised routing. The functions you will need from the stubAPI are addComment(postId, comment.comment, comment.author) and upvoteComment(postId, commentId).</p>
+</blockquote>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="03">
+            <h1>Hooking up the React App.</h1>
+<p>We will now connect your Hacker News React App to the API. This step requires completion of the React labs.</p>
+<h2>System Architecture</h2>
+<p>We will keep using the <strong>create-react-app</strong> framework you were using previously. <strong>create-react-app</strong> provides a mechanism for working with an API server in development. We can have the development server proxy requests intended for our API server as follows:</p>
+<p><img src="./img/architecture.png" alt="Development Architecture"></p>
+<p>The React app makes an API request to localhost:3000, the Webpack development server. The development server proxies that request to the API server. This will remove any Cross-Origin-Resource-Sharing (CORS) issues with the browser.
+For this to work we need to launch both the create-react-app dev server and the API server in order to run the app locally. We also need to get the react dev server to proxy requests to the Express API.</p>
+<ul>
+<li><p>Copy the complete hackerNews app from it&#39;s current location and put it in the root of your Express API. It should look like this:
+<img src="./img/files.png" alt="HackerNews folder"></p>
+</li>
+<li><p>The proxy functionality requires the version of <em>react-scripts</em> to be greater than 0.8.5. Check this is the case by looking at the dependencies list in <em>/hackernews/package.json</em>.</p>
+</li>
+<li><p>Open a console window in the hackerNews folder and start the react app:</p>
+<pre><code>npm start</code></pre>
+</li>
+</ul>
+<p>Check that the app functions as before. If it&#39;s not working then check the error messages if any.</p>
+<h2>Set up</h2>
+<h4>Nodemon filter</h4>
+<p>We want the nodemon process to ignore any changes in the <em>hackerNews</em> folder as these will not affect the API. In the <strong>package.json file in the node app root folder (/package.json</strong>, update the scripts property to the following:</p>
+<pre><code class="lang-json">&quot;scripts&quot;: {
+    &quot;start&quot;: &quot;nodemon --ignore hackerNews/* --exec babel-node index.js&quot;
+  }</code></pre>
+<h4>Proxy Server</h4>
+<p>To have the React development server proxy our API requests to our Express API server, we need to add the following to the <strong>package.json file in the hackerNews folder (/hackerNewes/package.json).</strong></p>
+<pre><code class="lang-json">...
+&quot;proxy&quot;:&quot;http://localhost:8080&quot;,
+...</code></pre>
+<ul>
+<li><strong>You must restart your React app for the new proxy setting to take affect.</strong> 
+The Webpack server should now forward any request for unknown resources coming into the Webpack server though to your Express app listening on port 8080.</li>
+</ul>
+<h4>JSX Linting</h4>
+<p>Check that your current linter will not recognise JSX syntax. This should be already the case from the previous lab. If not, install the relevant plugin:</p>
+<ul>
+<li><p>Run <code>npm install --save-dev eslint-plugin-react</code></p>
+</li>
+<li><p>If not already there, add <code>&quot;plugins&quot;: [&quot;react&quot;]</code> to your .eslintrc config file.</p>
+</li>
+</ul>
+<p>In your hackerNews folder, create a new <code>.eslintrc.json</code> file with the following contents:</p>
+<pre><code class="lang-json">{
+   &quot;env&quot;: {
+       &quot;browser&quot;: true,
+       &quot;node&quot;: true
+   },
+
+   &quot;globals&quot;: {
+       &quot;React&quot;: true
+   },
+
+   &quot;ecmaFeatures&quot;: {
+       &quot;jsx&quot;: true
+   },
+
+   &quot;plugins&quot;: [
+       &quot;react&quot;
+   ]
+}</code></pre>
+<h4>Axios</h4>
+<p>We will need to make http requests to the Express API from the React App. In the <strong>hackerNews</strong> folder, install <strong>axois</strong>.</p>
+<pre><code>npm install --save axios</code></pre>
+<p>Axios is a promise-based HTTP client for the browser and node.js. You will use it to make requests to the Express API.</p>
+<h3>Start both servers</h3>
+<p>You will need to now start both the react app server and the Express API at the same time. Open two separate command windowsin the hackerNews folder and the parent lab folder. Start the respective servers in both windows:</p>
+<pre><code>npm start</code></pre>
+<p>You should see both processes come to life. As before, they support &#39;hot code changes&#39; so you should not have to restart the processes as you moake changes.</p>
+<h2>Integrate the Express Hacker News API</h2>
+<p>Currently the Hacker News app uses a stubAPI to mimic a real API. We need to replace this.</p>
+<ul>
+<li>create a new script in the <em>hackerNews/src</em> folder called <strong>api.js</strong> and enter the following code:</li>
+</ul>
+<pre><code class="lang-javascript">import axios from &#39;axios&#39;;
+
+export const upvote = postId =&gt; {
+  return axios.post(`/api/posts/${postId}/upvote`)
+              .then(resp =&gt; resp.data);
+};
+
+export const getAll = () =&gt; {
+   return axios(&#39;/api/posts&#39;)
+              .then(resp =&gt; resp.data);
+};
+
+export const getPost = postId =&gt; {
+  return axios.get(`/api/posts/${postId}`)
+              .then(resp =&gt; resp.data);
+};
+
+export const add = (newTitle, newLink) =&gt; {
+  return axios.post(&#39;/api/posts&#39;, { title: newTitle, link: newLink })
+              .then(resp =&gt; resp.data);
+};</code></pre>
+<p>Notice how the routes match what we&#39;ve implemented in the Express Hacker News API. The proxy property of the package.json provides the host information required to complete the request.</p>
+<ul>
+<li>In the <code>hackerNews/src</code>, edit <code>App.js</code> as follows: Replace the  <code>import api from &#39;./dataStore/stubAPI&#39;</code> statement with the following.</li>
+</ul>
+<pre><code class="lang-javascript">import * as api from &#39;./api&#39;;</code></pre>
+<ul>
+<li>We are going to include posts as part of the HackerApp component state. In <em>App.js</em>, initialise the <code>state</code> and add the  <code>componentDidMount()</code> method to the HackerApp component to initialise the posts from the Express API:</li>
+</ul>
+<pre><code class="lang-javascript">export default class App extends Component {
+
+    state = {posts: [{}]};
+
+    componentDidMount() {
+        api.getAll().then(resp =&gt; {
+            this.setState({
+                posts: resp.posts
+            });
+        }).catch(console.error);
+    };
+
+    ...
+    ...</code></pre>
+<ul>
+<li>Now replace the <code>render</code> function of the HackerApp component with the following code. This replaces the previous use of stubAPI with the new posts state retrieved from the api package.</li>
+</ul>
+<pre><code class="lang-javascript">...
+    render() {
+        const posts = _.sortBy(this.state.posts, post =&gt;
+            post.upvotes);
+        return (
+            &lt;div className=&quot;container&quot;&gt;
+                &lt;div className=&quot;row&quot;&gt;
+                    &lt;div className=&quot;col-md-9 col-md-offset-1&quot;&gt;
+                        &lt;NewsList posts={posts} 
+                        upvoteHandler={this.incrementUpvote} /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;row&quot;&gt;
+                    &lt;div className=&quot;col-md-9 col-md-offset-1&quot;&gt;
+                        &lt;Form handleAdd={ this.addNewsItem } /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        );
+    }
+...</code></pre>
+<p>Now have a look at the app in the browser. You should see the list of news items as before. This time, however, they are retrieved from the Express API.
+Try to add a new post. You&#39;ll notice nothing happens. Next we will update the addPost() method.</p>
+<h3>Adding a post</h3>
+<ul>
+<li>Locate the <code>addNewsItem()</code> function in the App component. Replace it with the following:</li>
+</ul>
+<pre><code class="lang-javascript">addNewsItem = (title, link) =&gt; {
+        api.add(title,link)
+        .then(resp =&gt; {
+                      const newPost = {&quot;id&quot;:resp.id,&quot;title&quot;:title,&quot;link&quot;:link,&quot;upvotes&quot;:0, &quot;comments&quot;:[]};
+                      this.setState({posts: this.state.posts.concat([newPost])});
+        })
+      };</code></pre>
+<p>This function calls the Express API which returns a promise. When the promise is fulfilled, then it pushes the new post onto the posts state property. The HackerApp should react to this state and call the render function again.</p>
+<p>Check the app in the browser again. You should be able add new posts posts to the list.</p>
+<p>You can also check, via the API directly, that the new posts are being created.</p>
+<h3>Upvoting a Post</h3>
+<p>The upvote will now cause errors if you try to use it at the moment.
+Replace the <strong>incrementUpvote</strong> function in the App compnent with the following:</p>
+<pre><code class="lang-javascript">incrementUpvote = (id) =&gt; {
+  api.upvote(id).then(resp=&gt; {
+         var upvotedPost = _.find(this.state.posts, post=&gt;post.id == id);
+         upvotedPost.upvotes++;  
+         this.setState({})
+       }) ;
+};</code></pre>
+<h2>Challenge</h2>
+<p>Review your progress so far. Use the same approach to accomplish the following:</p>
+<ul>
+<li>integrate the API with the comment page.</li>
+<li>Update the contactList app to use the API developed in this lab.</li>
+</ul>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>
