@@ -1,0 +1,833 @@
+
+
+
+  {
+  
+  
+    "properties" : {"highlightstyle":"railscasts","slack":"https://wit-msc-in-computing.slack.com/messages/CCQ1F4MFW/","moodle":"https://moodle.wit.ie/course/view.php?id=141024","youtube":"https://www.youtube.com/playlist?list=PL4MwiC_0Rjn6jna4bycWxF3NuAIJGH7kZ","courseurl":"https://wit-computing.github.io/enterprise-web-2019/","credits":"Dr Frank Walsh, Diarmuid O'Connor, WIT","license":"Unless otherwise stated, this work is licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by/4.0/\">Creative Commons Attribution 4.0 International License</a>.","ects":10,"panelicon":"grey code","faPanelicon":"fas fa-code fa-10x","faColour":"#000000"},
+  
+  "type" : "course",
+  "title" : " Enterprise Web Development 2019 ",
+  "img" : "",
+  "videoid" : "",
+  "objectives" : "<h1>Enterprise Web Development 2019</h1>",
+  "folder" : "enterprise-web-2019",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "topics" : [  {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : " Module overview, ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "<p>A look at the context for this module.</p>",
+  "folder" : "topic00",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Overview. ",
+  "img" : "overview.jpg",
+  "videoid" : "MwI2kLw2njQ",
+  "objectives" : "<p>The context and specific technology stack for this module.</p>",
+  "folder" : "talk-1",
+  "link" : "overview.pdf",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : " JavaScript Fundamentals, ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "<p>The syntax and semantics of the language for both data representation and behavior representation.</p>",
+  "folder" : "topic01",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " JavaScript Fundamentals. ",
+  "img" : "JavaScript.png",
+  "videoid" : "tmy-6RHjEnc",
+  "objectives" : "<p>The syntax and semantics of Javascript for data representation and behaviour representatio,</p>",
+  "folder" : "talk-1",
+  "link" : "JavaScript.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab-01_JS_Objects",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>By completing a set of small exercises, this lab helps you develop an understanding of the basic syntax and fundamental concepts of the JavaScript language, with particular emphasis on data representation.</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab-02_JS_functions",
+  "img" : "img/main.jpg",
+  "videoid" : "none",
+  "objectives" : "<p>This lab continues our exploration of Javascripr fundamentals, this time focusing on the behavioral side. The topics covered include function definition, method definition, and constructor functions.</p>",
+  "folder" : "book-2",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "archive",
+  "title" : "Resource 1. ",
+  "img" : "archive.jpg",
+  "videoid" : "",
+  "objectives" : "<p>The JS code samplss referenced inthe lecture slides</p>",
+  "folder" : "archive",
+  "link" : "archive.zip",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : "Introduction to the DOM, CSS and Bootstrap ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "<p>This topic provides a introduction to key front end web technologies for this module</p>",
+  "folder" : "topic02",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "CSS and Bootstrap ",
+  "img" : "html5.png",
+  "videoid" : "U2_HiKb2PlA",
+  "objectives" : "<p>This topic provides an overview of Cascading Style Sheets and Bootstrap. A brief introduction to HTML5 will also be covered</p>",
+  "folder" : "talk-1",
+  "link" : "html5.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " The Browser ",
+  "img" : "dom.png",
+  "videoid" : "none",
+  "objectives" : "<p>This talk introduces the Document Object Model (DOM) and events in the browser.</p>",
+  "folder" : "talk-2",
+  "link" : "dom.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab-03_HTML_CSS",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>By completing this lab you will develop an understanding of the basics of HTML/CSS/Bootstrap.</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "archive",
+  "title" : "Code Samples ",
+  "img" : "archive.jpg",
+  "videoid" : "",
+  "objectives" : "<p>The code samples referenced in the lecture slides.</p>",
+  "folder" : "archive",
+  "link" : "archive.zip",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : " Introduction to React and Storybook. ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "<p>Examine the basics of React&#39;s component model, including class declaration, JSX, props, composition, iteration. Introduce the Storybook development tool.</p>",
+  "folder" : "topic03",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " ES6 top-up. ",
+  "img" : "ES6.jpg",
+  "videoid" : "none",
+  "objectives" : "<p>A brief look at some ES6 features necessary for dealing with the React framework.</p>",
+  "folder" : "talk-1",
+  "link" : "ES6.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Introduction to React and Storybook. ",
+  "img" : "React.png",
+  "videoid" : "none",
+  "objectives" : "<p>Examine the basics of React&#39;s component model, including declaration, JSX, props, composition, iteration. Introduce the Storybook development tool.</p>",
+  "folder" : "talk-2",
+  "link" : "React.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab-React_Basics",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>This lab guides you through the basic concepts of ReactJS by completing a series of exercises aimed at producing a set of simple UI components. Also, a first look at create-react-app tool.</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "archive",
+  "title" : "Resources. ",
+  "img" : "archive.jpg",
+  "videoid" : "",
+  "objectives" : "<p>Two zips includes: ES6 samples and UI Description samples.</p>",
+  "folder" : "archive",
+  "link" : "archive.zip",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : " React Component model. ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "<p>Explore React&#39;s component model in more detail.</p>",
+  "folder" : "topic04",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " React Component model. ",
+  "img" : "Component.png",
+  "videoid" : "none",
+  "objectives" : "<p>A look at React&#39;s data flow patterns and lifecycle hooks.</p>",
+  "folder" : "talk-1",
+  "link" : "Component.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab_React_Data_Flow",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Setup the FilteredFriends applications to illustrate the basic <strong>data flow</strong> design patterns promoted by ReactJS.</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab_Static_React_Apps",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>Over the coming weeks we will build three React apps in parallel. A static version of each is the target of this lab.</p>",
+  "folder" : "book-2",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "archive",
+  "title" : "Resources. ",
+  "img" : "archive.jpg",
+  "videoid" : "",
+  "objectives" : "<p>The Counter example</p>",
+  "folder" : "archive",
+  "link" : "archive.zip",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : " Thinking in React. ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "<p>Explain the design and development process promoted by the React designers - Thinking in React.</p>",
+  "folder" : "topic05",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Thinking in React. ",
+  "img" : "Design.png",
+  "videoid" : "none",
+  "objectives" : "<p>Explain the design and development process promoted by the React designers - Thinking in React.</p>",
+  "folder" : "talk-1",
+  "link" : "Design.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " ES6 top-up. ",
+  "img" : "ES6.jpg",
+  "videoid" : "none",
+  "objectives" : "<p>A brief look at some more ES6 features useful for cleaner JS development.</p>",
+  "folder" : "talk-2",
+  "link" : "ES6.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab-Interactive_Apps",
+  "img" : "img/main.jpg",
+  "videoid" : "none",
+  "objectives" : "<p>Continue the development of the three SPAs by adding <strong>statefulness</strong> and making them <strong>interactive and dynamic</strong>.</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "archive",
+  "title" : "Resources. ",
+  "img" : "archive.jpg",
+  "videoid" : "",
+  "objectives" : "<p>ES6 sample code snippets.</p>",
+  "folder" : "archive",
+  "link" : "archive.zip",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : " React Routing. ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "<p>Routing (or Navigation) in a React app is implemented using a separate module, however, it is fully aligned with React&#39;s core design principles.</p>",
+  "folder" : "topic06",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Routing. ",
+  "img" : "Routing.png",
+  "videoid" : "none",
+  "objectives" : "<p>The Router follows the principles of React core in that it promotes a declarative,programming model, using component composition and the &#39;event -&gt; state change -&gt; render&#39; process.</p>",
+  "folder" : "talk-1",
+  "link" : "Routing.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Functional components. ",
+  "img" : "SFC.png",
+  "videoid" : "none",
+  "objectives" : "<p>Stateless components can be implemented as functions rather than classes.</p>",
+  "folder" : "talk-2",
+  "link" : "SFC.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab_React_Routing",
+  "img" : "img/main.jpg",
+  "videoid" : "none",
+  "objectives" : "<p>In this lab we add <strong>routing</strong> to the apps being developed over the previous two lab exercises. Only the Phone Catalogue and Hacker News apps require routing logic.</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "archive",
+  "title" : "Resources. ",
+  "img" : "archive.jpg",
+  "videoid" : "",
+  "objectives" : "<p>Routing samples..</p>",
+  "folder" : "archive",
+  "link" : "archive.zip",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : "Introduction to Node.js ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "<p>Node.js, Remote Repos, &amp; Asynchronous Javascript</p>",
+  "folder" : "topic07",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Git Overview ",
+  "img" : "git.jpg",
+  "videoid" : "PNRsX_Rii1Y",
+  "objectives" : "<p>This talk provides a brief git overview - just enought to get through the assignments and labs!</p>",
+  "folder" : "talk-1",
+  "link" : "git.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : "Node ",
+  "img" : "node.png",
+  "videoid" : "none",
+  "objectives" : "<p>This topic provides an introduction to Node and Express. You will cover Server-side Javascript, event-driven web servers and the Express package.</p>",
+  "folder" : "talk-3",
+  "link" : "node.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "node_lab1",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>This lab introduces <strong>node.js</strong> as a server-side technology. You will use node.js to run javascript programs on the &quot;server-side&quot; which are capable of servicing HTTP requests. You will learn how to:</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : " Web APIs ",
+  "img" : "topic.jpg",
+  "videoid" : "",
+  "objectives" : "<p>This topic explores API design and implementation using the Express web application framework.</p>",
+  "folder" : "topic08",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Async Programming ",
+  "img" : "promises.png",
+  "videoid" : "none",
+  "objectives" : "<p>This topic examines asynchronous programming styles using Callback functions, Promises and Async/Await.</p>",
+  "folder" : "talk-0",
+  "link" : "promises.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Web APIs using Express ",
+  "img" : "APIs.jpg",
+  "videoid" : "NgyKjud8uvE",
+  "objectives" : "<p>This topic explores API design and implementation using the Express web application framework.</p>",
+  "folder" : "talk-1",
+  "link" : "APIs.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "node_lab2",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>This lab uses Express implement APIs for the contact and Hacker News examples.  In this lab you will use routing, parameterise URLs, and parsing Middleware.</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : " Mongo and Mongoose ",
+  "img" : "topic.jpg",
+  "videoid" : "",
+  "objectives" : "<p>Mongo is a NoSQL Database. Mongoose provides elegant Mongodb object modelling in Node.js. This topic explores how to use both in Express apps.</p>",
+  "folder" : "topic09",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " MongoDB and Mongoose ",
+  "img" : "mongoDB.png",
+  "videoid" : "FF50CrdQdgo",
+  "objectives" : "<p>This topic introduces MongoDB and Mongoose, an object modeling tool designed to work in an asynchronous environment.</p>",
+  "folder" : "talk-1",
+  "link" : "mongoDB.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "node-lab3",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>This lab introduces Mongoose, a simple way of interacting with your Mongo database.</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : " Introduction to React and Storybook. ",
+  "img" : "topic.png",
+  "videoid" : "",
+  "objectives" : "<p>Examine the basics of React&#39;s component model, including class declaration, JSX, props, composition, iteration. Introduce the Storybook development tool.</p>",
+  "folder" : "topic12",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " ES6 top-up. ",
+  "img" : "ES6.jpg",
+  "videoid" : "none",
+  "objectives" : "<p>A brief look at some ES6 features necessary for dealing with the React framework.</p>",
+  "folder" : "talk-1",
+  "link" : "ES6.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Introduction to React and Storybook. ",
+  "img" : "React.png",
+  "videoid" : "none",
+  "objectives" : "<p>Examine the basics of React&#39;s component model, including declaration, JSX, props, composition, iteration. Introduce the Storybook development tool.</p>",
+  "folder" : "talk-2",
+  "link" : "React.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Lab-React_Basics",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>This lab guides you through the basic concepts of ReactJS by completing a series of exercises aimed at producing a set of simple UI components. Also, a first look at create-react-app tool.</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "archive",
+  "title" : "Resources. ",
+  "img" : "archive.jpg",
+  "videoid" : "",
+  "objectives" : "<p>Two zips includes: ES6 samples and UI Description samples.</p>",
+  "folder" : "archive",
+  "link" : "archive.zip",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
+  "title" : " Assignments. ",
+  "img" : "topic.jpg",
+  "videoid" : "",
+  "objectives" : "<p>Module assignment specifications.</p>",
+  "folder" : "topic13",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Assignment1. ",
+  "img" : "Assignment1.png",
+  "videoid" : "none",
+  "objectives" : "<p>Design and develop a React SPA that demonstrates the frameworks feature set.</p>",
+  "folder" : "talk-1",
+  "link" : "Assignment1.pdf",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  }
+ ]
+  }
+
