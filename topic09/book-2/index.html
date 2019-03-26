@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html">  Mongo and Mongoose  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="Optional Simple-Authentication">
+          Optional Simple-Authentication
+        </a>
+      
+        <a class="item" data-tab="User-Model">
+          User-Model
+        </a>
+      
+        <a class="item" data-tab="Authentication">
+          Authentication
+        </a>
+      
+        <a class="item" data-tab="User-Session">
+          User-Session
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-1/index.html">Lab-01_JS_Objects </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-2/index.html">Lab-02_JS_functions </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic02/book-1/index.html">Lab-03_HTML_CSS </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic03/book-1/index.html">Lab-React_Basics </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-1/index.html">Lab_React_Data_Flow </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-2/index.html">Lab_Static_React_Apps </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic05/book-1/index.html">Lab-Interactive_Apps </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic06/book-1/index.html">Lab_React_Routing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic07/book-1/index.html">node_lab1 </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic08/book-1/index.html">node_lab2 </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic09/book-1/index.html">node-lab3 </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic09/book-2/index.html">Optional Simple-Authentication </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="Optional Simple-Authentication">
+            <h1>User Authentication using methods</h1>
+<p>This lab improves the Hacker News API to demonstrate using methods in Mongoose to create a simple authentication middlewared function.</p>
+<p>You will update the Hacker News API to include the following:</p>
+<ul>
+<li>A User Model using static and instance methods.</li>
+<li>A <code>/api/users</code> route to allow users to authenticate.</li>
+<li>Express-Sessions package to manage/track user session</li>
+<li>Athentication middleware to block access to the <code>/api/posts</code> for unauthenicated users.</li>
+<li>Update the Hacker News model to use referencing.</li>
+</ul>
+<h2>Initial set up</h2>
+<p>This exercise assumes you have finished the last lab. Make sure to commit your last changes to git before proceeding.</p>
+<ul>
+<li>Install <a href="https://www.npmjs.com/package/express-session">express-session</a> as a development dependency into the root of the Express application:</li>
+</ul>
+<pre><code class="lang-bash">npm install --save express-session</code></pre>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="User-Model">
+            <h1>User API.</h1>
+<ul>
+<li>Create a new folder <em>/api/users/</em> in the root project folder of the Node Express app. In this folder, create a new file called <em>userModel.js</em> and enter the following code:</li>
+</ul>
+<pre><code class="lang-javascript">import mongoose from &#39;mongoose&#39;;
+
+const Schema = mongoose.Schema;
+const UserSchema = new Schema({
+  username: { type: String, unique: true, required: true},
+  password: {type: String, required: true },
+});
+
+UserSchema.statics.findByUserName = function(username) {
+  return this.findOne({ username: username});
+};
+
+UserSchema.methods.comparePassword = function (candidatePassword) {
+  const isMatch = this.password === candidatePassword;
+  if (!isMatch) {
+    throw new Error(&#39;Password mismatch&#39;);
+  }
+  return this;
+};
+
+export default mongoose.model(&#39;User&#39;, UserSchema);</code></pre>
+<p>Ths above code includes a static method <code>findByUserName</code>  for querying the model using username. It also inlcudes a instance method <code>comparePassword</code> that allows a simple password comparison.</p>
+<h2>Users API</h2>
+<p>For now you will just create a &quot;get all&quot; users and compare/authenicate user route. </p>
+<ul>
+<li>In <em>/api/posts</em> directory, create a new file called <em>index.js</em> and enter the following code:</li>
+</ul>
+<pre><code class="lang-javascript">import express from &#39;express&#39;;
+import User from &#39;./userModel&#39;;
+import asyncHandler from &#39;express-async-handler&#39;;
+
+const router = express.Router(); // eslint-disable-line
+
+// Get all users, using try/catch to handle errors
+router.get(&#39;/&#39;, asyncHandler(async (req, res) =&gt; {
+    const contacts = await User.find();
+    res.status(200).json(contacts);
+}));
+
+// authenticate a user, using async handler
+router.post(&#39;/&#39;, asyncHandler(async (req, res) =&gt; {
+    if (!req.body.username || !req.body.password) {
+        res.status(401).send(&#39;authentication failed&#39;);
+    } else {
+        const user = await User.findByUserName(req.body.username);
+        if (user.comparePassword(req.body.password)) {
+            req.session.user = req.body.username;
+            req.session.authenticated = true;
+            res.status(200).end(&quot;authentication success!&quot;);
+        } else {
+            res.status(401).end(&#39;authentication failed&#39;);
+        }
+
+    }
+}));
+
+export default router;</code></pre>
+<h3>Seed DB with Users</h3>
+<ul>
+<li>In the root directory of the Node Express app, create a new file called <em>userData.js</em> and add the following code: </li>
+</ul>
+<pre><code class="lang-javascript">import userModel from &#39;./api/users/userModel&#39;;
+
+const users = [
+  {
+    &#39;username&#39;: &#39;user1&#39;,
+    &#39;password&#39;: &#39;test1&#39;,
+  },
+  {
+    &#39;username&#39;: &#39;user2&#39;,
+    &#39;password&#39;: &#39;test2&#39;,
+  },
+];
+
+
+export default async function loadUsers() {
+  console.log(&#39;load user Data&#39;);
+    try {
+
+      await userModel.deleteMany();
+      await userModel.collection.insertMany(users);
+      console.info(`${users.length} users were successfully stored.`);
+    } catch (err) {
+      console.error(`failed to Load user Data: ${err}`);
+    }
+  }</code></pre>
+<p>  This script will seed a User collection in your MongoDB.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Authentication">
+            <h2>Authentication Middleware</h2>
+<p>Create a new script called <em>authenicate</em> in the root folder and add the following contents:</p>
+<pre><code class="lang-javascript">import User from &#39;./api/users/userModel&#39;;
+// Authentication and Authorization Middleware
+export default async (req, res, next) =&gt; {
+  if (req.session &amp;&amp; req.session.authenticated) {
+    let user = await User.findByUserName(req.session.user);
+    if (!user)
+      return res.status(401).end(&#39;unauthorised&#39;);
+    next();
+  } else {
+    return res.status(401).end(&#39;unauthorised&#39;);
+  }
+};</code></pre>
+<p>This script checks the <code>req.session.user</code> exists and that the <code>req.session.authenicated</code> is set to true before calling the next middleware function.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="User-Session">
+            <h2>Authentication Middleware</h2>
+<p>Create a new script called <em>authenicate.sj</em> in the root folder of the Node Express app and add the following contents:</p>
+<pre><code class="lang-javascript">import User from &#39;./api/users/userModel&#39;;
+// Authentication and Authorization Middleware
+export default async (req, res, next) =&gt; {
+  if (req.session &amp;&amp; req.session.authenticated) {
+    let user = await User.findByUserName(req.session.user);
+    if (!user)
+      return res.status(401).end(&#39;unauthorised&#39;);
+    next();
+  } else {
+    return res.status(401).end(&#39;unauthorised&#39;);
+  }
+};</code></pre>
+<p>This script checks the <code>req.session.user</code> exists and that the <code>req.session.authenicated</code> is set to true before calling the next middleware function. </p>
+<p>Next, we need to update the apps <em>index.js</em>.</p>
+<h2>Express Session</h2>
+<p>Now the root <em>index.js</em> file will need to be updated to incorporate the :</p>
+<blockquote>
+<p>Express Session middleware.<br>The new User Route.<br>The Authenication middleware.</p>
+</blockquote>
+<ul>
+<li>Replace <em>index.js</em> in the root folder to unclude <strong>express-session</strong> middleware:</li>
+</ul>
+<pre><code class="lang-javascript">import dotenv from &#39;dotenv&#39;;
+import express from &#39;express&#39;;
+import postsRouter from &#39;./api/posts&#39;;
+import bodyParser from &#39;body-parser&#39;;
+import loadPosts from &#39;./postData&#39;;
+import loadUsers from &#39;./userData&#39;;
+import &#39;./db&#39;;
+import usersRouter from &#39;./api/users&#39;;
+import session from &#39;express-session&#39;;
+import authenticate from &#39;./authenticate&#39;;
+
+dotenv.config();
+
+const app = express();
+
+const port = process.env.PORT;
+
+if (process.env.seedDb) {
+  loadPosts();
+  loadUsers();
+}
+//session middleware
+app.use(session({
+  secret: &#39;ilikecake&#39;,
+  resave: true,
+  saveUninitialized: true
+}));
+
+//configure body-parser
+app.use(bodyParser.json());
+
+app.use(&#39;/api/posts&#39;, authenticate, postsRouter);
+//User router
+app.use(&#39;/api/users&#39;, usersRouter);
+
+app.listen(port, () =&gt; {
+  console.info(`Server running at ${port}`);
+});</code></pre>
+<p>Run the Express app and check the authentication function using Postman as follows.</p>
+<ul>
+<li><p>Try to access <code>/api/posts</code>. You should be denied access:
+<img src="./img/p1.png" alt="Posts - unauthorised"></p>
+</li>
+<li><p>Authenticate by doing a HTTP POST to <code>/api/users</code> with a json payload matching a user entry in the db as follows:
+<img src="./img/p2.png" alt="Posts - unauthorised"></p>
+</li>
+<li><p>Now retry the <code>/api/posts</code> route. You should now be able to access this API.
+<img src="./img/p3.png" alt="Posts - unauthorised"></p>
+</li>
+</ul>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>
