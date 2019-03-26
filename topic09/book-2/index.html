@@ -111,12 +111,8 @@ html, body {
           User-Model
         </a>
       
-        <a class="item" data-tab="Authentication">
-          Authentication
-        </a>
-      
-        <a class="item" data-tab="User-Session">
-          User-Session
+        <a class="item" data-tab="Authentication-Session">
+          Authentication-Session
         </a>
       
     </div>
@@ -333,26 +329,7 @@ export default async function loadUsers() {
 
           </div>
         
-          <div class="ui tab segment lab" data-tab="Authentication">
-            <h2>Authentication Middleware</h2>
-<p>Create a new script called <em>authenicate</em> in the root folder and add the following contents:</p>
-<pre><code class="lang-javascript">import User from &#39;./api/users/userModel&#39;;
-// Authentication and Authorization Middleware
-export default async (req, res, next) =&gt; {
-  if (req.session &amp;&amp; req.session.authenticated) {
-    let user = await User.findByUserName(req.session.user);
-    if (!user)
-      return res.status(401).end(&#39;unauthorised&#39;);
-    next();
-  } else {
-    return res.status(401).end(&#39;unauthorised&#39;);
-  }
-};</code></pre>
-<p>This script checks the <code>req.session.user</code> exists and that the <code>req.session.authenicated</code> is set to true before calling the next middleware function.</p>
-
-          </div>
-        
-          <div class="ui tab segment lab" data-tab="User-Session">
+          <div class="ui tab segment lab" data-tab="Authentication-Session">
             <h2>Authentication Middleware</h2>
 <p>Create a new script called <em>authenicate.sj</em> in the root folder of the Node Express app and add the following contents:</p>
 <pre><code class="lang-javascript">import User from &#39;./api/users/userModel&#39;;
