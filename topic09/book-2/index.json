@@ -1,0 +1,41 @@
+
+
+
+  {
+  
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Optional Simple-Authentication",
+  "img" : "",
+  "videoid" : "none",
+  "objectives" : "<p>This lab improves the Hacker News API to demonstrate using methods in Mongoose to create a simple authentication middlewared function.</p>",
+  "folder" : "book-2",
+  "link" : "index.html",
+  "los": [
+   ]
+,
+  "chapters" : [
+  
+    {
+    "title": "# User Authentication using methods",
+    "shortTitle": "Optional Simple-Authentication",
+    "contentMd" : "# User Authentication using methods\r\n\r\nThis lab improves the Hacker News API to demonstrate using methods in Mongoose to create a simple authentication middlewared function.\r\n\r\nYou will update the Hacker News API to include the following:\r\n\r\n- A User Model using static and instance methods.\r\n- A ``/api/users`` route to allow users to authenticate.\r\n- Express-Sessions package to manage/track user session\r\n- Athentication middleware to block access to the ``/api/posts`` for unauthenicated users.\r\n- Update the Hacker News model to use referencing.\r\n\r\n## Initial set up\r\n\r\nThis exercise assumes you have finished the last lab. Make sure to commit your last changes to git before proceeding.\r\n\r\n+ Install [express-session](https://www.npmjs.com/package/express-session) as a development dependency into the root of the Express application:\r\n\r\n```bash\r\nnpm install --save express-session\r\n```"
+    },
+  
+    {
+    "title": "# User API.",
+    "shortTitle": "User-Model",
+    "contentMd" : "# User API.\r\n\r\n+ Create a new folder */api/users/* in the root project folder of the Node Express app. In this folder, create a new file called *userModel.js* and enter the following code:\r\n\r\n```javascript\r\nimport mongoose from 'mongoose';\r\n\r\nconst Schema = mongoose.Schema;\r\nconst UserSchema = new Schema({\r\n  username: { type: String, unique: true, required: true},\r\n  password: {type: String, required: true },\r\n});\r\n\r\nUserSchema.statics.findByUserName = function(username) {\r\n  return this.findOne({ username: username});\r\n};\r\n\r\nUserSchema.methods.comparePassword = function (candidatePassword) {\r\n  const isMatch = this.password === candidatePassword;\r\n  if (!isMatch) {\r\n    throw new Error('Password mismatch');\r\n  }\r\n  return this;\r\n};\r\n\r\nexport default mongoose.model('User', UserSchema);\r\n```\r\n\r\nThs above code includes a static method ``findByUserName``  for querying the model using username. It also inlcudes a instance method ``comparePassword`` that allows a simple password comparison.\r\n\r\n\r\n## Users API\r\n\r\nFor now you will just create a \"get all\" users and compare/authenicate user route. \r\n\r\n+ In */api/posts* directory, create a new file called *index.js* and enter the following code:\r\n\r\n```javascript\r\nimport express from 'express';\r\nimport User from './userModel';\r\nimport asyncHandler from 'express-async-handler';\r\n\r\nconst router = express.Router(); // eslint-disable-line\r\n\r\n// Get all users, using try/catch to handle errors\r\nrouter.get('/', asyncHandler(async (req, res) => {\r\n    const contacts = await User.find();\r\n    res.status(200).json(contacts);\r\n}));\r\n\r\n// authenticate a user, using async handler\r\nrouter.post('/', asyncHandler(async (req, res) => {\r\n    if (!req.body.username || !req.body.password) {\r\n        res.status(401).send('authentication failed');\r\n    } else {\r\n        const user = await User.findByUserName(req.body.username);\r\n        if (user.comparePassword(req.body.password)) {\r\n            req.session.user = req.body.username;\r\n            req.session.authenticated = true;\r\n            res.status(200).end(\"authentication success!\");\r\n        } else {\r\n            res.status(401).end('authentication failed');\r\n        }\r\n\r\n    }\r\n}));\r\n\r\nexport default router;\r\n```\r\n\r\n### Seed DB with Users\r\n\r\n+ In the root directory of the Node Express app, create a new file called *userData.js* and add the following code: \r\n\r\n```javascript\r\nimport userModel from './api/users/userModel';\r\n\r\nconst users = [\r\n  {\r\n    'username': 'user1',\r\n    'password': 'test1',\r\n  },\r\n  {\r\n    'username': 'user2',\r\n    'password': 'test2',\r\n  },\r\n];\r\n\r\n\r\nexport default async function loadUsers() {\r\n  console.log('load user Data');\r\n    try {\r\n      \r\n      await userModel.deleteMany();\r\n      await userModel.collection.insertMany(users);\r\n      console.info(`${users.length} users were successfully stored.`);\r\n    } catch (err) {\r\n      console.error(`failed to Load user Data: ${err}`);\r\n    }\r\n  }\r\n```\r\n\r\n  This script will seed a User collection in your MongoDB.\r\n"
+    },
+  
+    {
+    "title": "## Authentication Middleware",
+    "shortTitle": "Authentication-Session",
+    "contentMd" : "## Authentication Middleware\r\n\r\nCreate a new script called *authenicate.sj* in the root folder of the Node Express app and add the following contents:\r\n\r\n```javascript\r\nimport User from './api/users/userModel';\r\n// Authentication and Authorization Middleware\r\nexport default async (req, res, next) => {\r\n  if (req.session && req.session.authenticated) {\r\n    let user = await User.findByUserName(req.session.user);\r\n    if (!user)\r\n      return res.status(401).end('unauthorised');\r\n    next();\r\n  } else {\r\n    return res.status(401).end('unauthorised');\r\n  }\r\n};\r\n```\r\n\r\nThis script checks the ``req.session.user`` exists and that the ``req.session.authenicated`` is set to true before calling the next middleware function. \r\n\r\nNext, we need to update the apps *index.js*.\r\n\r\n## Express Session\r\n\r\nNow the root *index.js* file will need to be updated to incorporate the :\r\n\r\n> Express Session middleware.  \r\n> The new User Route.  \r\n> The Authenication middleware.\r\n\r\n\r\n+ Replace *index.js* in the root folder to unclude **express-session** middleware:\r\n\r\n```javascript\r\nimport dotenv from 'dotenv';\r\nimport express from 'express';\r\nimport postsRouter from './api/posts';\r\nimport bodyParser from 'body-parser';\r\nimport loadPosts from './postData';\r\nimport loadUsers from './userData';\r\nimport './db';\r\nimport usersRouter from './api/users';\r\nimport session from 'express-session';\r\nimport authenticate from './authenticate';\r\n\r\ndotenv.config();\r\n\r\nconst app = express();\r\n\r\nconst port = process.env.PORT;\r\n\r\nif (process.env.seedDb) {\r\n  loadPosts();\r\n  loadUsers();\r\n}\r\n//session middleware\r\napp.use(session({\r\n  secret: 'ilikecake',\r\n  resave: true,\r\n  saveUninitialized: true\r\n}));\r\n\r\n//configure body-parser\r\napp.use(bodyParser.json());\r\n\r\napp.use('/api/posts', authenticate, postsRouter);\r\n//User router\r\napp.use('/api/users', usersRouter);\r\n\r\napp.listen(port, () => {\r\n  console.info(`Server running at ${port}`);\r\n});\r\n```\r\n\r\nRun the Express app and check the authentication function using Postman as follows.\r\n\r\n+ Try to access ``/api/posts``. You should be denied access:\r\n![Posts - unauthorised](./img/p1.png)\r\n\r\n+ Authenticate by doing a HTTP POST to ``/api/users`` with a json payload matching a user entry in the db as follows:\r\n![Posts - unauthorised](./img/p2.png)\r\n\r\n+ Now retry the ``/api/posts`` route. You should now be able to access this API.\r\n![Posts - unauthorised](./img/p3.png)\r\n\r\n"
+    }
+  
+  ]
+  }
+

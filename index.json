@@ -18,7 +18,6 @@
 ,
   "topics" : [  {
     
-    
   
     "properties" : {},
   
@@ -51,7 +50,6 @@
   },
  {
     
-    
   
     "properties" : {},
   
@@ -70,11 +68,11 @@
   
   "type" : "talk",
   "title" : " JavaScript Fundamentals. ",
-  "img" : "JavaScript.png",
+  "img" : "javascript.png",
   "videoid" : "tmy-6RHjEnc",
   "objectives" : "<p>The syntax and semantics of Javascript for data representation and behaviour representatio,</p>",
   "folder" : "talk-1",
-  "link" : "JavaScript.pdf",
+  "link" : "javascript.pdf",
   "los": [
    ]
 
@@ -131,7 +129,6 @@
 
   },
  {
-    
     
   
     "properties" : {},
@@ -213,7 +210,6 @@
   },
  {
     
-    
   
     "properties" : {},
   
@@ -293,7 +289,6 @@
 
   },
  {
-    
     
   
     "properties" : {},
@@ -375,7 +370,6 @@
   },
  {
     
-    
   
     "properties" : {},
   
@@ -455,7 +449,6 @@
 
   },
  {
-    
     
   
     "properties" : {},
@@ -537,7 +530,6 @@
   },
  {
     
-    
   
     "properties" : {},
   
@@ -601,7 +593,6 @@
 
   },
  {
-    
     
   
     "properties" : {},
@@ -667,7 +658,6 @@
   },
  {
     
-    
   
     "properties" : {},
   
@@ -700,6 +690,22 @@
   
     "properties" : {},
   
+  "type" : "talk",
+  "title" : " Extra Video - Methods and Referencing ",
+  "img" : "mongoose2.png",
+  "videoid" : "Lu8JzfqrC2A",
+  "objectives" : "<p>Extra material not covered in the last lecture.</p>",
+  "folder" : "talk-2",
+  "link" : "mongoose2.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
   "type" : "lab",
   "title" : "node-lab3",
   "img" : "img/main.png",
@@ -710,12 +716,27 @@
   "los": [
    ]
 
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Optional Simple-Authentication",
+  "img" : "",
+  "videoid" : "none",
+  "objectives" : "<p>This lab improves the Hacker News API to demonstrate using methods in Mongoose to create a simple authentication middlewared function.</p>",
+  "folder" : "book-2",
+  "link" : "index.html",
+  "los": [
+   ]
+
     } 
    ]
 
   },
  {
-    
     
   
     "properties" : {},
