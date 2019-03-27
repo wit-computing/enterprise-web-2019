@@ -7,7 +7,7 @@
     "properties" : {},
   
   "type" : "lab",
-  "title" : "Optional Simple-Authentication",
+  "title" : "Lab-Optional-Sessions",
   "img" : "",
   "videoid" : "none",
   "objectives" : "<p>This lab improves the Hacker News API to demonstrate using methods in Mongoose to create a simple authentication middlewared function.</p>",
@@ -20,7 +20,7 @@
   
     {
     "title": "# User Authentication using methods",
-    "shortTitle": "Optional Simple-Authentication",
+    "shortTitle": "Lab-Optional-Sessions",
     "contentMd" : "# User Authentication using methods\r\n\r\nThis lab improves the Hacker News API to demonstrate using methods in Mongoose to create a simple authentication middlewared function.\r\n\r\nYou will update the Hacker News API to include the following:\r\n\r\n- A User Model using static and instance methods.\r\n- A ``/api/users`` route to allow users to authenticate.\r\n- Express-Sessions package to manage/track user session\r\n- Athentication middleware to block access to the ``/api/posts`` for unauthenicated users.\r\n- Update the Hacker News model to use referencing.\r\n\r\n## Initial set up\r\n\r\nThis exercise assumes you have finished the last lab. Make sure to commit your last changes to git before proceeding.\r\n\r\n+ Install [express-session](https://www.npmjs.com/package/express-session) as a development dependency into the root of the Express application:\r\n\r\n```bash\r\nnpm install --save express-session\r\n```"
     },
   

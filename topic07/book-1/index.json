@@ -7,10 +7,10 @@
     "properties" : {},
   
   "type" : "lab",
-  "title" : "node_lab1",
+  "title" : "Lab-node1",
   "img" : "img/main.png",
   "videoid" : "none",
-  "objectives" : "<p>This lab introduces <strong>node.js</strong> as a server-side technology. You will use node.js to run javascript programs on the &quot;server-side&quot; which are capable of servicing HTTP requests. You will learn how to:</p>",
+  "objectives" : "<p>This lab introduces <strong>node.js</strong> as a server-side technology. You will use node.js to run javascript programs on the &quot;server-side&quot; which are capable of servicing HTTP requests. </p>",
   "folder" : "book-1",
   "link" : "index.html",
   "los": [
@@ -20,8 +20,8 @@
   
     {
     "title": "# Node and Express 1",
-    "shortTitle": "node_lab1",
-    "contentMd" : "# Node and Express 1\r\n\r\nThis lab introduces **node.js** as a server-side technology. You will use node.js to run javascript programs on the \"server-side\" which are capable of servicing HTTP requests. You will learn how to:\r\n\r\n- Create and use a remote repo on Github\r\n- Set node up as a HTTP server.\r\n- Use Node's built in http module to create a simple HTTP server.\r\n- Node's packaging system.\r\n- How to host your existing web resources in a Node.js HTTP server.\r\n- How to do a simple route for a HTTP request.\r\n"
+    "shortTitle": "Lab-node1",
+    "contentMd" : "# Node and Express 1\r\n\r\nThis lab introduces **node.js** as a server-side technology. You will use node.js to run javascript programs on the \"server-side\" which are capable of servicing HTTP requests. \r\n\r\nYou will learn how to:\r\n\r\n- Create and use a remote repo on Github\r\n- Set node up as a HTTP server.\r\n- Use Node's built in http module to create a simple HTTP server.\r\n- Node's packaging system.\r\n- How to host your existing web resources in a Node.js HTTP server.\r\n- How to do a simple route for a HTTP request.\r\n"
     },
   
     {

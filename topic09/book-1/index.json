@@ -7,7 +7,7 @@
     "properties" : {},
   
   "type" : "lab",
-  "title" : "node-lab3",
+  "title" : "Lab-node3",
   "img" : "img/main.png",
   "videoid" : "none",
   "objectives" : "<p>This lab introduces Mongoose, a simple way of interacting with your Mongo database.</p>",
@@ -20,7 +20,7 @@
   
     {
     "title": "# Mongoose",
-    "shortTitle": "node-lab3",
+    "shortTitle": "Lab-node3",
     "contentMd" : "# Mongoose\r\n\r\nThis lab introduces Mongoose, a simple way of interacting with your Mongo database.\r\n"
     },
   

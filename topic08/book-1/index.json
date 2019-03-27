@@ -7,7 +7,7 @@
     "properties" : {},
   
   "type" : "lab",
-  "title" : "node_lab2",
+  "title" : "Lab-node2",
   "img" : "img/main.png",
   "videoid" : "none",
   "objectives" : "<p>This lab uses Express implement APIs for the contact and Hacker News examples.  In this lab you will use routing, parameterise URLs, and parsing Middleware.</p>",
@@ -20,7 +20,7 @@
   
     {
     "title": "##Node and Express 2",
-    "shortTitle": "node_lab2",
+    "shortTitle": "Lab-node2",
     "contentMd" : "##Node and Express 2\r\n\r\nThis lab uses Express implement APIs for the contact and Hacker News examples.  In this lab you will use routing, parameterise URLs, and parsing Middleware.\r\n"
     },
   
