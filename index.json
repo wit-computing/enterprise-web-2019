@@ -745,7 +745,7 @@
   "title" : " Authentication using JWT and Passport ",
   "img" : "talk-01/authentication.jpeg",
   "videoid" : "",
-  "objectives" : "<p>This topic descibes how Java Web Tokens and Passport.js can be used for authentication in Express web APIs.</p>",
+  "objectives" : "<p>This topic descibes how JSON Web Tokens and Passport.js can be used for authentication in Express web APIs.</p>",
   "folder" : "topic10",
   "link" : "index.html",
   "los": [
