@@ -742,6 +742,54 @@
     "properties" : {},
   
   "type" : "topic",
+  "title" : " Authentication using JWT and Passport ",
+  "img" : "talk-01/authentication.jpeg",
+  "videoid" : "",
+  "objectives" : "<p>This topic descibes how Java Web Tokens and Passport.js can be used for authentication in Express web APIs.</p>",
+  "folder" : "topic10",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Authentication using Express, JWT, and Passport ",
+  "img" : "authentication.jpeg",
+  "videoid" : "none",
+  "objectives" : "<p>This talk descibes how Java Web Tokens and Passport.js can be used for authentication in Express web APIs.</p>",
+  "folder" : "talk-01",
+  "link" : "authentication.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "Authentication-JWT",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>This lab implements a JWT-based Authentication strategy on the Hacker News solution from the previous lab.</p>",
+  "folder" : "book-01",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
   "title" : " Assignments. ",
   "img" : "topic.jpg",
   "videoid" : "",
