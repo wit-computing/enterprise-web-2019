@@ -757,7 +757,7 @@
   "type" : "talk",
   "title" : " Authentication using Express, JWT, and Passport ",
   "img" : "authentication.jpeg",
-  "videoid" : "none",
+  "videoid" : "KUHCyoKr--M",
   "objectives" : "<p>This talk descibes how Java Web Tokens and Passport.js can be used for authentication in Express web APIs.</p>",
   "folder" : "talk-01",
   "link" : "authentication.pdf",
