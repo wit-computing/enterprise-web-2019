@@ -812,6 +812,22 @@
   "los": [
    ]
 
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Assignment2 ",
+  "img" : "Assignment2.jpg",
+  "videoid" : "none",
+  "objectives" : "<p>Build and API for Assignment1 using Node, Express and MongoDB.</p>",
+  "folder" : "talk-2",
+  "link" : "Assignment2.pdf",
+  "los": [
+   ]
+
     } 
    ]
 

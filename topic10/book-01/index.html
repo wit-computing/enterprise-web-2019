@@ -794,19 +794,19 @@ In the next part, we will include a Login page to allow user authentication.</p>
 <ul>
 <li>In <em>/hackerNews/src/components</em>  folder, create a new folder called <strong>loginPage</strong> and add a file <strong>index.js</strong> with the following contents:</li>
 </ul>
-<pre><code class="lang-Javascript">import React, { Component } from &quot;react&quot;;
+<pre><code class="lang-Javascript">import React, {Component} from &quot;react&quot;;
 import * as api from &#39;../../api&#39;;
 import Auth from &#39;../../auth&#39;;
-import { Redirect } from &#39;react-router&#39;
+import {Redirect} from &#39;react-router&#39;
 
- class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: &quot;&quot;,
       password: &quot;&quot;,
       confirmpassword: &quot;&quot;,
-      authenticated:false,
+      authenticated: false,
       action: &quot;Log In&quot;
     };
   }
@@ -817,47 +817,49 @@ import { Redirect } from &#39;react-router&#39;
     });
   }
 
-  handleSubmit = event =&gt; {
-    event.preventDefault();
-  }
-
-  signupWasClickedCallback = async (event) =&gt; {
+  handleSignUp = async (event) =&gt; {
     try {
-        if (this.state.password !== this.state.comfirmpassword){ Error(&#39;Passwords do not match!&#39;);
+      if (this.state.password !== this.state.comfirmpassword) {
         alert(&#39;Passwords Must Match&#39;);
         console.log(&quot;failed&quot;)
-    }
-        else{
+      } else {
         const result = await api.signup(this.state.username, this.state.password);
-        this.setState({ authenticated: true })
-        }
-       // this.context.router.push(&#39;/&#39;)
-
+        this.setState({
+          authenticated: true
+        })
+      }
 
     } catch (e) {
-        alert(`Registration Failed ${e}`)
-        event.preventDefault();
+      alert(`Registration Failed ${e}`)
+      event.preventDefault();
     }
-};
+  };
 
-submitForm = event =&gt; {
-    console.log(&quot;submit&quot;)
+  submitForm = event =&gt; {
     event.preventDefault()
   }
 
-  loginWasClickedCallback =  async (event) =&gt; {
-    try {
-        const result = await api.login(this.state.username, this.state.password);
-        Auth.authenticateUser(result.token);
-        this.setState({ authenticated: true })
-    } catch (e) {
-        alert(`Authentication Failed: ${e}`)
-        event.preventDefault();
-    }
-};
+  validateForm = () =&gt; {
+    return this.state.username.length &gt; 0 &amp;&amp; this.state.password.length &gt; 0;
+  }
 
-switchView = event =&gt; {
-    this.setState({ action: event.target.value })
+  handleLogin = async (event) =&gt; {
+    try {
+      const result = await api.login(this.state.username, this.state.password);
+      Auth.authenticateUser(result.token);
+      this.setState({
+        authenticated: true
+      })
+    } catch (e) {
+      alert(`Authentication Failed: ${e}`)
+      event.preventDefault();
+    }
+  };
+
+  switchView = event =&gt; {
+    this.setState({
+      action: event.target.value
+    })
     event.preventDefault()
   }
 
@@ -876,26 +878,23 @@ switchView = event =&gt; {
     &lt;/div&gt; 
     &lt;div  className=&quot;form-group&quot;&gt;
         &lt;label&gt;Your password&lt;/label&gt;
-        &lt;input id=&quot;password&quot; className=&quot;form-control&quot; placeholder=&quot;******&quot; type=&quot;password&quot; onChange={this.handleChange}/&gt;
-
+      &lt;input id=&quot;password&quot; className=&quot;form-control&quot; placeholder=&quot;******&quot; type=&quot;password&quot; onChange={this.handleChange}/&gt;
         {this.state.action===&quot;Register&quot; &amp;&amp; &lt;div&gt;&lt;label&gt;Confirm password&lt;/label&gt;&lt;input id=&quot;comfirmpassword&quot; className=&quot;form-control&quot; placeholder=&quot;******&quot; type=&quot;password&quot; onChange={this.handleChange}/&gt;&lt;/div&gt;}
-    &lt;/div&gt; 
+    &lt;/div&gt;
     &lt;div className=&quot;form-group&quot;&gt;
-       {this.state.action===&quot;Log In&quot; &amp;&amp; &lt;button type=&quot;submit&quot;  className=&quot;btn btn-primary btn-block&quot; onClick={this.loginWasClickedCallback}&gt; Log In  &lt;/button&gt;}
-       {this.state.action===&quot;Register&quot; &amp;&amp; &lt;button type=&quot;submit&quot;  className=&quot;btn btn-primary btn-block&quot; onClick={this.signupWasClickedCallback}&gt; Register  &lt;/button&gt;}
-
-  &lt;div style={{float: &#39;left&#39;,paddingTop:10}}&gt;
-  {this.state.action===&quot;Log In&quot; &amp;&amp; &lt;button   type=&quot;submit&quot; onClick={this.switchView} className=&quot;btn btn-secondary&quot; value=&quot;Register&quot;&gt;Register&lt;/button&gt;}
-  {this.state.action===&quot;Register&quot; &amp;&amp; &lt;button type=&quot;submit&quot;  onClick={this.switchView} className=&quot;btn btn-secondary&quot; value=&quot;Log In&quot;&gt;Log In&lt;/button&gt;}
+      {this.state.action===&quot;Log In&quot; &amp;&amp; &lt;button type=&quot;submit&quot;  disabled={!this.validateForm()} className=&quot;btn btn-primary btn-block&quot; onClick={this.handleLogin}&gt; Log In  &lt;/button&gt;}
+      {this.state.action===&quot;Register&quot; &amp;&amp; &lt;button type=&quot;submit&quot; disabled={!this.validateForm()} className=&quot;btn btn-primary btn-block&quot; onClick={this.handleSignUp}&gt; Register  &lt;/button&gt;}
+      &lt;div style={{float: &#39;left&#39;,paddingTop:10}}&gt;
+        {this.state.action===&quot;Log In&quot; &amp;&amp; &lt;button   type=&quot;submit&quot;  onClick={this.switchView} className=&quot;btn btn-secondary&quot; value=&quot;Register&quot;&gt;Register&lt;/button&gt;}
+        {this.state.action===&quot;Register&quot; &amp;&amp; &lt;button type=&quot;submit&quot;   onClick={this.switchView} className=&quot;btn btn-secondary&quot; value=&quot;Log In&quot;&gt;Log In&lt;/button&gt;}
+      &lt;/div&gt;
+      &lt;div style={{float: &#39;right&#39;,paddingTop:10}}&gt;
+        &lt;button type=&quot;button&quot;  className=&quot;btn btn-secondary&quot; &gt;Forgot?&lt;/button&gt;
+      &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div style={{float: &#39;right&#39;,paddingTop:10}}&gt;
-    &lt;button type=&quot;button&quot;  className=&quot;btn btn-secondary&quot; &gt;Forgot?&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
 &lt;/form&gt;
 {authenticated &amp;&amp; (&lt;Redirect to={from || &#39;/&#39;}/&gt;)}
-&lt;/div&gt; 
+&lt;/div&gt;
     );
   }
 }
@@ -917,7 +916,7 @@ export default Login;</code></pre>
           &lt;Redirect from=&#39;*&#39; to=&#39;/&#39; /&gt;
 &lt;/Switch&gt;</code></pre>
 <ul>
-<li>Locate the render function in the HackerApp component and replce with the following so that the button is only visible if authentication fails.:</li>
+<li>Locate the render function in the HackerApp component and repalce with the following so that the app redirects to the login page if not authenitcated:</li>
 </ul>
 <pre><code class="lang-Javascript">render() {
         const posts = _.sortBy(this.state.posts, post =&gt;
