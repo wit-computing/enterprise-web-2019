@@ -790,6 +790,54 @@
     "properties" : {},
   
   "type" : "topic",
+  "title" : " Unit Testing APIs ",
+  "img" : "talk-1/Testing-Web-APIs.jpg",
+  "videoid" : "",
+  "objectives" : "<p>This topic introduces unit testing for web APIs, focussing on Mocha, Should and SuperTest.</p>",
+  "folder" : "topic11",
+  "link" : "index.html",
+  "los": [
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "talk",
+  "title" : " Testing Web APIs ",
+  "img" : "Testing-Web-APIs.jpg",
+  "videoid" : "none",
+  "objectives" : "<p>This talk covers API testing with Mocha, Should and SuperTest</p>",
+  "folder" : "talk-1",
+  "link" : "Testing-Web-APIs.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
+  "type" : "lab",
+  "title" : "api-testing-ES6",
+  "img" : "img/main.png",
+  "videoid" : "none",
+  "objectives" : "<p>This lab shows you how to test a Node API using Mocha, Should, Sinon, and SuperTest.</p>",
+  "folder" : "book-1",
+  "link" : "index.html",
+  "los": [
+   ]
+
+    } 
+   ]
+
+  },
+ {
+    
+  
+    "properties" : {},
+  
+  "type" : "topic",
   "title" : " Assignments. ",
   "img" : "topic.jpg",
   "videoid" : "",

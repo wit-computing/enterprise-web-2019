@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"
+          type="text/css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css"
+          rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+      
+
+body {
+  font-family: "Open Sans", "Helvetica", "Helvetica Neue",  "Arial", sans-serif;
+  font-size:90%;
+  color: black;
+}
+
+p {
+  margin: 0.5em;
+}
+
+pre code {
+  font-family: "Monaco";
+  font-size: 100%;
+}
+
+img {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin:10px;
+}
+
+h1, h2, h3 {
+  border-bottom:thin solid black;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+
+h1 {
+  font-style:italic;
+  font-size:130%;
+}
+
+h2 {
+  font-size:110%;
+}
+
+h3 {
+  font-size:100%;
+}
+
+
+
+      
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  background: white;
+  text-align: right;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+
+
+    </style>
+  </head>
+
+  
+  
+
+  <div class="ui fixed top pointing inverted stackable menu labmenu">
+    <header class="header item">
+      <i id="toc" class="sitemap icon"></i>
+      
+        <a href="../index.html">  Unit Testing APIs  </a>
+      
+    </header>
+    <div class="right tab-menu menu">
+      
+        <a class="item" data-tab="api-testing-ES6">
+          api-testing-ES6
+        </a>
+      
+        <a class="item" data-tab="refactor">
+          refactor
+        </a>
+      
+        <a class="item" data-tab="set-up">
+          set-up
+        </a>
+      
+        <a class="item" data-tab="integration-test">
+          integration-test
+        </a>
+      
+        <a class="item" data-tab="unit-testing">
+          unit-testing
+        </a>
+      
+        <a class="item" data-tab="unit-testing-stubbing">
+          unit-testing-stubbing
+        </a>
+      
+        <a class="item" data-tab="Reporting">
+          Reporting
+        </a>
+      
+    </div>
+  </div>
+
+
+  
+
+  <div class="ui pushable">
+    <div class="ui inverted labeled icon left inline vertical sidebar menu">
+      <br><br>
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-1/index.html">Lab-01_JS_Objects </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic01/book-2/index.html">Lab-02_JS_functions </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic02/book-1/index.html">Lab-03_HTML_CSS </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic03/book-1/index.html">Lab-React_Basics </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-1/index.html">Lab_React_Data_Flow </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic04/book-2/index.html">Lab_Static_React_Apps </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic05/book-1/index.html">Lab-Interactive_Apps </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic06/book-1/index.html">Lab_React_Routing </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic07/book-1/index.html">Lab-node1 </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic08/book-1/index.html">Lab-node2 </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic09/book-1/index.html">Lab-node3 </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic09/book-2/index.html">Lab-Optional-Sessions </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic10/book-01/index.html">Authentication-JWT </a>
+          
+        
+      
+        
+          
+            <a class="item"
+               href="https://wit-computing.github.io/enterprise-web-2019//topic11/book-1/index.html">api-testing-ES6 </a>
+          
+        
+      
+    </div>
+    <div class="pusher" tabindex="-1">
+      <div class="ui basic segment">
+        <br>
+        
+          <div class="ui tab segment lab" data-tab="api-testing-ES6">
+            <h1>API Testing Lab</h1>
+<p>This lab shows you how to test a Node API using Mocha, Should, Sinon, and SuperTest.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="refactor">
+            <h2>Hacker Refactor</h2>
+<p>You will now refactor the Hacker and Contact API with some improvements. This will then give us a reason to construct some tests</p>
+<h2>Seeding</h2>
+<p>We will consolodate the seeding data into the one module/location and use the <em>db.js</em> module to seed the db. This way we can simplify the main <em>index.js</em> file of the app.</p>
+<ul>
+<li><p>in the root folder of the Express application, creat a new folder called <em>seed</em></p>
+</li>
+<li><p>Create a new file called <em>hackerData.js</em> with the following content. </p>
+</li>
+</ul>
+<pre><code class="lang-javascript">import userModel from &#39;../api/users/userModel&#39;;
+import postModel from &#39;../api/posts/postsModel&#39;;
+
+const posts = [
+    {id: 1,
+      title: &#39;India - Tiger population sees 30% increase.&#39;,
+      link: &#39;http://www.bbc.com/news/world-asia-30896028&#39;,
+      user: &#39;&#39;,
+       comments: [],
+       upvotes: 10,
+     },
+    {
+       id: 2,
+       title: &#39;The button that is not.&#39;,
+       link: &#39;http://blog.nuclearsecrecy.com/2014/12/15/button-isnt/&#39;,
+       user: &#39;&#39;,
+       comments: [],
+       upvotes: 12,
+     },
+     {
+       id: 3,
+       title: &#39;Google Nears $1B Investment in SpaceX&#39;,
+       link: null,
+       user: &#39;&#39;,
+       comments: [],
+       upvotes: 12,
+     },
+     {
+       id: 4,
+       title: &#39;Coinbase Raises $75M from DFJ Growth, USAA, and More&#39;,
+       link: &#39;http://blog.coinbase.com/post/108642362357/coinbase-raises-75m-from-dfj-growth-usaa-nyse&#39;,
+       user: &#39;&#39;,
+       comments: [],
+       upvotes: 2,
+     },
+ ];
+
+const users = [{
+        &#39;username&#39;: &#39;user1&#39;,
+        &#39;password&#39;: &#39;test1&#39;,
+    },
+    {
+        &#39;username&#39;: &#39;user2&#39;,
+        &#39;password&#39;: &#39;test2&#39;,
+    },
+];
+
+export default async function loadHackerData() {
+
+    try {
+        await userModel.deleteMany();
+        //Save user data to db
+        const user1 = await new userModel(users[0]).save();
+        const user2 = await new userModel(users[1]).save();
+
+        //assign users randomly to each post
+        posts.forEach((post)=&gt;{post.user = ((Math.random&lt;0.5)?user1._id : user2._id)});
+
+
+        //Load posts data
+        await postModel.deleteMany();
+        await postModel.collection.insertMany(posts);
+        console.info(`${posts.length} posts were successfully stored.`);
+
+        console.info(`${users.length} users were successfully stored.`);
+    } catch (err) {
+        console.error(`failed to Load user Data: ${err}`);
+    }
+}</code></pre>
+<ul>
+<li><p>Move the contactsData.js into the new <em>seed</em> folder</p>
+</li>
+<li><p>Create a new file called <code>index.js</code> in the <em>seed</em> folder with the following content:</p>
+</li>
+</ul>
+<pre><code class="lang-javascript">import loadContacts from &#39;./contactsData&#39;;
+import loadHackerData from &#39;./hackerData&#39;;
+
+export default () =&gt; {
+    loadContacts();
+    loadHackerData();
+};</code></pre>
+<ul>
+<li><p>Delete postsData.js and UserData.js from the root folder.</p>
+</li>
+<li><p>Locate and <strong>delete</strong> the following from the code in <code>index.js</code>  in the root folder of the Express app.</p>
+</li>
+</ul>
+<pre><code class="lang-javascript">if (process.env.seedDb) {
+  loadContacts();
+  loadPosts();
+  loadUsers();
+}</code></pre>
+<ul>
+<li>Finally, update the <em>db.js</em> file as follows to import the seed module and call it once the DB is loaded.</li>
+</ul>
+<pre><code class="lang-javascript">import seed from &#39;./seed&#39;;
+
+...
+
+db.once(&#39;open&#39;, () =&gt; {
+    console.log(`database connected to ${db.name} on ${db.host}`);
+    seed();
+});</code></pre>
+<p>Remove all references to <em>userData.js, contactsData.js, postData.js</em> in the import dataements of the index.js.</p>
+<ul>
+<li>Open /api/posts/index.js and update the GET /:id route to populate the user path:</li>
+</ul>
+<pre><code class="lang-javascript">// get post
+router.get(&#39;/:id&#39;, asyncHandler(async (req, res) =&gt; {
+    const id = req.params.id;
+    const post = await Post.findById(id).populate(&#39;user&#39;);
+    return res.send({post});
+}));</code></pre>
+<p>We can now create some unit and integration tests for the API.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="set-up">
+            <h1>Set up</h1>
+<ul>
+<li>You need a working version of the Contacts api for this lab. The solution to the last lab you completed will suffice. Otherwise, you can get the solution from the  <a href="https://github.com/fxwalsh/ewd-examples-2019.git">Github examples repo</a>.</li>
+</ul>
+<h3>Install dependencies</h3>
+<p>All the following are development dependencies because you will just use them for testing. As such, use the <code>--save-dev</code> option for npm installation.</p>
+<ul>
+<li><p>You need <strong>Mocha, Should and SuperTest</strong>. Install as development dependencies into your new lab folder as follows.</p>
+<pre><code>npm install --save-dev mocha
+npm install --save-dev should
+npm install --save-dev sinon sinon-test
+npm install --save-dev supertest</code></pre>
+</li>
+<li><p>You need <strong>babel-core</strong> and <strong>babel-polyfill</strong>. As we are writing code using ES6, we need to be able to transpile our unit tests using Babel. We can use the existing Babel configuration  for the lab but we need to add <em>babel-core</em> and <em>babel-polyfill</em>. Install both as a dev dependency.</p>
+</li>
+</ul>
+<pre><code class="lang-bash">npm install --save-dev babel-core
+npm install --save-dev babel-polyfill</code></pre>
+<ul>
+<li>You need <strong>Cross-Env</strong>. <code>NODE_ENV</code> is an environment variable. <code>NODE_ENV</code> value is set to ‘test’ when we run our tests. We will also need to revert to &#39;development&#39; when we&#39;re updating the code. Setting environment variables differs across Operating Systems/platforms. We also want to be able to set the value from a scipt. <em>Cross-Env</em> is an NPM package which uses a single command to set environment variables without worrying about the platform. Install <em>Cross-Env</em> as a development dependency:</li>
+</ul>
+<pre><code class="lang-bash">npm install save-dev cross-env</code></pre>
+<h3>Create your first integration test</h3>
+<ul>
+<li>To enable us to test the app, we need to export the app object from <em>index.js</em> in the base folder of the project. Modify the <em>index.js</em> as follows:</li>
+</ul>
+<pre><code class="lang-javascript">...
+export const app = express(); //replaces the previous const app = express();
+...</code></pre>
+<ul>
+<li>Create  new folder called <em>test</em> in the root folder of the lab. Create a new file called <code>/test/testContactsApi.js</code> with the following content.</li>
+</ul>
+<pre><code class="lang-javascript">import supertest from &#39;supertest&#39;;
+import {app} from &#39;./../index.js&#39;;
+import should from &#39;should&#39;;
+
+// UNIT test begin
+describe(&#39;Contacts API test&#39;, function () {
+    this.timeout(120000);
+    // test #1: return a collection of json documents
+    it(&#39;should return collection of JSON documents&#39;, function (done) {
+        // calling home page api
+        supertest(app)
+            .get(&#39;/api/contacts&#39;)
+            .expect(&#39;Content-type&#39;, /json/)
+            .expect(200) // This is the HTTP response
+            .then(res =&gt; {
+                // HTTP status should be 200
+                res.should.have.property(&#39;status&#39;).equal(200);
+                done();
+            });
+    });
+});</code></pre>
+<h2>Update package.json</h2>
+<ul>
+<li>Replace the <em>scripts</em> entry in the <em>package.json</em> file with the following.
+```json</li>
+</ul>
+<p>&quot;scripts&quot;: {
+   &quot;start&quot;: &quot;cross-env NODE_ENV=development nodemon --ignore hackerNews/<em> --exec babel-node index.js&quot;,
+   &quot;test&quot;: &quot;cross-env NODE_ENV=test mocha --require babel-core/register --require babel-polyfill --reporter mochawesome --exit&quot;,
+   &quot;pretest&quot;: &quot;eslint </em>.js ./api/contacts/<em>.js ./test/</em>.js&quot;
+ }</p>
+<pre><code>
+The above script entry for test will set ``NODE_ENV`` to test and then run mocha against the files matching the pattern provided (i.e. by default it&#39;ll pick up the test in the test folder). You also need to update the start script to set ``NODE_ENV`` to &#39;development&#39; before starting the server.
+&gt; **The pretest script is optional**. If you are linting, it might be a good idea to include a &quot;full lint&quot; before each test. When you run the test script, the pretest will be run automatically. 
+Also, to ignore any linting errors rlating to undeclared mocha functions like describe, create a new file called *.eslintrc* in the test folder and add the following content:
+
+~~~json
+{
+    &quot;env&quot;: {
+        &quot;mocha&quot;: true
+    },
+    &quot;rules&quot;: {
+       &quot;no-unused-vars&quot;:&quot;off&quot;
+    }
+}
+~~~
+
++ Now test by running the test script:
+
+```bash
+npm run test</code></pre>
+<p>The first time you run it you will probably get a few errors and warnings similar to what&#39;s shown in the following diagram:</p>
+<p><img src="./img/error1.png" alt="PreTest Linting Failures"></p>
+<p>Fix the errors/warnings listed and you should see something similar to the following:</p>
+<p><img src="./img/main.png" alt="First Successful Mocha Test"></p>
+<h2>Include Mockgoose</h2>
+<p>The current test is an integration test as it requires a real, functioning database. If we want our tests to just apply to the service interface then we should remove the dependency on the database. </p>
+<p><strong>Mockgoose</strong> will allow us to test the code in isolation from MongoDB.</p>
+<ul>
+<li>Install Mockgoose as a development dependency:</li>
+</ul>
+<pre><code>npm install --save-dev mockgoose</code></pre>
+<p>In our current solution, we connect to the database by importing the <em>db.js</em> module. Update the <em>db.js</em> module to use Mockgoose for testing as follows:</p>
+<ul>
+<li>In <em>db.js</em>, Import the Mockgoose package</li>
+</ul>
+<pre><code class="lang-javascript">import {Mockgoose} from &#39;mockgoose&#39;;
+...</code></pre>
+<ul>
+<li><p>In <em>db.js</em>, replace the <code>mongoose.connect(process.env.mongoDB);</code> statement with the following code:</p>
+<pre><code class="lang-javascript">...
+// Connect to database
+if (process.env.NODE_ENV === &#39;test&#39;) {
+  // use mockgoose for testing
+  const mockgoose=new Mockgoose(mongoose);
+  mockgoose.prepareStorage().then(()=&gt;{
+    mongoose.connect(process.env.mongoDB);
+  });
+} else {
+  // use the real deal for everything else
+  mongoose.connect(process.env.mongoDB);
+}
+...</code></pre>
+</li>
+</ul>
+<p>This code will wrap the existing Mongoose object with Mockgoose only if the <code>NODE_ENV</code> environment variable is set to test (i.e. we&#39;re running test cases).</p>
+<ul>
+<li>Now test again by running the test script:</li>
+</ul>
+<pre><code class="lang-bash">npm run test</code></pre>
+<p>This time the first test run  will take longer as Mockgoose will create a local Mongodb in memory for the test. Subsequent tests will be faster though.
+<img src="./img/main.png" alt="First Mocha Test"></p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="integration-test">
+            <h1>Testing the Contacts API</h1>
+<p>Now lets try to test the add contact function of the API.</p>
+<ul>
+<li>Add another unit test to the last test. This time we&#39;ll use SuperTest to post a new contact and test for the correct status:<pre><code class="lang-javascript">// test #2 add a contact
+  it(&#39;should add a contact&#39;, function (done) {
+      // post to /api/contacts
+      supertest(app)
+          .post(&#39;/api/contacts&#39;)
+          .send({
+              name: &#39;Contact 99&#39;,
+              address: &#39;123 Strand St&#39;,
+              age:23
+          })
+          .expect(&#39;Content-type&#39;, /json/)
+          .expect(201)
+          .then ((res) =&gt; {
+              res.status.should.equal(201);
+              res.body.should.have.property(&#39;_id&#39;);
+              res.body.name.should.equal(&#39;Contact 99&#39;);
+              done();
+          });
+  });</code></pre>
+</li>
+</ul>
+<p>Now run the test again <code>npm run test</code>. You should see something similar to the following:
+<img src="./img/add_contact.png" alt="Add a contact test"></p>
+<h2>Delete a Contact</h2>
+<p>For this test, you will delete the first contact in the list returned from the API:</p>
+<ul>
+<li>Enter the following code:<pre><code class="lang-javascript">// #3 delete a contact
+  it(&#39;should delete a contact&#39;, () =&gt; {
+    return  supertest(app)
+          .get(&#39;/api/contacts&#39;)
+          .expect(&#39;Content-type&#39;, /json/)
+          .expect(200).then( (res) =&gt; {
+             const id=res.body[0]._id;
+             return supertest(app).delete(`/api/contacts/${id}`).expect(204); 
+          }).then( (res) =&gt; {
+              res.status.should.equal(204);  
+          });
+  });</code></pre>
+</li>
+</ul>
+<h2>Challenge</h2>
+<p>Develop a test for the following route in the Contacts API</p>
+<blockquote>
+<p>PUT /api/contacts/[:id]</p>
+</blockquote>
+<p>Use the notes and online resources for support.</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="unit-testing">
+            <h1>Unit testing the Mongoose Models</h1>
+<p>Ideally, for unit testing, you would like to test without having to connect to a database. Unit-testing is where we test one single unit at a time in isolation from other functionalities. A DB connection would make the tests slow, difficult to set up, and really would become a form of integration testing because we would be testing database integration code as part of the test.</p>
+<p>To unit test our models for Hacker News (postModel, commentModel, and userModel) we will use <strong>Mocha.js</strong> test framework. We will use <strong>should.js</strong> as the assertion mechanism to write the tests and finally <strong>signon.js</strong> to spy on and check correct function calls</p>
+<h2>postsModel</h2>
+<ul>
+<li><p>create test folder in <em>/api/posts/</em></p>
+</li>
+<li><p>Create a new .eslintrc file in /api/posts/tests with the following content:</p>
+</li>
+</ul>
+<pre><code class="lang-json">{
+    &quot;env&quot;: {
+        &quot;mocha&quot;: true
+    },
+    &quot;rules&quot;: {
+       &quot;no-unused-vars&quot;:&quot;off&quot;
+    }
+}</code></pre>
+<ul>
+<li>In <em>/api/posts/tests</em> create a file called <em>testPostsSchema.js</em> and add the following code:</li>
+</ul>
+<pre><code class="lang-javascript">import should from &#39;should&#39;;
+import postsModel from &#39;../postsModel&#39;;
+import mongoose from &#39;mongoose&#39;;
+const Schema = mongoose.Schema;
+
+describe(&#39;postModelTests&#39;, () =&gt; {
+
+ it(&#39;should validate a post with a user and title&#39;, (done) =&gt; {
+        const post={user: &quot;5ca22a64816cd8423c27214d&quot;, title: &quot;A title&quot;};
+        const m = new postsModel(post);
+        m.validate((err) =&gt; {
+           should.not.exist(err);
+           m.title.should.equal(&quot;A title&quot;);
+           m.user.toString().should.equal(&quot;5ca22a64816cd8423c27214d&quot;);
+           done();
+        });
+    });
+});</code></pre>
+<ul>
+<li>In the root folder of the Express app, open <em>package.json</em> and, in the <code>scripts</code> property, add a new entry to run the mocha using the tests defined in the <em>/api/</em> folders:</li>
+</ul>
+<pre><code class="lang-json">...
+ &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;nodemon --ignore hackerNews/* --exec babel-node index.js&quot;,
+    &quot;unit-test&quot;: &quot;cross-env NODE_ENV=test mocha &#39;./api/**/tests/*.js --require babel-core/register --require babel-polyfill --exit&quot;,
+    ...
+  }
+...</code></pre>
+<ul>
+<li><p>Open a command line at the root of the Exprss node app and  run the test by entering <code>npm run unit-test</code>. You should see output similar to the following:</p>
+<p> <img src="./img/unit1.png" alt="Unit Test - postModel"></p>
+</li>
+<li><p>Now add the following to check post and comments validation</p>
+</li>
+</ul>
+<pre><code class="lang-javascript"> it(&#39;should require a user and title&#39;, (done) =&gt; {
+
+        const post={message: &quot;This is not valid&quot;};
+        const m = new postsModel(post);
+        m.validate((err) =&gt; {
+           const errors = err.errors;
+           errors.should.have.property(&quot;user&quot;);
+           errors.should.have.property(&quot;title&quot;);
+           done();
+        });
+    });
+
+
+
+    it(&#39;should add a comment to a post&#39;, function(done) {
+        const post={user: &quot;5ca22a64816cd8423c27214d&quot;, title: &quot;A title&quot;};
+        const m = new postsModel(post);
+        m.comments.push({body:&quot;a comment body&quot;,user:&quot;5ca22a64816cd8423c27214c&quot;});
+        m.validate((err) =&gt; {
+           should.not.exist(err);
+           m.comments[0].body.should.equal(&quot;a comment body&quot;);
+           m.comments[0].user.toString().should.equal(&quot;5ca22a64816cd8423c27214c&quot;);
+           done();
+        });
+    });
+
+    it(&#39;should require a user and body for a comment to a post&#39;, function(done) {
+        const post={user: &quot;5ca22a64816cd8423c27214d&quot;, title: &quot;A title&quot;};
+        const m = new postsModel(post);
+        m.comments.push({acomment:&quot;this is not a valid comment&quot;});
+        m.validate((err) =&gt; {
+           should.exist(err);
+           const errors = err.errors;
+           errors.should.have.property(&quot;comments.0.user&quot;);
+           errors.should.have.property(&quot;comments.0.body&quot;);
+           done();
+        });
+    });</code></pre>
+<ul>
+<li><p>Run the test script again, you should now see a few more test results:</p>
+<p><img src="./img/unit2.png" alt="More Unit Tests - postModel"></p>
+</li>
+</ul>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="unit-testing-stubbing">
+            <h1>Unit Testing - User Model</h1>
+<p>In the last lab we used instance and static methods in Mongoose. We would like to write some tests for there however, some instance methods access the database and, ideally, we&#39;d like to absent db useage in our unit tests. This is a bit more challenging but we can use <strong>sinon.js</strong> to check that we are calling the instance methods correctly. </p>
+<ul>
+<li>As before, create a <em>tests</em> folder in <em>/api/users</em>.</li>
+<li>In <em>/api/users/tests</em>, create  file called <em>testUserSchema.js</em> and add the following simple tests:</li>
+</ul>
+<pre><code class="lang-javascript">import should from &#39;should&#39;;
+import userModel from &#39;../userModel&#39;;
+
+describe(&#39;userModelTests&#39;, () =&gt; {
+    it(&#39;should require a username and password&#39;, (done) =&gt; {
+
+        const user={auser: &quot;This is not valid&quot;};
+        const m = new userModel(user);
+        m.validate((err) =&gt; {
+           should.exist(err);
+           const errors = err.errors;
+           errors.should.have.property(&quot;username&quot;);
+           errors.should.have.property(&quot;password&quot;);
+           done();
+        });
+    });
+
+    it(&#39;should validate a user with a username and password&#39;, (done) =&gt; {   
+        const username=&quot;fxwalsh&quot;;
+        const password=&quot;pass&quot;;
+
+        const user={username: username, password: password};
+        const m = new userModel(user);
+        m.validate((err) =&gt; {
+           should.not.exist(err);
+           m.username.should.equal(username);
+           m.password.should.equal(password);
+           done();
+        });
+    });
+});</code></pre>
+<ul>
+<li>Run the tests as before and make sure they pass(the other Posts Model tests will run also)...</li>
+</ul>
+<p><img src="./img/unit3.png" alt="unit Tests - User Model"></p>
+<h2>Testing User Schema Static Methods - findByUserName</h2>
+<ul>
+<li>Add the following to the import section of testUserModel</li>
+</ul>
+<pre><code class="lang-javascript">import sinon from &#39;sinon&#39;;
+import sinonTestFactory from &#39;sinon-test&#39;;</code></pre>
+<ul>
+<li>Now, in the same file, add the following test:</li>
+</ul>
+<pre><code class="lang-javascript">    it(&#39;should search using username&#39;, sinonTest(function() {
+        this.stub(userModel, &#39;findOne&#39;);
+        const username=&quot;fxwalsh&quot;;
+        userModel.findByUserName(username);
+        sinon.assert.calledWith(userModel.findOne, {
+            username: username
+        });
+    }));</code></pre>
+<p>We start by stubbing <code>userModel.findOne</code>. We &quot;stub it out&quot; so it doesn’t do any database access. Stubbing it also allows us to use <strong>Sinon.js</strong> to check whether it was called with the correct parameters.</p>
+<p>We then  call <code>userModel.findByUserName(username)</code> and use <code>sinon.assert.calledWith...</code> to check the stubbed <code>findOne</code> was called correctly.</p>
+<h2>Testing Use Schema instance Methods - comparePasswords</h2>
+<p>As this method does not directly &quot;go at&quot; the database, it can be checked without stubbing.</p>
+<ul>
+<li>Insert the following test into the same file as above,  <em>testUserSchema.js</em>.</li>
+</ul>
+<pre><code class="lang-javascript">    it(&#39;should detect matching passwords&#39;, sinonTest(function (done) {
+
+        const username = &quot;fxwalsh&quot;;
+        const password = &quot;$2a$10$hxklBTD1KLdYOCrulbtf8OKxjxFEc5WBCODCCCYGb67udslRc0mHi&quot;;
+
+        const user1 = {
+            username: username,
+            password: password
+        };
+
+        const user2 = {
+            username: username,
+            password: password
+        };
+
+        const m1 = new userModel(user1);
+        const m2 = new userModel(user2);
+
+        m1.comparePassword(m2.password, (err, result) =&gt; {
+                should.not.exist(err);
+                result.should.be.true;
+                done();
+            }
+
+
+        )
+    }));</code></pre>
+<p>The above test creates 2 users with the same password. The <code>comparePassword</code> method is called and resulting callback validated the correct response(no <code>err</code> object and <code>result==true</code>).</p>
+
+          </div>
+        
+          <div class="ui tab segment lab" data-tab="Reporting">
+            <h1>Report Generation</h1>
+<p>At the moment, the tests report back to the console. You&#39;ll now use <strong>Mochawesome</strong> to generate a unit test report that visualises the test results.</p>
+<ul>
+<li><p>Install Mochawesome to you dev dependencies.</p>
+<pre><code>npm install --save-dev mochawesome</code></pre>
+</li>
+<li><p>To output the results, update your test script in <em>package.json</em> to include mochawsome as the reporter:</p>
+<pre><code class="lang-javascript">&quot;test&quot;: &quot;cross-env NODE_ENV=test mocha --require babel-core/register --require babel-polyfill --reporter mochawesome&quot;</code></pre>
+</li>
+<li><p>Now run the tests again. Mochawesome will generate reports in the <strong>/mochawesome-reports/</strong> folder in your project
+<img src="./img/mock.png" alt="Mockawesome report"></p>
+</li>
+</ul>
+
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <script>
+    $(document).on('keydown', function(e) {
+  e = e || window.event;
+  var nextTab;
+  switch (e.which || e.keyCode) {
+    case 37: // left
+      nextTab = $('.tab-menu a[data-tab].active').prev('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').last();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+
+    case 39: // right
+      nextTab = $('.tab-menu a[data-tab].active').next('a[data-tab]');
+      if (!nextTab.length) nextTab = $('.tab-menu a[data-tab]').first();
+      nextTab.click();
+      $('.pusher').focus();
+      break;
+  }
+});
+
+    $(document).ready(function() {
+  $('img').addClass('ui image');
+
+  $('.ui.embed').embed();
+
+  const $images = $('.lab img');
+  jQuery.each($images, function(i) {
+    if ($images[i].alt.length > 0) {
+      const divImg = $(document.createElement('div')).addClass(
+        'ui basic segment',
+      );
+      $($images[i]).wrap(divImg);
+      const divLabel = $(document.createElement('div')).addClass(
+        'ui blue ribbon label',
+      );
+      divLabel.append($images[i].alt);
+      $(divLabel).insertBefore($images[i]);
+    }
+  });
+
+  $('.ui.menu .item').tab({
+    history: true,
+    historyType: 'hash',
+  });
+
+  $('.popup').popup();
+
+  $('.ui.sidebar')
+    .sidebar({ context: $('.pushable') })
+    .sidebar('setting', 'transition', 'slide out')
+    .sidebar('attach events', '#toc');
+});
+
+  </script>
+
+
+
+  <div class="ui bottom fixed borderless right menu">
+    <div class="ui right small menu">
+      <div class="ui tiny basic message segment">
+         Powered by <a href="https://github.com/edeleastar/tutors-ts">tutors-ts.</a> Unless otherwise stated, this work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+</html>
