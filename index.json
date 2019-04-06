@@ -790,10 +790,10 @@
     "properties" : {},
   
   "type" : "topic",
-  "title" : " Unit Testing APIs ",
+  "title" : " API Testing ",
   "img" : "talk-1/Testing-Web-APIs.jpg",
   "videoid" : "",
-  "objectives" : "<p>This topic introduces unit testing for web APIs, focussing on Mocha, Should and SuperTest.</p>",
+  "objectives" : "<p>This topic introduces testing for web APIs, focussing on Mocha, Should and SuperTest.</p>",
   "folder" : "topic11",
   "link" : "index.html",
   "los": [
@@ -805,7 +805,7 @@
   "type" : "talk",
   "title" : " Testing Web APIs ",
   "img" : "Testing-Web-APIs.jpg",
-  "videoid" : "none",
+  "videoid" : "bjuztEcU-88",
   "objectives" : "<p>This talk covers API testing with Mocha, Should and SuperTest</p>",
   "folder" : "talk-1",
   "link" : "Testing-Web-APIs.pdf",
