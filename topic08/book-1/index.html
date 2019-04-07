@@ -253,7 +253,7 @@ html, body {
 </ul>
 <blockquote>
 <pre><code class="lang-script">npm install --save body-parser
-npm install --save lodashgit</code></pre>
+npm install --save lodash</code></pre>
 <p>Body-parser is a middleware that express can use to parse json.</p>
 </blockquote>
 <ul>
@@ -276,7 +276,7 @@ app.use(bodyParser.urlencoded());
 <li>Now replace the contents of the contacts routing script, <strong>/api/contacts/index.js</strong>, with the following code.</li>
 </ul>
 <pre><code class="lang-javascript">import express from &#39;express&#39;;
-import contacts from &#39;./contacts&#39;;
+import { contacts } from &#39;./contacts&#39;;
 
 const router = express.Router();
 
