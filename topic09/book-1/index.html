@@ -257,7 +257,7 @@ html, body {
           <div class="ui tab segment lab" data-tab="01">
             <h1>Set up</h1>
 <p>This lab continues from last weeks lab. If you have not completed last weeks lab you will need to do so.</p>
-<p>If you don&#39;t have the last lab, it will eventually be available in the labs directory of the  <a href="https://github.com/fxwalsh/node-samples-2018.git">samples</a> repository on Github.</p>
+<p>If you don&#39;t have the last lab, it will eventually be available in the labs directory of the  <a href="https://github.com/fxwalsh/node-samples-2018.git">samples</a> repository on GitHub.</p>
 <p>Check it works as before by running:</p>
 <pre><code>npm start</code></pre>
 <h3>Get Mongo, Mongoose and Express Async Handler</h3>
@@ -270,7 +270,7 @@ html, body {
 mongod -dbpath db</code></pre>
 <p>This should create your db directory and start the Mongodb service on your local host.</p>
 <ul>
-<li>Install Mongoose in your lab project directory for the Express app (<strong>DONT</strong> innstall it in the React app directory) </li>
+<li>Install Mongoose in your lab project directory for the Express app (<strong>DONT</strong> install it in the React app directory) </li>
 </ul>
 <pre><code class="lang-bash">npm install -save mongoose</code></pre>
 <ul>
@@ -282,7 +282,7 @@ mongod -dbpath db</code></pre>
         
           <div class="ui tab segment lab" data-tab="02">
             <h1>Create a Mongoose Schema for Contacts</h1>
-<p>With Mongoose we declare the object structure (or schema) for each collection in the database - this app has only one. In your Express app directory, navicate to <em>api/contact/</em> and create the file <em>contactModel.js</em> containing the following code:</p>
+<p>With Mongoose we declare the object structure (or schema) for each collection in the database - this app has only one. In your Express app directory, navigate to <em>api/contact/</em> and create the file <em>contactModel.js</em> containing the following code:</p>
 <pre><code class="lang-javascript">import mongoose from &#39;mongoose&#39;;
 const Schema = mongoose.Schema;
 
@@ -309,7 +309,7 @@ export default mongoose.model(&#39;Contact&#39;, ContactSchema);</code></pre>
           <div class="ui tab segment lab" data-tab="03">
             <h1>Add configuration parameters</h1>
 <p>You will need to configure Mongoose to connect to your Mongodb database.</p>
-<p>It is risky to have configuration parameters such as user-names, passwords, and instance specific parameters &quot;hard coded&quot; into your javascript programs. In this exercise you will externalise these paramters into the &quot;.env&quot; file.</p>
+<p>It is risky to have configuration parameters such as user-names, passwords, and instance specific parameters &quot;hard coded&quot; into your javascript programs. In this exercise you will externalise these parameters into the &quot;.env&quot; file.</p>
 <p>Add the following mongoDb URI to the end of your <code>.env</code> file in the root folder of the express app.</p>
 <pre><code class="lang-bash">mongoDB=mongodb://localhost:27017/contacts_db
 seedDb=true</code></pre>
@@ -401,8 +401,10 @@ if (process.env.seedDb) {
         
           <div class="ui tab segment lab" data-tab="04">
             <h1>Update Contacts Routing Package</h1>
-<p>We need to change <code>api/contacts/index.js</code> to incorporate Mongoose to connect to MongoDB.
-+ Replace  <code>/api/contacts/index.js</code>  with the following code</p>
+<p>We need to change <code>api/contacts/index.js</code> to incorporate Mongoose to connect to MongoDB.</p>
+<ul>
+<li>Replace  <code>/api/contacts/index.js</code>  with the following code</li>
+</ul>
 <pre><code class="lang-javascript">
 import express from &#39;express&#39;;
 import Contact from &#39;./contactModel&#39;;
@@ -520,8 +522,10 @@ const CommentSchema = new Schema({
    upvotes: {type: Number, min: 0, max: 100, default: 0},
  });
 export default mongoose.model(&#39;posts&#39;, PostSchema);</code></pre>
-<p>This file exports the model for hacker news posts. Notice the use of two schemas, CommentSchema and PostSchema, with the former used as the type for the comments in the latter.
-+ We want to be able to seed the database with test data during development. Create a new file called <em>postsData.js</em> in the root <em>node-lab3</em> folder.</p>
+<p>This file exports the model for hacker news posts. Notice the use of two schemas, CommentSchema and PostSchema, with the former used as the type for the comments in the latter.</p>
+<ul>
+<li>We want to be able to seed the database with test data during development. Create a new file called <em>postsData.js</em> in the root <em>node-lab3</em> folder.</li>
+</ul>
 <pre><code class="lang-javascript">import postModel from &#39;./api/posts/postsModel&#39;;
 
 const posts = [

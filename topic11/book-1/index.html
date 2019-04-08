@@ -247,8 +247,8 @@ html, body {
           <div class="ui tab segment lab" data-tab="api-testing-ES6">
             <h1>API Testing Lab</h1>
 <p>This lab shows you how to test a Node API using Mocha, Should, Sinon, and SuperTest.</p>
-<h2>Prerequesites</h2>
-<p>You need a working version of the Hacker News and Contacts api for this lab. The solution to the last lab you completed will suffice. Otherwise, you can get the solution from the  <a href="https://github.com/fxwalsh/ewd-examples-2019.git">Github examples repo</a>.</p>
+<h2>Prerequisites</h2>
+<p>You need a working version of the Hacker News and Contacts API for this lab. The solution to the last lab you completed will suffice. Otherwise, you can get the solution from the  <a href="https://github.com/fxwalsh/ewd-examples-2019.git">GitHub examples repo</a>.</p>
 
           </div>
         
@@ -401,7 +401,7 @@ npm install --save-dev supertest</code></pre>
 <pre><code class="lang-bash">npm install --save-dev babel-core
 npm install --save-dev babel-polyfill</code></pre>
 <ul>
-<li>You need <strong>Cross-Env</strong>. <code>NODE_ENV</code> is an environment variable. <code>NODE_ENV</code> value is set to ‘test’ when we run our tests. We will also need to revert to &#39;development&#39; when we&#39;re updating the code. Setting environment variables differs across Operating Systems/platforms. We also want to be able to set the value from a scipt. <em>Cross-Env</em> is an NPM package which uses a single command to set environment variables without worrying about the platform. Install <em>Cross-Env</em> as a development dependency:</li>
+<li>You need <strong>Cross-Env</strong>. <code>NODE_ENV</code> is an environment variable. <code>NODE_ENV</code> value is set to ‘test’ when we run our tests. We will also need to revert to &#39;development&#39; when we&#39;re updating the code. Setting environment variables differs across Operating Systems/platforms. We also want to be able to set the value from a script. <em>Cross-Env</em> is an NPM package which uses a single command to set environment variables without worrying about the platform. Install <em>Cross-Env</em> as a development dependency:</li>
 </ul>
 <pre><code class="lang-bash">npm install save-dev cross-env</code></pre>
 <h3>Mockgoose</h3>
@@ -432,7 +432,7 @@ npm install --save-dev babel-polyfill</code></pre>
        &quot;no-unused-vars&quot;:&quot;off&quot;
     }
 }</code></pre>
-<p>This lets <em>eslint</em> know that this folder is a mocha environment and it won&#39;t pick up on unused vars and undeclared functions.</p>
+<p>This lets <em>eslint</em> know that this folder is a mocha environment and it won&#39;t pick up on unused variables and undeclared functions.</p>
 <ul>
 <li>In <em>/api/posts/tests</em> create a file called <em>testPostsSchema.js</em> and add the following code:</li>
 </ul>
@@ -473,7 +473,7 @@ describe(&#39;postModelTests&#39;, () =&gt; {
   }
 ...</code></pre>
 <ul>
-<li><p>Open a command line at the root of the Exprss node app and  run the test by entering <code>npm run unit-test</code>. You should see output similar to the following:</p>
+<li><p>Open a command line at the root of the Express node app and  run the test by entering <code>npm run unit-test</code>. You should see output similar to the following:</p>
 <p> <img src="./img/unit1.png" alt="Unit Test - postModel"></p>
 </li>
 </ul>
@@ -546,7 +546,7 @@ describe(&#39;postModelTests&#39;, () =&gt; {
             <h1>Unit Testing - User Model</h1>
 <p>Our Mongoose models include instance and static methods. We would like to write some tests for them however, some instance methods access the database and, ideally, we&#39;d like to remove db dependencies in our unit tests. This is a bit more challenging but we can use <strong>sinon.js</strong> to check that we are calling the db  correctly.</p>
 <ul>
-<li>As before, create a <em>tests</em> folder in <em>/api/users</em> and create a file called <em>.eslintrs</em> that contains the following:</li>
+<li>As before, create a <em>tests</em> folder in <em>/api/users</em> and create a file called <em>.eslintrc</em> that contains the following:</li>
 </ul>
 <pre><code class="lang-json">{
     &quot;env&quot;: {
@@ -661,9 +661,9 @@ import sinonTestFactory from &#39;sinon-test&#39;;</code></pre>
 export const app = express(); //replaces the previous const app = express();
 ...</code></pre>
 <ul>
-<li><p>Create  new folder called <em>test</em> in the root folder of the lab. </p>
+<li><p>Create  new folder called <em>test</em> in the root folder of the lab.</p>
 </li>
-<li><p>As before, create a new eslint confic file called <em>.eslintrc</em> file in <em>tests</em> with the following content:</p>
+<li><p>As before, create a new eslint config file called <em>.eslintrc</em> file in <em>tests</em> with the following content:</p>
 </li>
 </ul>
 <pre><code class="lang-json">{

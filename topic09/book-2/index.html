@@ -230,13 +230,13 @@ html, body {
         
           <div class="ui tab segment lab" data-tab="Lab-Optional-Sessions">
             <h1>User Authentication using methods</h1>
-<p>This lab improves the Hacker News API to demonstrate using methods in Mongoose to create a simple authentication middlewared function.</p>
+<p>This lab improves the Hacker News API to demonstrate using methods in Mongoose to create a simple authentication middleware function.</p>
 <p>You will update the Hacker News API to include the following:</p>
 <ul>
 <li>A User Model using static and instance methods.</li>
 <li>A <code>/api/users</code> route to allow users to authenticate.</li>
 <li>Express-Sessions package to manage/track user session</li>
-<li>Athentication middleware to block access to the <code>/api/posts</code> for unauthenicated users.</li>
+<li>Authentication middleware to block access to the <code>/api/posts</code> for unauthenticated users.</li>
 <li>Update the Hacker News model to use referencing.</li>
 </ul>
 <h2>Initial set up</h2>
@@ -358,15 +358,15 @@ export default async (req, res, next) =&gt; {
     return res.status(401).end(&#39;unauthorised&#39;);
   }
 };</code></pre>
-<p>This script checks the <code>req.session.user</code> exists and that the <code>req.session.authenicated</code> is set to true before calling the next middleware function. </p>
+<p>This script checks the <code>req.session.user</code> exists and that the <code>req.session.authenticated</code> is set to true before calling the next middleware function. </p>
 <p>Next, we need to update the apps <em>index.js</em>.</p>
 <h2>Express Session</h2>
 <p>Now the root <em>index.js</em> file will need to be updated to incorporate the :</p>
 <blockquote>
-<p>Express Session middleware.<br>The new User Route.<br>The Authenication middleware.</p>
+<p>Express Session middleware.<br>The new User Route.<br>The Authentication middleware.</p>
 </blockquote>
 <ul>
-<li>Replace <em>index.js</em> in the root folder to unclude <strong>express-session</strong> middleware:</li>
+<li>Replace <em>index.js</em> in the root folder to include <strong>express-session</strong> middleware:</li>
 </ul>
 <pre><code class="lang-javascript">import dotenv from &#39;dotenv&#39;;
 import express from &#39;express&#39;;

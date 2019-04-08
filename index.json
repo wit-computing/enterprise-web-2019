@@ -726,7 +726,7 @@
   "title" : "Lab-Optional-Sessions",
   "img" : "",
   "videoid" : "none",
-  "objectives" : "<p>This lab improves the Hacker News API to demonstrate using methods in Mongoose to create a simple authentication middlewared function.</p>",
+  "objectives" : "<p>This lab improves the Hacker News API to demonstrate using methods in Mongoose to create a simple authentication middleware function.</p>",
   "folder" : "book-2",
   "link" : "index.html",
   "los": [

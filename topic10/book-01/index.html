@@ -320,7 +320,7 @@ module.exports = mongoose.model(&#39;User&#39;, UserSchema);</code></pre>
 <h1>Seed database with User Data</h1>
 <p>For development and testing purposes it would be a good idea to seed the database with some user data.</p>
 <ul>
-<li>Create a new file called <strong>userData.js</strong> in the root foldes of the project and enter the following javascipt code:</li>
+<li>Create a new file called <strong>userData.js</strong> in the root folder of the project and enter the following Javascipt code:</li>
 </ul>
 <pre><code class="lang-javascript">import userModel from &#39;./api/users/userModel&#39;;
 
@@ -361,7 +361,7 @@ if (process.env.seedDb) {
   loadUsers();
 }</code></pre>
 <ul>
-<li>Open a terminal window in the root folder and start the app by entering <code>npm start</code>. Comfirm that the users are being loaded by checking that you see the following console output:</li>
+<li>Open a terminal window in the root folder and start the app by entering <code>npm start</code>. Confirm that the users are being loaded by checking that you see the following console output:</li>
 </ul>
 <pre><code class="lang-bash">[nodemon] starting `babel-node index.js`
 body-parser deprecated undefined extended: provide extended option index.js:82:30
@@ -470,14 +470,14 @@ router.post(&#39;/&#39;, asyncHandler(async (req, res) =&gt; {
 }));</code></pre>
 <p>The above function checks for both username and password in the request. If the action parameter&#39;s value is &quot;register&quot;, it attempts to create a new user in the database (using the mongoose User model). Otherwise, it authenticates the user, creates the JWT token using the secret and signed with the users username.
 The token is then returned to the client for use in future requests.</p>
-<h2>Tesing using Postman</h2>
+<h2>Testing using Postman</h2>
 <p>Test that you can create and authenticate a user by trying the following tests in Postman:</p>
 <ul>
-<li><strong>Get Users</strong>:Test that a HTTP GET for <em>/api/users/</em> returns a collection of User documents with encypted passwords.</li>
+<li><strong>Get Users</strong>:Test that a HTTP GET for <em>/api/users/</em> returns a collection of User documents with encrypted passwords.</li>
 </ul>
 <p><img src="./img/user1.png" alt="Get Users"></p>
 <ul>
-<li><strong>Register a User</strong>:Test that a HTTP POST for <em>/api/users/</em> with <code>action=regster</code> as a parameter Adds a new User document with an encypted password. Remember to include a User JSON document in the HTTP request body.</li>
+<li><strong>Register a User</strong>:Test that a HTTP POST for <em>/api/users/</em> with <code>action=regster</code> as a parameter Adds a new User document with an encrypted password. Remember to include a User JSON document in the HTTP request body.</li>
 </ul>
 <p><img src="./img/user2.png" alt="Register a New User"></p>
 <ul>
@@ -486,7 +486,7 @@ The token is then returned to the client for use in future requests.</p>
 <p><img src="./img/user3.png" alt="Authenticate a New User"></p>
 <p>In this case, the API will return the JWT token in the response body.</p>
 <ul>
-<li><strong>Unknown User/Password</strong>: Try to authenticate with an unkown user. You should see the follwing response:</li>
+<li><strong>Unknown User/Password</strong>: Try to authenticate with an unknown user. You should see the following response:</li>
 </ul>
 <p><img src="./img/user4.png" alt="Unknown User"></p>
 
@@ -525,7 +525,7 @@ const strategy = new JWTStrategy(jwtOptions, async function(payload, next) {
 passport.use(strategy);
 
 export default passport;</code></pre>
-<p>The above script extracts the user from the token in the request (the payload) and verifys it is a valid username. The <em>user id</em> is then passed on to the next middleware, accessable through the request object.</p>
+<p>The above script extracts the user from the token in the request (the payload) and verifies it is a valid username. The <em>user id</em> is then passed on to the next middleware, accessible through the request object.</p>
 <p>Update the HackerNews posts API to use the user id by adding <code>user</code> field to the post schema and including it in the posts API:</p>
 <ul>
 <li>Replace PostSchema in /api/posts/postsModel.js with the following:</li>
@@ -584,9 +584,9 @@ app.use(passport.initialize());​
 // Add passport.authenticate(..)  to middleware stack for protected routes​
 app.use(&#39;/api/posts&#39;, passport.authenticate(&#39;jwt&#39;, {session: false}), postsRouter);</code></pre>
 <h2>Test the Hacker News API</h2>
-<p>Now test that access to the <em>/api/posts</em> rquites JWT token.</p>
+<p>Now test that access to the <em>/api/posts</em> requires JWT token.</p>
 <ul>
-<li>As before, autenicate a known user in the database. This time, copy the JWT Token returned from the API:</li>
+<li>As before, authenticate a known user in the database. This time, copy the JWT Token returned from the API:</li>
 </ul>
 <p><img src="./img/user3.png" alt="Get JWT Token"></p>
 <ul>
@@ -633,9 +633,9 @@ It should look like this when complete:</li>
 <pre><code>npm install --save axios</code></pre>
 <p>Axios is a promise-based HTTP client for the browser and node.js. You will use it to make requests to the Express API.</p>
 <h3>Start both servers</h3>
-<p>You will need to now start both the react app server and the Express API at the same time. Open two separate command windowsin the hackerNews folder and the parent lab folder. Start the respective servers in both windows:</p>
+<p>You will need to now start both the react app server and the Express API at the same time. Open two separate command windows in the hackerNews folder and the parent lab folder. Start the respective servers in both windows:</p>
 <pre><code>npm start</code></pre>
-<p>You should see both processes come to life. As before, they support &#39;hot code changes&#39; so you should not have to restart the processes as you moake changes.</p>
+<p>You should see both processes come to life. As before, they support &#39;hot code changes&#39; so you should not have to restart the processes as you make changes.</p>
 <h2>Integrate the Express Hacker News API</h2>
 <p>Currently the Hacker News app uses a stubAPI to mimic a real API. We will now replace this with functionality that integrates with our API.  We also need to manage JWT tokens in local storage in the browser.</p>
 <ul>
@@ -722,7 +722,7 @@ export const signup = async (username, password) =&gt; {
 </ul>
 <pre><code class="lang-javascript">import * as api from &#39;./api&#39;;</code></pre>
 <ul>
-<li>We are going to place the posts returned from the Express API in the HackerApp component state. We will only show the NewsList component if we sucessfully retrieve all posts from the API. We include an <em>isHidden</em> property to indicate this.
+<li>We are going to place the posts returned from the Express API in the HackerApp component state. We will only show the NewsList component if we successfully retrieve all posts from the API. We include an <em>isHidden</em> property to indicate this.
 In <em>App.js</em>, us the  function  <code>componentDidMount()</code> of the App component to get the posts from the Express API:</li>
 </ul>
 <pre><code class="lang-javascript">...
@@ -742,7 +742,7 @@ In <em>App.js</em>, us the  function  <code>componentDidMount()</code> of the Ap
     ...
     ...</code></pre>
 <ul>
-<li>Now replace the <code>render</code> function of the HackerApp component with the following code. This replaces the previous use of stubAPI with the new posts state retrieved from the api package.</li>
+<li>Now replace the <code>render</code> function of the HackerApp component with the following code. This replaces the previous use of stubAPI with the new posts state retrieved from the <em>api</em> package.</li>
 </ul>
 <pre><code class="lang-javascript">render() {
   const posts = _.sortBy(this.state.posts, post =&gt;
@@ -787,7 +787,7 @@ try{
     alert(`failed to upvote post ${id}: ${e}`);
   }
 };</code></pre>
-<p>Nowstart the application. You will probably notice you get a proxy message failure message as the react app tries to start.</p>
+<p>Now start the application. You will probably notice you get a proxy message failure message as the react app tries to start.</p>
 <pre><code class="lang-bash">roxy error: Could not proxy request /api/posts from localhost:3000 to http://localhost:8080.
 See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED).</code></pre>
 <p>This is because the react app (the client) has not retrieved a valid Javascript Web Token to use the HackerNews Express API.
@@ -908,7 +908,7 @@ class Login extends Component {
 export default Login;</code></pre>
 <p>Again we import the <em>api.js</em> script to interact with the users api. We also use the <em>auth.js</em> script to manage local storage of the JWT token.</p>
 <h2>Add the loginPage to HackerNews App</h2>
-<p>We will now update the HackerNews app such that, if the user has not authenticated, we will present a link (in the form of a button) to the loginpage.</p>
+<p>We will now update the HackerNews app such that, if the user has not authenticated, we will present a link (in the form of a button) to the login page.</p>
 <ul>
 <li>Open hackernews/src/index.js and add a new route for the login page.</li>
 </ul>
@@ -923,7 +923,7 @@ export default Login;</code></pre>
           &lt;Redirect from=&#39;*&#39; to=&#39;/&#39; /&gt;
 &lt;/Switch&gt;</code></pre>
 <ul>
-<li>Locate the render function in the HackerApp component and repalce with the following so that the app redirects to the login page if not authenitcated:</li>
+<li>Locate the render function in the HackerApp component and replace with the following so that the app redirects to the login page if not authenticated:</li>
 </ul>
 <pre><code class="lang-Javascript">render() {
         const posts = _.sortBy(this.state.posts, post =&gt;
@@ -945,7 +945,7 @@ export default Login;</code></pre>
         );
     }</code></pre>
 <blockquote>
-<p>NOTE: Your render funtion might be different to the above. The main objective is to locate the NewsList component and replace it with the two statements that display/hide the login button and the NewsList component.</p>
+<p>NOTE: Your render function might be different to the above. The main objective is to locate the NewsList component and replace it with the two statements that display/hide the login button and the NewsList component.</p>
 </blockquote>
 <ul>
 <li>Now Test the HackerNews app. If not logged in you should see the following:</li>
@@ -956,7 +956,7 @@ export default Login;</code></pre>
 </ul>
 <p><img src="./img/hacker2.png" alt="Login Page"></p>
 <ul>
-<li><p>Authenicate using username: user1, password: test1. This should return you to the main page and the list of news posts.</p>
+<li><p>Authenticate using username: user1, password: test1. This should return you to the main page and the list of news posts.</p>
 <p><img src="./img/hacker3.png" alt="Authenticated"></p>
 </li>
 </ul>
