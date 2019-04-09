@@ -818,6 +818,22 @@
   
     "properties" : {},
   
+  "type" : "talk",
+  "title" : " Testing Authenticated APIs ",
+  "img" : "talk.png",
+  "videoid" : "bRd_nqBDR14",
+  "objectives" : "<p>This additional talk covers testing APIs which require authentication using Java Web Tokens.</p>",
+  "folder" : "talk-2",
+  "link" : "talk.pdf",
+  "los": [
+   ]
+
+    } ,
+   {
+    
+  
+    "properties" : {},
+  
   "type" : "lab",
   "title" : "api-testing-ES6",
   "img" : "img/main.png",
